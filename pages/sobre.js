@@ -14,8 +14,8 @@ const Sobre = ({ sobre, config }) => {
 			{sobre && sobre.data && (
 				<>
 					<Meta
-						pageTitle={sobre.data.titulo}
-						pageDesc={sobre.data.corpo}
+						pageTitle={RichText.asText(sobre.data.titulo)}
+						pageDesc={RichText.asText(sobre.data.corpo)}
 						pageImage={sobre.data.imagem && sobre.data.imagem.url}
 					/>
 					<section className={`${styles.sobre} grid grid--full`}>
