@@ -1,0 +1,33 @@
+.prize {
+	text-align: center;
+	display: grid;
+	.textBox,
+	.laurel {
+		grid-column: 1;
+		grid-row: 1;
+		align-self: center;
+		justify-self: center;
+	}
+	.laurel {
+		z-index: 1;
+	}
+	.textBox {
+		z-index: 2;
+	}
+	margin-bottom: 2rem;
+}
+
+.title {
+	font-weight: 400;
+	margin-bottom: 0.3rem;
+}
+
+.year {
+	font-size: 0.8rem;
+	color: var(--colour__main--faded);
+}
+
+.info {
+	font-size: 0.8rem;
+	margin-bottom: 0.3rem;
+}

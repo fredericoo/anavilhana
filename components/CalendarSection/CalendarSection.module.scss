@@ -1,0 +1,11 @@
+.section {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+	.header {
+		grid-column: grid-start / grid-end;
+		margin-bottom: 3rem;
+	}
+	.calendar {
+		grid-column: grid-start / col-7;
+	}
+}

@@ -1,0 +1,35 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+
+	.info {
+		margin: 0.7rem 0 1rem;
+		flex-grow: 1;
+	}
+
+	.image {
+		filter: grayscale(100%);
+		transition: filter 0.6s ease-out;
+	}
+
+	.more {
+		width: 2rem;
+		height: 2rem;
+		background: var(--colour__main);
+		color: var(--colour__bg);
+		border: none;
+		border-radius: 1rem;
+		-webkit-appearance: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&:hover {
+		text-decoration: none;
+		.image {
+			filter: grayscale(30%);
+		}
+	}
+}

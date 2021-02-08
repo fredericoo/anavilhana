@@ -1,0 +1,79 @@
+@import "styles/abstracts/mixins";
+
+.calendar {
+	grid-column: grid-start / col-7;
+	border: 1px solid var(--colour__secondary);
+	.header,
+	.body {
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		text-align: center;
+	}
+	.body {
+		.date {
+			background: transparent;
+			@include on-event {
+				cursor: pointer;
+			}
+			&[data-active-month="false"] {
+				color: rgba(0, 0, 0, 0.2);
+			}
+			&.active {
+				font-weight: 700;
+				text-decoration: underline;
+			}
+			&.marked {
+				border: 1px solid var(--colour__accent);
+			}
+			@include on-event {
+				background: var(--colour__secondary);
+			}
+			@include on-active {
+				background: var(--colour__secondary);
+				outline: none;
+			}
+		}
+	}
+	.header {
+		border-bottom: 1px solid var(--colour__secondary);
+	}
+	.date {
+		padding: 0.5rem;
+		border: 1px solid transparent;
+	}
+
+	.footer {
+		padding: 0.5rem 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		.month {
+			text-align: center;
+		}
+	}
+}
+
+.airings {
+	grid-column: grid-end / col-7;
+	.header {
+		text-align: center;
+		opacity: 0.5;
+		margin-bottom: 1rem;
+	}
+}
+
+.event {
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--colour__secondary);
+	.filmName {
+		display: inline-block;
+		border-bottom: 1px solid var(--colour__accent);
+		margin-bottom: 0.2em;
+		@include on-event {
+			color: var(--colour__accent);
+		}
+	}
+	.synopsis {
+		opacity: 0.5;
+	}
+}

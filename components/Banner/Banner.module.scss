@@ -1,0 +1,25 @@
+@import "styles/abstracts/mixins";
+
+.section {
+	min-height: 80vh;
+	.textBlock {
+		padding: 2rem 0;
+		position: relative;
+		z-index: 1;
+		grid-row: 1;
+		grid-column: grid-start / grid-end;
+		@include responsive($tablet-l) {
+			grid-column: grid-start / col-7;
+		}
+		color: var(--textColour);
+
+		.heading {
+			margin-bottom: 1rem;
+		}
+	}
+	.background {
+		z-index: 0;
+		grid-row: 1;
+		grid-column: screen-start / screen-end;
+	}
+}

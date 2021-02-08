@@ -1,0 +1,24 @@
+{
+	"title": "Anavilhana",
+	"desc": "Anavilhana",
+	"filmes": "Filmes",
+	"institucional": "Institucional",
+	"imprensa": "Imprensa",
+	"cursos": "Cursos",
+	"sobre": "Sobre",
+	"contato": "Contato",
+	"loja": "Loja",
+	"sala": "Sala de exibição",
+	"premiacoes": "Premiações",
+	"sinopse": "Sinopse",
+	"fichaTecnica": "Ficha Técnica",
+	"exibicoesEm": "Exibições em",
+	"toggleMenu": "Abre ou fecha o menu.",
+	"rodape": "Rodapé",
+	"obras": "Obras",
+	"montagens": "Montagens",
+	"resultados": {
+		"singular": "resultado",
+		"plural": "resultados"
+	}
+}

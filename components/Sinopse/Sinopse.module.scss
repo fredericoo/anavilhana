@@ -1,0 +1,40 @@
+@import "styles/abstracts/mixins";
+
+.section {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+
+	.textBox {
+		grid-column: col-10 / grid-end;
+		order: 2;
+	}
+
+	.heading {
+		margin-bottom: 1rem;
+	}
+
+	.trailer {
+		order: 1;
+		grid-column: grid-start / col-10;
+		& > * {
+			width: 100%;
+		}
+		figcaption {
+			opacity: 0.5;
+		}
+	}
+}
+
+.videoWrapper {
+	width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--aspectRatio));
+	position: relative;
+	& > * {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+}

@@ -1,0 +1,17 @@
+table {
+	margin-bottom: var(--leading);
+
+	table {
+		border-collapse: collapse;
+	}
+	th {
+		border-bottom: 1px solid;
+		@extend .smcp;
+		font-weight: 300;
+	}
+	td,
+	th {
+		padding: 0.125em 0.5em 0.25em 0.5em;
+		line-height: 1;
+	}
+}

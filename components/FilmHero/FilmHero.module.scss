@@ -1,0 +1,48 @@
+.section {
+	min-height: 90vh;
+	background: var(--colour__main);
+	color: var(--colour__bg);
+	overflow: hidden;
+}
+
+.films {
+	align-self: end;
+	grid-column: grid-start / grid-end;
+	grid-row: 1;
+	display: flex;
+	flex-wrap: wrap;
+	padding: var(--gutter) 0;
+	z-index: 2;
+}
+
+.image {
+	grid-column: screen-start / screen-end;
+	grid-row: 1;
+	position: relative;
+	z-index: 1;
+}
+
+.film {
+	display: block;
+	margin-right: 2em;
+	margin-bottom: 1em;
+	.name {
+		display: inline-block;
+	}
+	.year {
+		margin-left: 0.25em;
+		vertical-align: top;
+		font-size: 0.5em;
+	}
+
+	opacity: 0.5;
+	&.active {
+		opacity: 1;
+	}
+
+	&:hover {
+		text-decoration: none;
+		opacity: 1;
+		color: inherit;
+	}
+}

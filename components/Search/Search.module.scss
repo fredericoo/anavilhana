@@ -1,0 +1,51 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.button {
+	padding: 4px 8px;
+	border: none;
+	-webkit-appearance: none;
+	background: transparent;
+	opacity: 0.5;
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.box {
+	position: relative;
+	margin-right: 1rem;
+
+	.input {
+		border: none;
+		border-radius: 4px;
+		padding: 4px 8px;
+		background: var(--colour__secondary);
+	}
+
+	.suggestions {
+		width: 100%;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: var(--colour__bg);
+		z-index: 100;
+		.resultCount {
+			text-align: center;
+			user-select: none;
+			pointer-events: none;
+			opacity: 0.5;
+			padding: 4px 8px;
+		}
+		a {
+			display: block;
+			padding: 0.3em;
+			&:hover {
+				text-decoration: none;
+				background: var(--colour__secondary);
+			}
+		}
+	}
+}

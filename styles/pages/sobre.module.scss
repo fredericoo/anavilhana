@@ -1,0 +1,36 @@
+@import "styles/abstracts/mixins";
+
+.sobre {
+	margin-bottom: 8rem;
+
+	.image {
+		grid-column: screen-start / screen-end;
+		@include responsive($tablet-p) {
+			grid-column: col-8 / grid-end;
+			order: 2;
+		}
+		margin-bottom: 2rem;
+	}
+	.body {
+		grid-column: grid-start / grid-end;
+		@include responsive($tablet-p) {
+			grid-column: grid-start / span 5;
+			padding-top: 30vh;
+			order: 1;
+		}
+	}
+}
+
+.membros {
+	margin-bottom: 8rem;
+	.body {
+		grid-column: grid-start / grid-end;
+		@include responsive($tablet-p) {
+			grid-column: col-4 / span 5;
+		}
+		margin-bottom: 4rem;
+	}
+	.list {
+		grid-column: grid-start / grid-end;
+	}
+}

@@ -1,0 +1,19 @@
+.placeholder {
+	transition: background-color 1s ease-out;
+	background-color: #f0f0f0;
+}
+
+.fill {
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.image {
+	transition: opacity 1s ease-out;
+	opacity: 0;
+	&.loaded {
+		opacity: 1;
+	}
+}

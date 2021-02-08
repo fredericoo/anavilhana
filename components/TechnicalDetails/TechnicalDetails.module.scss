@@ -1,0 +1,35 @@
+.section {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+
+	.items,
+	.heading {
+		grid-column: col-4 / grid-end;
+	}
+	.heading {
+		margin-bottom: 2rem;
+	}
+}
+
+.task {
+	.doers {
+		color: var(--colour__main--faded);
+		li {
+			display: inline-block;
+			&:not(:last-child):after {
+				content: ", ";
+				margin-right: 0.2em;
+			}
+		}
+		a {
+			white-space: nowrap;
+			border-bottom: 1px solid;
+			&:hover {
+				text-decoration: none;
+			}
+			&:after {
+				content: " ↗";
+			}
+		}
+	}
+}

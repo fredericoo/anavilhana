@@ -1,0 +1,56 @@
+@import "styles/abstracts/mixins";
+
+.section {
+	background: var(--colour__secondary);
+	padding-top: 20vh;
+}
+.header {
+	order: 1;
+	grid-column: grid-start / grid-end;
+	@include responsive($tablet-p) {
+		grid-column: span 3 / grid-end;
+		order: 3;
+		position: sticky;
+		top: 100px;
+		align-self: start;
+	}
+}
+.body {
+	order: 2;
+	grid-column: grid-start / grid-end;
+	@include responsive($tablet-p) {
+		grid-column: col-3 / span 7;
+	}
+
+	.heading {
+		margin-bottom: var(--leading);
+	}
+
+	.prizes {
+		margin: 2rem 0;
+	}
+}
+
+.obra {
+	.imagem {
+		filter: grayscale(100%);
+		transition: filter 0.6s ease-out;
+	}
+	.titulo {
+		margin-top: 0.7rem;
+		text-transform: uppercase;
+	}
+	.ano {
+		display: inline-block;
+		margin-left: 0.4em;
+		font-size: 0.7em;
+		vertical-align: top;
+	}
+
+	&:hover {
+		text-decoration: none;
+		.imagem {
+			filter: grayscale(0%);
+		}
+	}
+}
