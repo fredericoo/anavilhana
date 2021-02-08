@@ -1,0 +1,25 @@
+@import "styles/abstracts/mixins";
+
+.section {
+	margin: 4rem 0;
+	header {
+		margin-bottom: 2rem;
+		grid-column: grid-start / grid-end;
+		@include responsive($tablet-p) {
+			grid-column: span 6;
+		}
+	}
+
+	.ways {
+		grid-column: grid-start / grid-end;
+		@include responsive($tablet-p) {
+			grid-column: span 6;
+		}
+		li {
+			margin-bottom: 1rem;
+			dt {
+				opacity: 0.3;
+			}
+		}
+	}
+}
