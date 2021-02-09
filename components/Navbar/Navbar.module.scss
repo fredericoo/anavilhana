@@ -7,6 +7,8 @@
 	display: flex;
 	background: var(--colour__bg);
 	max-width: 100vw;
+
+	padding: 8px calc(var(--gutter) / 2);
 }
 
 .toggler {

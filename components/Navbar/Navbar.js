@@ -18,7 +18,7 @@ const Navbar = ({ menu }) => {
 	}, [asPath]);
 
 	return (
-		<nav className={`container ${styles.navbar}`}>
+		<nav className={`${styles.navbar}`}>
 			<Link href="/">
 				<a className={styles.logo}>
 					<img src="/img/logo.svg" />

@@ -1,5 +1,7 @@
 .list {
-	padding-top: 2rem;
+	border-top: 1px solid;
+	padding-top: 0.5rem;
+	margin-top: 4rem;
 	.item {
 		-webkit-appearance: none;
 		background: transparent;
@@ -29,4 +31,9 @@
 			}
 		}
 	}
+}
+
+.title {
+	font-size: 1.2em;
+	margin-bottom: 0.5rem;
 }
