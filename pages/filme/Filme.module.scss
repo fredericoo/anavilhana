@@ -6,7 +6,7 @@
 	top: 100px;
 	grid-column: grid-start / grid-end;
 	@include responsive($tablet-p) {
-		grid-column: grid-start / span 3;
+		grid-column: grid-start / span 2;
 	}
 	height: 0;
 }
