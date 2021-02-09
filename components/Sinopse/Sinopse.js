@@ -13,7 +13,7 @@ const Sinopse = ({ filme }) => {
 			} grid grid--inner`}
 		>
 			<div className={styles.textBox}>
-				<h2 className={`${styles.heading} h-3`}>{t("common:sinopse")}</h2>
+				<h2 className={`${styles.heading} h-2`}>{t("common:sinopse")}</h2>
 				<div className={`${styles.sinopse} body`}>
 					<Text content={filme.sinopse} />
 				</div>
