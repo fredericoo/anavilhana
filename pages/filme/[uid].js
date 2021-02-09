@@ -44,7 +44,7 @@ export default function Post({ doc, config }) {
 							]}
 						/>
 					</nav>
-					{!!filme.premiacoes.length && filme.premiacoes[0].ano && (
+					{!!filme.premiacoes.length && filme.premiacoes[0].premio__titulo && (
 						<section id="premiacoes" className={styles.section}>
 							<Prizes prizes={filme.premiacoes} />
 						</section>
