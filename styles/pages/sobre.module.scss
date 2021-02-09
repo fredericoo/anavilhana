@@ -10,6 +10,9 @@
 			order: 2;
 		}
 		margin-bottom: 2rem;
+		align-self: start;
+		position: sticky;
+		top: 80px;
 	}
 	.body {
 		grid-column: grid-start / grid-end;

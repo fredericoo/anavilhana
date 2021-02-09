@@ -1,24 +1,12 @@
 @import "styles/abstracts/mixins";
 
-.section {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-
-	.items,
-	.heading {
-		grid-column: grid-start / grid-end;
-		@include responsive($tablet-l) {
-			grid-column: col-4 / grid-end;
-		}
-	}
-	.heading {
-		margin-bottom: 2rem;
-	}
-}
-
-.task {
-	.doers {
+.item {
+	.task {
+		font-weight: normal;
 		color: var(--colour__main--faded);
+		opacity: 0.8;
+	}
+	.doers {
 		li {
 			display: inline-block;
 			line-height: 1.4;
@@ -31,6 +19,7 @@
 			white-space: nowrap;
 			border-bottom: 1px solid;
 			&:hover {
+				color: var(--colour__accent);
 				text-decoration: none;
 			}
 		}

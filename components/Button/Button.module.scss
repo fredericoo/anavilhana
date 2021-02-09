@@ -47,6 +47,10 @@
 		font-size: 0.8em;
 		padding: 4px 0;
 		border-bottom: 1px solid;
+		@include on-event {
+			cursor: pointer;
+			border-bottom-color: transparent;
+		}
 	}
 
 	&--arrow {
@@ -80,6 +84,10 @@
 	&--primary {
 		background: var(--colour__main);
 		color: var(--colour__bg);
+		@include on-event {
+			background: var(--colour__accent);
+			color: var(--colour__bg);
+		}
 	}
 
 	&--secondary {

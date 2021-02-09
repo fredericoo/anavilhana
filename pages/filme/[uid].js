@@ -1,16 +1,21 @@
+import styles from "./Filme.module.scss";
+
 import { queryRepeatableDocuments } from "utils/queries";
 import { Client } from "utils/prismicHelpers";
-import Layout from "components/Layout/Layout";
-import styles from "./Filme.module.scss";
-import Meta from "components/Meta/Meta";
-import useTranslation from "next-translate/useTranslation";
 import { RichText } from "prismic-reactjs";
+
+import useTranslation from "next-translate/useTranslation";
+
+import Layout from "components/Layout/Layout";
+import Meta from "components/Meta/Meta";
 import FilmHero from "components/FilmHero/FilmHero";
 import Prizes from "components/Prizes/Prizes";
 import TechnicalDetails from "components/TechnicalDetails/TechnicalDetails";
 import Sinopse from "components/Sinopse/Sinopse";
 import PhotoCarousel from "components/PhotoCarousel/PhotoCarousel";
 import ScrollNav from "components/ScrollNav/ScrollNav";
+import Columns from "components/Columns/Columns";
+import WatchLink from "components/WatchLink/WatchLink";
 
 export default function Post({ doc, config }) {
 	const { t } = useTranslation();
@@ -38,20 +43,20 @@ export default function Post({ doc, config }) {
 						<ScrollNav
 							items={[
 								{ label: t("common:premiacoes"), id: "premiacoes" },
-								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
 								{ label: t("common:sinopse"), id: "sinopse" },
 								{ label: t("common:galeria"), id: "galeria" },
+								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
+								{ label: t("common:assista"), id: "assista" },
 							]}
 						/>
 					</nav>
 					{!!filme.premiacoes.length && filme.premiacoes[0].premio_titulo && (
-						<section id="premiacoes" className={styles.section}>
+						<section
+							id="premiacoes"
+							className={`${styles.section}`}
+							style={{ "--section__bg": "var(--colour__secondary)" }}
+						>
 							<Prizes prizes={filme.premiacoes} />
-						</section>
-					)}
-					{filme.ficha_tecnica && (
-						<section id="fichaTecnica" className={styles.section}>
-							<TechnicalDetails details={filme.ficha_tecnica} />
 						</section>
 					)}
 					<section id="sinopse" className={`${styles.section} ${styles.over}`}>
@@ -65,6 +70,38 @@ export default function Post({ doc, config }) {
 							<PhotoCarousel photos={filme.galeria} />
 						</section>
 					)}
+					{filme.ficha_tecnica && (
+						<section
+							id="fichaTecnica"
+							className={`${styles.section} ${styles.content}`}
+						>
+							<h2 className={`h-2 ${styles.heading}`}>
+								{t("common:fichaTecnica")}
+							</h2>
+							<TechnicalDetails details={filme.ficha_tecnica} />
+						</section>
+					)}
+
+					{!!filme.plataforma_e_link.length &&
+						filme.plataforma_e_link[0].nome_da_plataforma && (
+							<section
+								id="assista"
+								className={`${styles.section} ${styles.content}`}
+							>
+								<h2 className={`h-2 ${styles.heading}`}>
+									{t("common:assista")}
+								</h2>
+								<Columns>
+									{filme.plataforma_e_link.map((assista, key) => (
+										<WatchLink
+											key={key}
+											platform={assista.nome_da_plataforma}
+											link={assista.link_do_filme}
+										/>
+									))}
+								</Columns>
+							</section>
+						)}
 				</div>
 			</Layout>
 		);

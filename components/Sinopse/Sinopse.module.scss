@@ -1,8 +1,6 @@
 @import "styles/abstracts/mixins";
 
 .section {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
 	&.hasTrailer {
 		background: var(--colour__bg);
 		.textBox {

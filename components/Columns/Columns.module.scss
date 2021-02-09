@@ -3,7 +3,7 @@
 .columns {
 	display: grid;
 	column-gap: var(--colGap);
-	row-gap: var(--colGap);
+	row-gap: var(--gutter);
 	grid-template-columns: repeat(var(--cols), 1fr);
 	--cols__md: var(--cols);
 	--cols__lg: var(--cols__md);

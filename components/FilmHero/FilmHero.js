@@ -27,7 +27,7 @@ const FilmHero = ({ filmes }) => {
 					<motion.div
 						key={image.url}
 						initial={{ opacity: 0, scale: 1.5 }}
-						animate={{ opacity: 1, scale: 1.2 }}
+						animate={{ opacity: 0.6, scale: 1.2 }}
 						exit={{ opacity: 0, scale: 1 }}
 						transition={{ ease: "easeOut", duration: 0.3 }}
 						className={styles.image}

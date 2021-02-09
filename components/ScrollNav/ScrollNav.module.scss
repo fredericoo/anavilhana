@@ -1,7 +1,7 @@
 .list {
-	border-top: 1px solid;
+	border-top: 1px solid rgba(0, 0, 0, 0.5);
 	padding-top: 0.5rem;
-	margin-top: 4rem;
+	margin-top: 2rem;
 	.item {
 		-webkit-appearance: none;
 		background: transparent;
@@ -35,9 +35,4 @@
 			}
 		}
 	}
-}
-
-.title {
-	font-size: 1.2em;
-	margin-bottom: 0.5rem;
 }

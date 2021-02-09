@@ -2,6 +2,7 @@ import styles from "./Prizes.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import Prize from "./Prize";
 import Button from "components/Button/Button";
+import Columns from "components/Columns/Columns";
 import { useState } from "react";
 
 const Prizes = ({ prizes }) => {
@@ -15,7 +16,7 @@ const Prizes = ({ prizes }) => {
 	return (
 		<div className={`${styles.section} grid grid--inner`}>
 			<h2 className={`h-2 ${styles.heading}`}>{t("common:premiacoes")}</h2>
-			<div className={`${styles.prizes}`}>
+			<Columns sm={2} md={3} className={`${styles.prizes}`}>
 				{prizes.slice(0, show).map((premio, key) => (
 					<Prize
 						key={key}
@@ -24,7 +25,7 @@ const Prizes = ({ prizes }) => {
 						info={premio.premio_info}
 					/>
 				))}
-			</div>
+			</Columns>
 			{show < prizes.length && (
 				<div className={styles.showMore}>
 					<Button type="link" onClick={showMore}>

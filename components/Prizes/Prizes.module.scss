@@ -1,10 +1,6 @@
 @import "styles/abstracts/mixins";
 
 .section {
-	background: var(--colour__secondary);
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-
 	.prizes,
 	.heading {
 		grid-column: grid-start / grid-end;
@@ -14,11 +10,6 @@
 	}
 	.heading {
 		margin-bottom: 2rem;
-	}
-	.prizes {
-		display: grid;
-		grid-gap: var(--gutter);
-		grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
 	}
 	.showMore {
 		grid-column: grid-start / grid-end;

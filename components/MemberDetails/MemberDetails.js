@@ -5,18 +5,17 @@ import { RichText } from "prismic-reactjs";
 import Placeholder from "components/Placeholder/Placeholder";
 import Prize from "components/Prizes/Prize";
 import Columns from "components/Columns/Columns";
+import FilmThumb from "components/FilmThumb/FilmThumb";
 
 import useTranslation from "next-translate/useTranslation";
-import Link from "next/link";
-import { hrefResolver } from "prismic-configuration";
-import moment from "moment";
+
 import ScrollNav from "components/ScrollNav/ScrollNav";
 
 const MemberDetails = ({ member, obras }) => {
 	const { t } = useTranslation();
 
 	return (
-		<section className={`${styles.section} grid grid--full`}>
+		<div className={`${styles.container} grid grid--full`}>
 			<nav className={styles.navigation}>
 				<ScrollNav
 					items={[
@@ -61,7 +60,7 @@ const MemberDetails = ({ member, obras }) => {
 				</div>
 
 				{!!member.premiacoes.length && member.premiacoes[0].premio_ano && (
-					<div id="premiacoes" className={styles.prizes}>
+					<div id="premiacoes" className={`${styles.section} ${styles.prizes}`}>
 						<h2 className={`h-2 ${styles.heading}`}>
 							{t("common:premiacoes")}
 						</h2>
@@ -79,18 +78,21 @@ const MemberDetails = ({ member, obras }) => {
 				)}
 
 				{!!obras.length && (
-					<div id="obras" className={styles.obras}>
+					<div id="obras" className={`${styles.section} ${styles.obras}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
 						<Columns sm={3} md={3}>
 							{obras.map((obra) => (
-								<Obra key={obra.uid} obra={obra} />
+								<FilmThumb key={obra.uid} obra={obra} />
 							))}
 						</Columns>
 					</div>
 				)}
 
 				{!!member.montagens.length && member.montagens[0].ano && (
-					<div id="montagens" className={styles.montagens}>
+					<div
+						id="montagens"
+						className={`${styles.section} ${styles.montagens}`}
+					>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:montagens")}</h2>
 						<ul>
 							{member.montagens.map((montagem, key) => (
@@ -103,36 +105,8 @@ const MemberDetails = ({ member, obras }) => {
 					</div>
 				)}
 			</div>
-		</section>
+		</div>
 	);
 };
-
-const Obra = ({ obra }) => (
-	<Link href={hrefResolver(obra)}>
-		<a className={styles.obra}>
-			{obra.data.imagem && (
-				<div className={styles.imagem}>
-					<Placeholder
-						src={obra.data.imagem.url}
-						width={1920}
-						height={1080}
-						layout="responsive"
-						sizes="(max-width: 768px) 150px,
-    								(max-width: 1920px) 300px,
-    								600px"
-					/>
-				</div>
-			)}
-			<h3 className={styles.titulo}>
-				{RichText.asText(obra.data.titulo)}
-				{obra.data.lancamento && (
-					<span className={styles.ano}>
-						{moment(obra.data.lancamento).format("Y")}
-					</span>
-				)}
-			</h3>
-		</a>
-	</Link>
-);
 
 export default MemberDetails;

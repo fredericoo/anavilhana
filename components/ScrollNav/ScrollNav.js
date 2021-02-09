@@ -40,7 +40,6 @@ const ScrollNav = ({ items }) => {
 
 	return (
 		<ul className={styles.list}>
-			<li className={`smcp ${styles.title}`}>Índice</li>
 			{navItems.map(({ ref, label }, key) => (
 				<li key={key}>
 					<button
