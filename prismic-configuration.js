@@ -23,6 +23,9 @@ module.exports = {
 		if (doc.link_type === "Web") {
 			return doc.url;
 		}
+		if (doc.url) {
+			return doc.url;
+		}
 		return `/${doc.uid}`;
 	},
 
@@ -37,7 +40,7 @@ module.exports = {
 		if (doc.type === "homepage") {
 			return `/`;
 		}
-		if (doc.link_type === "Web") {
+		if (doc.url) {
 			return doc.url;
 		}
 		return `/${doc.uid}`;

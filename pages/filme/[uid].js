@@ -2,6 +2,7 @@ import styles from "./Filme.module.scss";
 
 import { queryRepeatableDocuments } from "utils/queries";
 import { Client } from "utils/prismicHelpers";
+import Prismic from "prismic-javascript";
 import { RichText } from "prismic-reactjs";
 
 import useTranslation from "next-translate/useTranslation";
@@ -16,8 +17,9 @@ import PhotoCarousel from "components/PhotoCarousel/PhotoCarousel";
 import ScrollNav from "components/ScrollNav/ScrollNav";
 import Columns from "components/Columns/Columns";
 import WatchLink from "components/WatchLink/WatchLink";
+import CriticsSection from "components/CriticsSection/CriticsSection";
 
-export default function Post({ doc, config }) {
+export default function Post({ doc, articles, config }) {
 	const { t } = useTranslation();
 
 	if (doc && doc.data) {
@@ -46,6 +48,7 @@ export default function Post({ doc, config }) {
 								{ label: t("common:sinopse"), id: "sinopse" },
 								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
+								{ label: t("common:criticas"), id: "criticas" },
 								{ label: t("common:assista"), id: "assista" },
 							]}
 						/>
@@ -82,6 +85,18 @@ export default function Post({ doc, config }) {
 						</section>
 					)}
 
+					{!!articles.length && (
+						<section
+							id="criticas"
+							className={`${styles.section} ${styles.content}`}
+						>
+							<h2 className={`h-2 ${styles.heading}`}>
+								{t("common:criticas")}
+							</h2>
+							<CriticsSection articles={articles} />
+						</section>
+					)}
+
 					{!!filme.plataforma_e_link.length &&
 						filme.plataforma_e_link[0].nome_da_plataforma && (
 							<section
@@ -91,7 +106,7 @@ export default function Post({ doc, config }) {
 								<h2 className={`h-2 ${styles.heading}`}>
 									{t("common:assista")}
 								</h2>
-								<Columns>
+								<Columns sm={1} md={2} lg={3}>
 									{filme.plataforma_e_link.map((assista, key) => (
 										<WatchLink
 											key={key}
@@ -144,6 +159,10 @@ export async function getStaticProps({ params, locale }) {
 		lang: locale,
 		fetchLinks: ["membro.nome"],
 	});
+	const articles = await client.query([
+		Prismic.Predicates.at("document.type", "artigo"),
+		Prismic.Predicates.at("my.artigo.linked", doc.id),
+	]);
 	const config = await client.getSingle("config", { lang: locale });
 
 	if (doc) {
@@ -151,9 +170,10 @@ export async function getStaticProps({ params, locale }) {
 			revalidate: 60,
 			props: {
 				config: config || {},
+				articles: articles.results || [],
 				doc: doc || {},
 			},
 		};
 	}
-	return { revalidate: 60, props: { doc: {}, config: {} } };
+	return { revalidate: 60, props: { doc: {}, config: {}, articles: [] } };
 }

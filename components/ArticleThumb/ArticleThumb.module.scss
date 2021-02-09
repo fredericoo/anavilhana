@@ -1,0 +1,40 @@
+@import "styles/abstracts/mixins";
+
+.article {
+	margin-bottom: 2rem;
+	.source {
+		opacity: 0.5;
+	}
+	.title {
+		margin-bottom: 0.5rem;
+		hanging-punctuation: first;
+	}
+	.lead {
+		opacity: 0.5;
+		line-height: 1.4;
+		max-height: calc(1.4 * 1em * 3);
+		overflow-y: hidden;
+		text-overflow: ellipsis;
+		line-clamp: 3;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+	}
+	.cta {
+		&:after {
+			content: " ↗";
+			display: inline;
+		}
+	}
+
+	@include on-event {
+		text-decoration: none;
+
+		.title {
+			text-decoration: underline;
+		}
+		.cta {
+			color: var(--colour__accent);
+		}
+	}
+}

@@ -10,7 +10,7 @@ const FilmThumb = ({ obra }) => (
 	<Link href={hrefResolver(obra)}>
 		<a className={styles.obra}>
 			<div className={styles.imagem}>
-				{!!obra.data.imagem.url && (
+				{obra.data.imagem && obra.data.imagem.url && (
 					<Image
 						src={obra.data.imagem.url}
 						layout="fill"
@@ -20,7 +20,7 @@ const FilmThumb = ({ obra }) => (
     								600px"
 					/>
 				)}
-				{!obra.data.imagem.url && (
+				{obra.data.imagem && !obra.data.imagem.url && (
 					<div className={styles.noPic}>
 						{RichText.asText(obra.data.titulo).charAt(0)}
 					</div>

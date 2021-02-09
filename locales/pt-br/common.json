@@ -15,11 +15,13 @@
 	"galeria": "Galeria",
 	"exibicoesEm": "Exibições em",
 	"toggleMenu": "Abre ou fecha o menu.",
+	"criticas": "Críticas & Artigos",
 	"rodape": "Rodapé",
 	"obras": "Obras",
 	"montagens": "Montagens",
 	"assista": "Assista",
 	"mais": "Ver todas",
+	"ler": "Ler na íntegra",
 	"resultados": {
 		"singular": "resultado",
 		"plural": "resultados"
