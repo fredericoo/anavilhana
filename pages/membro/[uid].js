@@ -1,4 +1,6 @@
 import { queryRepeatableDocuments } from "utils/queries";
+
+import Prismic from "prismic-javascript";
 import { Client } from "utils/prismicHelpers";
 import Layout from "components/Layout/Layout";
 import styles from "./Membro.module.scss";
@@ -7,7 +9,7 @@ import useTranslation from "next-translate/useTranslation";
 import { RichText } from "prismic-reactjs";
 import MemberDetails from "components/MemberDetails/MemberDetails";
 
-export default function Post({ doc, config, obras }) {
+export default function Post({ doc, config, obras, articles }) {
 	const { t } = useTranslation();
 
 	if (doc && doc.data) {
@@ -26,7 +28,7 @@ export default function Post({ doc, config, obras }) {
 							: ""
 					}
 				/>
-				<MemberDetails member={membro} obras={obras} />
+				<MemberDetails member={membro} obras={obras} artigos={articles} />
 			</Layout>
 		);
 	}
@@ -47,12 +49,13 @@ export default function Post({ doc, config, obras }) {
 }
 
 export async function getStaticPaths() {
-	const documents = await queryRepeatableDocuments(
-		(doc) => doc.type === "membro"
-	);
+	const client = Client();
+	const documents = await client.query([
+		Prismic.Predicates.at("document.type", "membro"),
+	]);
 
 	return {
-		paths: documents.map((doc) => {
+		paths: documents.results.map((doc) => {
 			return {
 				params: { uid: doc.uid },
 				locale: doc.lang,
@@ -68,14 +71,16 @@ export async function getStaticProps({ params, locale }) {
 		lang: locale,
 		fetchLinks: ["filme.titulo"],
 	});
-	const allObras = await queryRepeatableDocuments(
-		(doc) => doc.type === "filme"
-	);
-	const obras = allObras.filter(
-		(obra) =>
-			obra.data.ficha_tecnica.filter((item) => item.membro.uid === doc.uid)
-				.length > 0
-	);
+
+	const articles = await client.query([
+		Prismic.Predicates.at("document.type", "artigo"),
+		Prismic.Predicates.at("my.artigo.mencoes.membro", doc.id),
+	]);
+
+	const obras = await client.query([
+		Prismic.Predicates.at("document.type", "filme"),
+		Prismic.Predicates.at("my.filme.ficha_tecnica.membro", doc.id),
+	]);
 
 	const config = await client.getSingle("config", { lang: locale });
 
@@ -85,9 +90,13 @@ export async function getStaticProps({ params, locale }) {
 			props: {
 				config: config || {},
 				doc: doc || {},
-				obras: obras || {},
+				obras: obras.results || [],
+				articles: articles.results || [],
 			},
 		};
 	}
-	return { revalidate: 60, props: { doc: {}, config: {}, obras: {} } };
+	return {
+		revalidate: 60,
+		props: { doc: {}, config: {}, obras: [], articles: [] },
+	};
 }

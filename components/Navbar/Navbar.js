@@ -44,9 +44,9 @@ const Navbar = ({ menu }) => {
 					</ul>
 					<Search />
 					<div className={styles.login}>
-						<Button type="secondary" href="/login">
+						{/* <Button type="secondary" href="/sala">
 							{t("common:sala")}
-						</Button>
+						</Button> */}
 					</div>
 				</div>
 			</div>

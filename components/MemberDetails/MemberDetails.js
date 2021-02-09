@@ -10,18 +10,20 @@ import FilmThumb from "components/FilmThumb/FilmThumb";
 import useTranslation from "next-translate/useTranslation";
 
 import ScrollNav from "components/ScrollNav/ScrollNav";
+import ArticleThumb from "components/ArticleThumb/ArticleThumb";
 
-const MemberDetails = ({ member, obras }) => {
+const MemberDetails = ({ member, obras, artigos }) => {
 	const { t } = useTranslation();
 
 	return (
 		<div className={`${styles.container} grid grid--full`}>
-			<nav className={styles.navigation}>
+			<nav className={styles.nav}>
 				<ScrollNav
 					items={[
 						{ label: t("common:sobre"), id: "sobre" },
 						{ label: t("common:premiacoes"), id: "premiacoes" },
 						{ label: t("common:obras"), id: "obras" },
+						{ label: t("common:criticas"), id: "criticas" },
 						{ label: t("common:montagens"), id: "montagens" },
 					]}
 				/>
@@ -64,7 +66,7 @@ const MemberDetails = ({ member, obras }) => {
 						<h2 className={`h-2 ${styles.heading}`}>
 							{t("common:premiacoes")}
 						</h2>
-						<Columns sm={3} md={3}>
+						<Columns sm={2} md={3}>
 							{member.premiacoes.map((prize, key) => (
 								<Prize
 									key={key}
@@ -80,9 +82,20 @@ const MemberDetails = ({ member, obras }) => {
 				{!!obras.length && (
 					<div id="obras" className={`${styles.section} ${styles.obras}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
-						<Columns sm={3} md={3}>
+						<Columns sm={2} md={3}>
 							{obras.map((obra) => (
 								<FilmThumb key={obra.uid} obra={obra} />
+							))}
+						</Columns>
+					</div>
+				)}
+
+				{!!artigos.length && (
+					<div id="criticas" className={`${styles.section}`}>
+						<h2 className={`h-2 ${styles.heading}`}>{t("common:criticas")}</h2>
+						<Columns sm={1} md={2}>
+							{artigos.map((artigo, key) => (
+								<ArticleThumb key={key} article={artigo} />
 							))}
 						</Columns>
 					</div>

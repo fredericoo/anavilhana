@@ -40,11 +40,10 @@ const PhotoCarousel = ({ photos }) => {
 const CarouselSlide = ({ photo, onClick }) => {
 	if (!photo.url) return null;
 	const photoProps = onClick
-		? { layout: "fill" }
+		? { layout: "fill", objectFit: "cover" }
 		: {
-				width: photo.dimensions.width,
-				height: photo.dimensions.height,
-				layout: "responsive",
+				objectFit: "contain",
+				layout: "fill",
 		  };
 	return (
 		<figure

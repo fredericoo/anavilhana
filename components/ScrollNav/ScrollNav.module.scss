@@ -1,37 +1,69 @@
+@import "styles/abstracts/mixins";
+
 .list {
-	border-top: 1px solid rgba(0, 0, 0, 0.5);
-	padding-top: 0.5rem;
-	margin-top: 2rem;
+	background: var(--colour__secondary);
+	display: flex;
+	overflow: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	max-width: 100vw;
+	align-items: center;
+	@include responsive($tablet-l) {
+		align-items: flex-start;
+		border-top: 1px solid rgba(0, 0, 0, 0.5);
+		background: transparent;
+		padding-top: 0.5rem;
+		margin-top: 2rem;
+		flex-direction: column;
+	}
+	transition: opacity 0.3s ease-out;
+	&.hidden {
+		@include responsive($tablet-l) {
+			opacity: 0;
+		}
+	}
 	.item {
 		-webkit-appearance: none;
 		background: transparent;
 		border: none;
 		position: relative;
-		padding: 0.618em 1.618em 0.618em 1.2rem;
-		transform: translateX(-1.2rem);
 		transition: transform 0.6s var(--easing), opacity 0.3s ease-out;
 		opacity: 0.5;
 		display: inline-block;
 		text-align: left;
+		padding: 0.618em 1.618em;
+		flex: 1 1 0;
+
+		@include responsive($tablet-l) {
+			transform: translateX(-1.2rem);
+			&:before {
+				content: "";
+				height: 1px;
+				width: 0;
+				position: absolute;
+				top: 51%;
+				left: 1.2rem;
+				background: currentColor;
+				transition: width 0.6s var(--easing), left 0.6s var(--easing);
+			}
+		}
+
 		&:hover {
 			opacity: 1;
 		}
-		&:before {
-			content: "";
-			height: 1px;
-			width: 0;
-			position: absolute;
-			top: 51%;
-			left: 1.2rem;
-			background: currentColor;
-			transition: width 0.6s var(--easing), left 0.6s var(--easing);
-		}
+
 		&.active {
 			transform: none;
 			opacity: 1;
-			&:before {
-				left: 0;
-				width: 0.8rem;
+
+			@include responsive($tablet-l) {
+				&:before {
+					left: 0;
+					width: 0.8rem;
+				}
 			}
 		}
 	}

@@ -3,12 +3,14 @@
 .nav {
 	align-self: start;
 	position: sticky;
-	top: 100px;
-	grid-column: grid-start / grid-end;
+	grid-column: screen-start / screen-end;
+	top: 64px;
 	@include responsive($tablet-p) {
+		top: 100px;
 		grid-column: grid-start / span 3;
+		height: 0;
 	}
-	height: 0;
+	z-index: 10;
 }
 
 .section {
@@ -16,8 +18,11 @@
 	padding-bottom: 2rem;
 	grid-column: screen-start / screen-end;
 	background: var(--section__bg);
+
 	&.over {
-		z-index: 2;
+		@include responsive($tablet-l) {
+			z-index: 20;
+		}
 	}
 	&.content {
 		grid-column: grid-start / grid-end;

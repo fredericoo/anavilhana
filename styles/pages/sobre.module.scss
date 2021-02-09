@@ -8,11 +8,11 @@
 		@include responsive($tablet-p) {
 			grid-column: col-8 / grid-end;
 			order: 2;
+			align-self: start;
+			position: sticky;
+			top: 80px;
 		}
 		margin-bottom: 2rem;
-		align-self: start;
-		position: sticky;
-		top: 80px;
 	}
 	.body {
 		grid-column: grid-start / grid-end;

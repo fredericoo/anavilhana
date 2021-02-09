@@ -62,27 +62,35 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 
 	return (
 		<div className={styles.airings}>
-			<header className={`${styles.header} h-3`}>
-				{`${t("common:exibicoesEm")} ${moment(selectDate).format("D/MM")}`}
-			</header>
-			{eventsToday.map((event) => (
-				<div className={styles.event}>
-					<Link href={`/filme/${event.film.uid}`}>
-						<a>
-							<h3 className={`${styles.filmName} h-4`}>
-								{RichText.asText(event.film.data.titulo)}
-							</h3>
-						</a>
-					</Link>
-					<div className={`${styles.dateTime} smcp`}>
-						{event.fullDate.format("D/MM, hh:mm")} —{" "}
-						{RichText.asText(event.local)}
+			<div className={styles.scroll}>
+				<header className={`${styles.header} h-3`}>
+					{`${t("common:exibicoesEm")} ${moment(selectDate).format("D/MM")}`}
+				</header>
+				{eventsToday.length ? (
+					eventsToday.map((event) => (
+						<div className={styles.event}>
+							<Link href={`/filme/${event.film.uid}`}>
+								<a>
+									<h3 className={`${styles.filmName} h-4`}>
+										{RichText.asText(event.film.data.titulo)}
+									</h3>
+								</a>
+							</Link>
+							<div className={`${styles.dateTime} smcp`}>
+								{event.fullDate.format("D/MM, hh:mm")} —{" "}
+								{RichText.asText(event.local)}
+							</div>
+							<div className={`s-sm ${styles.synopsis}`}>
+								<RichText render={event.film.data.sinopse} />
+							</div>
+						</div>
+					))
+				) : (
+					<div className={`${styles.notFound} s-sm`}>
+						{t("common:nenhumaExibicao")}
 					</div>
-					<div className={`s-sm ${styles.synopsis}`}>
-						<RichText render={event.film.data.sinopse} />
-					</div>
-				</div>
-			))}
+				)}
+			</div>
 		</div>
 	);
 };

@@ -17,13 +17,17 @@
 	}
 }
 
-.navigation {
-	position: sticky;
-	top: 100px;
+.nav {
 	align-self: start;
-	grid-column: grid-start / grid-end;
+	position: sticky;
+	grid-column: screen-start / screen-end;
+	top: 64px;
+	z-index: 10;
 	@include responsive($tablet-p) {
-		grid-column: col-3 / grid-start;
+		top: 100px;
+		grid-column: grid-start / span 2;
+		height: 0;
+		z-index: 2;
 	}
 }
 

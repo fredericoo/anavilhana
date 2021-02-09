@@ -1,10 +1,11 @@
 import styles from "./ScrollNav.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import animateScrollTo from "animated-scroll-to";
 
 const ScrollNav = ({ items }) => {
 	const [activeNav, setActiveNav] = useState();
 	const [navItems, setNavItems] = useState([]);
+	const [overlay, setOverlay] = useState(false);
 
 	useEffect(() => {
 		setNavItems(
@@ -26,11 +27,30 @@ const ScrollNav = ({ items }) => {
 		setActiveNav(active);
 	};
 
+	const handleOverlay = (entries, observer) => {
+		let overlay = false;
+		entries.forEach((entry) => {
+			console.log(entry, observer);
+			if (entry.isIntersecting) overlay = true;
+		});
+		setOverlay(overlay);
+	};
+
 	useEffect(() => {
 		handleScroll();
 		document.addEventListener("scroll", () => handleScroll());
+
+		const observer = new window.IntersectionObserver(handleOverlay, {
+			root: null,
+			threshold: [0.5],
+		});
+		navItems
+			.filter(({ ref }) => ref.dataset.hidenav)
+			.forEach(({ ref }) => observer.observe(ref));
+
 		return () => {
 			document.removeEventListener("scroll", handleScroll);
+			observer.disconnect();
 		};
 	}, [navItems]);
 
@@ -39,7 +59,7 @@ const ScrollNav = ({ items }) => {
 	};
 
 	return (
-		<ul className={styles.list}>
+		<ul className={`${styles.list} ${overlay ? styles.hidden : ""}`}>
 			{navItems.map(({ ref, label }, key) => (
 				<li key={key}>
 					<button

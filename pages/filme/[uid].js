@@ -66,10 +66,7 @@ export default function Post({ doc, articles, config }) {
 						<Sinopse filme={filme} />
 					</section>
 					{!!filme.galeria.length && filme.galeria[0].imagem1 && (
-						<section
-							id="galeria"
-							className={`${styles.section} ${styles.over}`}
-						>
+						<section data-hidenav id="galeria" className={`${styles.section}`}>
 							<PhotoCarousel photos={filme.galeria} />
 						</section>
 					)}
@@ -138,12 +135,13 @@ export default function Post({ doc, articles, config }) {
 }
 
 export async function getStaticPaths() {
-	const documents = await queryRepeatableDocuments(
-		(doc) => doc.type === "filme"
-	);
+	const client = Client();
+	const documents = await client.query([
+		Prismic.Predicates.at("document.type", "filme"),
+	]);
 
 	return {
-		paths: documents.map((doc) => {
+		paths: documents.results.map((doc) => {
 			return {
 				params: { uid: doc.uid },
 				locale: doc.lang,

@@ -1,7 +1,10 @@
 @import "styles/abstracts/mixins";
 
 .calendar {
-	grid-column: grid-start / col-7;
+	grid-column: grid-start / grid-end;
+	@include responsive($tablet-p) {
+		grid-column: grid-start / col-7;
+	}
 	border: 1px solid var(--colour__secondary);
 	.header,
 	.body {
@@ -53,11 +56,33 @@
 }
 
 .airings {
-	grid-column: grid-end / col-7;
 	.header {
 		text-align: center;
-		opacity: 0.5;
 		margin-bottom: 1rem;
+		position: sticky;
+		top: 0;
+		background: var(--colour__bg);
+		color: var(--colour__main--faded);
+		padding: 8px;
+		z-index: 2;
+	}
+
+	position: relative;
+	height: 300px;
+	grid-column: grid-end / grid-start;
+	border-bottom: 1px solid var(--colour__secondary);
+	@include responsive($tablet-p) {
+		border-bottom: none;
+		grid-column: grid-end / col-7;
+		max-height: initial;
+	}
+	.scroll {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: scroll;
 	}
 }
 
@@ -76,4 +101,11 @@
 	.synopsis {
 		opacity: 0.5;
 	}
+}
+
+.notFound {
+	display: block;
+	text-align: center;
+	max-width: 33ch;
+	margin: auto;
 }
