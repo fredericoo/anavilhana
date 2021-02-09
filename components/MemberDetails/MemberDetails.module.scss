@@ -2,7 +2,8 @@
 
 .section {
 	background: var(--colour__secondary);
-	padding-top: 20vh;
+	padding-top: 8rem;
+	padding-bottom: 4rem;
 }
 .header {
 	order: 1;
@@ -15,6 +16,17 @@
 		align-self: start;
 	}
 }
+
+.navigation {
+	position: sticky;
+	top: 100px;
+	align-self: start;
+	grid-column: grid-start / grid-end;
+	@include responsive($tablet-p) {
+		grid-column: col-3 / grid-start;
+	}
+}
+
 .body {
 	order: 2;
 	grid-column: grid-start / grid-end;

@@ -10,6 +10,7 @@ import Prizes from "components/Prizes/Prizes";
 import TechnicalDetails from "components/TechnicalDetails/TechnicalDetails";
 import Sinopse from "components/Sinopse/Sinopse";
 import PhotoCarousel from "components/PhotoCarousel/PhotoCarousel";
+import ScrollNav from "components/ScrollNav/ScrollNav";
 
 export default function Post({ doc, config }) {
 	const { t } = useTranslation();
@@ -32,12 +33,39 @@ export default function Post({ doc, config }) {
 					}
 				/>
 				<FilmHero filmes={[doc]} />
-				{filme.premiacoes && <Prizes prizes={filme.premiacoes} />}
-				{filme.ficha_tecnica && (
-					<TechnicalDetails details={filme.ficha_tecnica} />
-				)}
-				<Sinopse filme={filme} />
-				{filme.galeria && <PhotoCarousel photos={filme.galeria} />}
+				<div className={`grid grid--full`}>
+					<nav className={styles.nav}>
+						<ScrollNav
+							items={[
+								{ label: t("common:premiacoes"), id: "premiacoes" },
+								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
+								{ label: t("common:sinopse"), id: "sinopse" },
+								{ label: t("common:galeria"), id: "galeria" },
+							]}
+						/>
+					</nav>
+					{!!filme.premiacoes.length && filme.premiacoes[0].ano && (
+						<section id="premiacoes" className={styles.section}>
+							<Prizes prizes={filme.premiacoes} />
+						</section>
+					)}
+					{filme.ficha_tecnica && (
+						<section id="fichaTecnica" className={styles.section}>
+							<TechnicalDetails details={filme.ficha_tecnica} />
+						</section>
+					)}
+					<section id="sinopse" className={`${styles.section} ${styles.over}`}>
+						<Sinopse filme={filme} />
+					</section>
+					{!!filme.galeria.length && filme.galeria[0].imagem1 && (
+						<section
+							id="galeria"
+							className={`${styles.section} ${styles.over}`}
+						>
+							<PhotoCarousel photos={filme.galeria} />
+						</section>
+					)}
+				</div>
 			</Layout>
 		);
 	}

@@ -6,7 +6,7 @@ const Prizes = ({ prizes }) => {
 	if (!prizes || !prizes[0].premio_titulo) return null;
 	const { t } = useTranslation();
 	return (
-		<section className={`${styles.section} grid grid--inner`}>
+		<div className={`${styles.section} grid grid--inner`}>
 			<h2 className={`h-2 ${styles.heading}`}>{t("common:premiacoes")}</h2>
 			<div className={`${styles.prizes}`}>
 				{prizes.map((premio, key) => (
@@ -18,7 +18,7 @@ const Prizes = ({ prizes }) => {
 					/>
 				))}
 			</div>
-		</section>
+		</div>
 	);
 };
 export default Prizes;

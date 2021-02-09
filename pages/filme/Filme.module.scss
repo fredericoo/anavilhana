@@ -1,0 +1,19 @@
+@import "styles/abstracts/mixins";
+
+.nav {
+	align-self: start;
+	position: sticky;
+	top: 100px;
+	grid-column: grid-start / grid-end;
+	@include responsive($tablet-p) {
+		grid-column: grid-start / span 4;
+	}
+	height: 0;
+}
+
+.section {
+	grid-column: screen-start / screen-end;
+	&.over {
+		z-index: 2;
+	}
+}

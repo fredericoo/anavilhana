@@ -19,7 +19,7 @@ const PhotoCarousel = ({ photos }) => {
 	};
 
 	return (
-		<section className={`${styles.section} grid grid--full`}>
+		<div className={`${styles.section} grid grid--full`}>
 			<CarouselSlide
 				photo={photos[displaySlides.previous].imagem1}
 				onClick={() => changeSlide(displaySlides.previous)}
@@ -33,7 +33,7 @@ const PhotoCarousel = ({ photos }) => {
 				{" "}
 				{slideIndex + 1} / {photos.length}
 			</div>
-		</section>
+		</div>
 	);
 };
 

@@ -22,14 +22,14 @@ const TechnicalDetails = ({ details }) => {
 
 	const { t } = useTranslation();
 	return (
-		<section className={`${styles.section} grid grid--inner`}>
+		<div className={`${styles.section} grid grid--inner`}>
 			<h2 className={`h-2 ${styles.heading}`}>{t("common:fichaTecnica")}</h2>
 			<Columns className={styles.items} sm={2} md={2}>
 				{fichaTecnica.map((item) => (
 					<Task task={item.task} doers={item.doers} />
 				))}
 			</Columns>
-		</section>
+		</div>
 	);
 };
 

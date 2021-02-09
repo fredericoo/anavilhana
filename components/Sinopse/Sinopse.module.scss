@@ -3,25 +3,42 @@
 .section {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
+	&.hasTrailer {
+		background: var(--colour__bg);
+		.textBox {
+			grid-column: grid-start / grid-end;
+			order: 1;
+			margin-bottom: 1rem;
+			@include responsive($tablet-l) {
+				grid-column: col-10 / grid-end;
+				order: 2;
+			}
+		}
+		.trailer {
+			grid-column: grid-start / grid-end;
+			order: 2;
+			@include responsive($tablet-l) {
+				order: 1;
+				grid-column: grid-start / col-10;
+			}
+			& > * {
+				width: 100%;
+			}
+			figcaption {
+				opacity: 0.5;
+			}
+		}
+	}
 
 	.textBox {
-		grid-column: col-10 / grid-end;
-		order: 2;
+		grid-column: grid-start / grid-end;
+		@include responsive($tablet-l) {
+			grid-column: col-4 / col-10;
+		}
 	}
 
 	.heading {
 		margin-bottom: 1rem;
-	}
-
-	.trailer {
-		order: 1;
-		grid-column: grid-start / col-10;
-		& > * {
-			width: 100%;
-		}
-		figcaption {
-			opacity: 0.5;
-		}
 	}
 }
 

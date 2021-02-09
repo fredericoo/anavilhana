@@ -23,7 +23,7 @@ const FilmHero = ({ filmes }) => {
 		<section className={`${styles.section} grid grid--full`}>
 			<h1 className="visually-hidden">{t("common:filmes")}</h1>
 			<AnimatePresence>
-				{image && (
+				{image.url && (
 					<motion.div
 						key={image.url}
 						initial={{ opacity: 0, scale: 1.5 }}

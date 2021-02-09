@@ -1,0 +1,32 @@
+.list {
+	padding-top: 2rem;
+	.item {
+		-webkit-appearance: none;
+		background: transparent;
+		border: none;
+		position: relative;
+		padding: 0.618em 1.618em 0.618em 0;
+		transition: padding 0.6s var(--easing), opacity 0.3s ease-out;
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+		&:before {
+			content: "";
+			height: 1px;
+			width: 0;
+			position: absolute;
+			top: 51%;
+			left: 0;
+			background: currentColor;
+			transition: width 0.6s var(--easing);
+		}
+		&.active {
+			padding-left: 1rem;
+			opacity: 1;
+			&:before {
+				width: 0.8rem;
+			}
+		}
+	}
+}
