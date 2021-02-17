@@ -1,5 +1,14 @@
 import { queryRepeatableDocuments } from "./queries";
-import { mutate } from "swr";
+import { Client } from "utils/prismicHelpers";
+import Prismic from "prismic-javascript";
+
+export async function fetchAllOfType(type) {
+	const client = Client();
+	const docs = await client.query([
+		Prismic.Predicates.at("document.type", type),
+	]);
+	return docs.results;
+}
 
 export async function fetcher(input) {
 	const { docType, locale, filters } = JSON.parse(input);

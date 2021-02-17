@@ -1,6 +1,6 @@
 import styles from "./Calendar.module.scss";
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { weekdays, monthsFull } from "./constants/dates";
 import {
 	getDayOfMonth,
@@ -13,16 +13,27 @@ import Button from "components/Button/Button";
 import useTranslation from "next-translate/useTranslation";
 import { RichText } from "prismic-reactjs";
 import Link from "next/link";
+import useSWR from "swr";
+import { fetchAllOfType } from "utils/fetcher";
 
-const Calendar = ({ filmes }) => {
-	const markedDates = filmes
-		.map((filme) =>
-			filme.data.exibicoes.map((exibicao) =>
-				getMonthDayYear(moment(exibicao.datetime))
-			)
-		)
-		.flat();
+const Calendar = () => {
+	const { data, error } = useSWR("filme", fetchAllOfType);
+
+	const [markedDates, setMarkedDates] = useState([]);
 	const [selectDate, setSelectDate] = useState(moment().toDate());
+
+	useEffect(() => {
+		data &&
+			setMarkedDates(
+				data
+					.map((filme) =>
+						filme.data.exibicoes.map((exibicao) =>
+							getMonthDayYear(moment(exibicao.datetime))
+						)
+					)
+					.flat()
+			);
+	}, [data]);
 
 	const handleDateChange = (date) => {
 		setSelectDate(date);
@@ -39,13 +50,27 @@ const Calendar = ({ filmes }) => {
 					markedDates={markedDates}
 				/>
 			</div>
-			<CalendarAirings selectDate={selectDate} filmes={filmes} />
+			{!error && <CalendarAirings selectDate={selectDate} filmes={data} />}
 		</div>
 	);
 };
 
 const CalendarAirings = ({ selectDate, filmes }) => {
 	const { t } = useTranslation();
+	if (!filmes)
+		return (
+			<div className={styles.airings}>
+				<div className={styles.scroll}>
+					<header className={`${styles.header} h-3`}>
+						{`${t("common:exibicoesEm")} ${moment(selectDate).format("D/MM")}`}
+					</header>
+					<div className={`${styles.notFound} s-sm`}>
+						{t("common:carregando")}
+					</div>
+				</div>
+			</div>
+		);
+
 	const eventsToday = filmes
 		.map((filme) =>
 			filme.data.exibicoes.map((exibicao) => {
@@ -66,7 +91,7 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 				<header className={`${styles.header} h-3`}>
 					{`${t("common:exibicoesEm")} ${moment(selectDate).format("D/MM")}`}
 				</header>
-				{eventsToday.length ? (
+				{!!eventsToday.length ? (
 					eventsToday.map((event) => (
 						<div className={styles.event}>
 							<Link href={`/filme/${event.film.uid}`}>
