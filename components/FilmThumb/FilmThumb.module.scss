@@ -1,9 +1,8 @@
 .obra {
 	.imagem {
-		filter: grayscale(100%);
 		transition: filter 0.6s ease-out;
 		height: 0;
-		padding-bottom: 65.2%;
+		padding-bottom: 56.25%;
 		position: relative;
 		background: var(--colour__main);
 		.noPic {
@@ -24,15 +23,14 @@
 	}
 	.ano {
 		display: inline-block;
-		margin-left: 0.4em;
 		font-size: 0.7em;
 		vertical-align: top;
 	}
 
 	&:hover {
 		text-decoration: none;
-		.imagem {
-			filter: grayscale(0%);
+		.titulo {
+			color: var(--colour__accent);
 		}
 	}
 }

@@ -77,10 +77,13 @@ export async function getStaticProps({ params, locale }) {
 		Prismic.Predicates.at("my.artigo.mencoes.membro", doc.id),
 	]);
 
-	const obras = await client.query([
-		Prismic.Predicates.at("document.type", "filme"),
-		Prismic.Predicates.at("my.filme.ficha_tecnica.membro", doc.id),
-	]);
+	const obras = await client.query(
+		[
+			Prismic.Predicates.at("document.type", "filme"),
+			Prismic.Predicates.at("my.filme.ficha_tecnica.membro", doc.id),
+		],
+		{ fetchLinks: "membro.nome" }
+	);
 
 	const config = await client.getSingle("config", { lang: locale });
 

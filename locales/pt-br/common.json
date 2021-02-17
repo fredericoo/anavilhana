@@ -23,8 +23,12 @@
 	"assista": "Assista",
 	"mais": "Ver todas",
 	"ler": "Ler na íntegra",
+	"direcao": "Direção",
+	"disponivelEm": "Disponível em",
 	"resultados": {
 		"singular": "resultado",
 		"plural": "resultados"
-	}
+	},
+	"carregando": "Carregando…",
+	"erro": "Um erro ocorreu."
 }

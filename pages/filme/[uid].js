@@ -1,7 +1,6 @@
 import styles from "./Filme.module.scss";
 
-import { queryRepeatableDocuments } from "utils/queries";
-import { Client } from "utils/prismicHelpers";
+import { Client, groupHasItems } from "utils/prismicHelpers";
 import Prismic from "prismic-javascript";
 import { RichText } from "prismic-reactjs";
 
@@ -18,6 +17,8 @@ import ScrollNav from "components/ScrollNav/ScrollNav";
 import Columns from "components/Columns/Columns";
 import WatchLink from "components/WatchLink/WatchLink";
 import CriticsSection from "components/CriticsSection/CriticsSection";
+import Grid from "components/Grid/Grid";
+import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 
 export default function Post({ doc, articles, config }) {
 	const { t } = useTranslation();
@@ -39,37 +40,82 @@ export default function Post({ doc, articles, config }) {
 							: ""
 					}
 				/>
-				<FilmHero filmes={[doc]} />
+
+				<Sinopse filme={filme} />
+
+				{(groupHasItems(filme.plataforma_e_link) || filme.trailer.html) && (
+					<Grid className={styles.section}>
+						{filme.trailer.html && (
+							<Grid.Col
+								md={
+									groupHasItems(filme.plataforma_e_link)
+										? "grid-start / col-7"
+										: "grid-start / grid-end"
+								}
+							>
+								<div>
+									<VideoPlayer
+										html={filme.trailer.html}
+										width={filme.trailer.width}
+										height={filme.trailer.height}
+										autoPlay
+									/>
+								</div>
+							</Grid.Col>
+						)}
+						{groupHasItems(filme.plataforma_e_link) && (
+							<Grid.Col
+								md={
+									filme.trailer.html
+										? "col-7 / grid-end"
+										: "grid-start / grid-end"
+								}
+							>
+								<h2 className={`h-4 ${styles.heading}`}>
+									{t("common:assista")}
+								</h2>
+								<Columns sm={1} md={2}>
+									{filme.plataforma_e_link.map((assista, key) => (
+										<WatchLink
+											key={key}
+											platform={assista.nome_da_plataforma}
+											link={assista.link_do_filme}
+										/>
+									))}
+								</Columns>
+							</Grid.Col>
+						)}
+					</Grid>
+				)}
+
 				<div className={`grid grid--full`}>
 					<nav className={styles.nav}>
 						<ScrollNav
 							items={[
 								{ label: t("common:premiacoes"), id: "premiacoes" },
-								{ label: t("common:sinopse"), id: "sinopse" },
 								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
 								{ label: t("common:criticas"), id: "criticas" },
-								{ label: t("common:assista"), id: "assista" },
 							]}
 						/>
 					</nav>
+
 					{!!filme.premiacoes.length && filme.premiacoes[0].premio_titulo && (
 						<section
 							id="premiacoes"
 							className={`${styles.section}`}
 							style={{ "--section__bg": "var(--colour__secondary)" }}
 						>
-							<Prizes prizes={filme.premiacoes} />
+							<Prizes prizes={filme.premiacoes} perPage={3} />
 						</section>
 					)}
-					<section id="sinopse" className={`${styles.section} ${styles.over}`}>
-						<Sinopse filme={filme} />
-					</section>
+
 					{!!filme.galeria.length && filme.galeria[0].imagem1 && (
 						<section data-hidenav id="galeria" className={`${styles.section}`}>
 							<PhotoCarousel photos={filme.galeria} />
 						</section>
 					)}
+
 					{filme.ficha_tecnica && (
 						<section
 							id="fichaTecnica"
@@ -93,27 +139,6 @@ export default function Post({ doc, articles, config }) {
 							<CriticsSection articles={articles} />
 						</section>
 					)}
-
-					{!!filme.plataforma_e_link.length &&
-						filme.plataforma_e_link[0].nome_da_plataforma && (
-							<section
-								id="assista"
-								className={`${styles.section} ${styles.content}`}
-							>
-								<h2 className={`h-2 ${styles.heading}`}>
-									{t("common:assista")}
-								</h2>
-								<Columns sm={1} md={2} lg={3}>
-									{filme.plataforma_e_link.map((assista, key) => (
-										<WatchLink
-											key={key}
-											platform={assista.nome_da_plataforma}
-											link={assista.link_do_filme}
-										/>
-									))}
-								</Columns>
-							</section>
-						)}
 				</div>
 			</Layout>
 		);

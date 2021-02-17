@@ -5,8 +5,8 @@ import Button from "components/Button/Button";
 import Columns from "components/Columns/Columns";
 import { useState } from "react";
 
-const Prizes = ({ prizes }) => {
-	const [show, setShow] = useState(6);
+const Prizes = ({ prizes, perPage = 6 }) => {
+	const [show, setShow] = useState(perPage);
 	if (!prizes || !prizes[0].premio_titulo) return null;
 	const { t } = useTranslation();
 	const showMore = () => {

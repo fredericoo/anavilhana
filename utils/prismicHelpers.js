@@ -18,6 +18,14 @@ export const customLink = (type, element, content) => (
 	</Link>
 );
 
+export const groupHasItems = (group) => {
+	if (!group || !Array.isArray(group) || !group.length) return false;
+	return (
+		group.length > 1 ||
+		group.filter((item) => Object.values(item).filter((value) => value))
+	);
+};
+
 // Client method to query documents from the Prismic repo
 
 export const Client = (req = null) =>

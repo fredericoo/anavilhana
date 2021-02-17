@@ -3,7 +3,6 @@ import Layout from "components/Layout/Layout";
 import Meta from "components/Meta/Meta";
 import { RichText } from "prismic-reactjs";
 import styles from "styles/pages/contato.module.scss";
-import Text from "components/Text/Text";
 
 const Contato = ({ doc, config }) => {
 	const contato = doc ? doc.data : null;

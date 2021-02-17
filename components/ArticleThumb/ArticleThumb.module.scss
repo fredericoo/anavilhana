@@ -8,6 +8,10 @@
 	.title {
 		margin-bottom: 0.5rem;
 		hanging-punctuation: first;
+		&:after {
+			content: " ↗";
+			display: inline;
+		}
 	}
 	.lead {
 		opacity: 0.5;
@@ -20,20 +24,11 @@
 		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
 	}
-	.cta {
-		&:after {
-			content: " ↗";
-			display: inline;
-		}
-	}
 
 	@include on-event {
 		text-decoration: none;
 
 		.title {
-			text-decoration: underline;
-		}
-		.cta {
 			color: var(--colour__accent);
 		}
 	}

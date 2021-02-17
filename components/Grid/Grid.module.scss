@@ -1,0 +1,43 @@
+@import "styles/abstracts/mixins";
+
+.grid {
+	display: grid;
+	gap: var(--gutter);
+	grid-template-columns:
+		[screen-start] var(--sidebearing)
+		[grid-start col-1] 1fr [col-2] 1fr [col-3] 1fr [col-4] 1fr [col-5] 1fr [col-6] 1fr [col-7] 1fr [col-8] 1fr [col-9] 1fr [col-10] 1fr [col-11] 1fr [col-12] 1fr [grid-end] var(
+			--sidebearing
+		)
+		[screen-end];
+
+	&.container {
+		padding: 0 max(var(--gutter), calc(var(--sidebearing) + var(--gutter)));
+		grid-template-columns: [screen-start grid-start col-1] 1fr [col-2] 1fr [col-3] 1fr [col-4] 1fr [col-5] 1fr [col-6] 1fr [col-7] 1fr [col-8] 1fr [col-9] 1fr [col-10] 1fr [col-11] 1fr [col-12] 1fr [grid-end screen-end];
+	}
+}
+
+.col {
+	--colMd: var(--colSm);
+	--colLg: var(--colMd);
+	--colXl: var(--colLg);
+	--rowMd: var(--rowSm);
+	--rowLg: var(--rowMd);
+	--rowXl: var(--rowLg);
+
+	grid-column: var(--colSm);
+	grid-row: var(--rowSm);
+	z-index: var(--zIndex);
+
+	@include responsive($tablet-p) {
+		grid-column: var(--colMd);
+		grid-row: var(--rowMd);
+	}
+	@include responsive($tablet-l) {
+		grid-column: var(--colLg);
+		grid-row: var(--rowLg);
+	}
+	@include responsive($desktop) {
+		grid-column: var(--colXl);
+		grid-row: var(--rowXl);
+	}
+}

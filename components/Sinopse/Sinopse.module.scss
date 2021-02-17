@@ -1,55 +1,29 @@
 @import "styles/abstracts/mixins";
 
-.section {
-	&.hasTrailer {
-		background: var(--colour__bg);
-		.textBox {
-			grid-column: grid-start / grid-end;
-			order: 1;
-			margin-bottom: 1rem;
-			@include responsive($tablet-l) {
-				grid-column: col-10 / grid-end;
-				order: 2;
-			}
+.sinopse {
+	align-self: center;
+	color: var(--colour__bg);
+	.text {
+		margin-top: 1rem;
+		p {
+			color: var(--colour__bg);
+			opacity: 0.8;
 		}
-		.trailer {
-			grid-column: grid-start / grid-end;
-			order: 2;
-			@include responsive($tablet-l) {
-				order: 1;
-				grid-column: grid-start / col-10;
-			}
-			& > * {
-				width: 100%;
-			}
-			figcaption {
-				opacity: 0.5;
-			}
-		}
-	}
-
-	.textBox {
-		grid-column: grid-start / grid-end;
-		@include responsive($tablet-l) {
-			grid-column: col-4 / col-10;
-		}
-	}
-
-	.heading {
-		margin-bottom: 1rem;
 	}
 }
 
-.videoWrapper {
-	width: 100%;
-	height: 0px;
-	padding-bottom: calc(100% / var(--aspectRatio));
-	position: relative;
+.title {
+	margin-bottom: 8px;
+}
+
+.year {
+	font-size: 0.6em;
+	vertical-align: top;
+}
+
+.cover {
+	background: black;
 	& > * {
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		top: 0;
-		left: 0;
+		opacity: 0.4;
 	}
 }

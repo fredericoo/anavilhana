@@ -43,7 +43,8 @@ export async function getStaticProps({ locale }) {
 	});
 
 	const documents = await client.query(
-		Prismic.Predicates.at("document.type", "filme")
+		Prismic.Predicates.at("document.type", "filme"),
+		{ fetchLinks: "membro.nome", orderings: "[my.filme.lancamento desc]" }
 	);
 
 	const config = await client.getSingle("config", { lang: locale });

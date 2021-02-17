@@ -3,7 +3,6 @@ import styles from "./MemberDetails.module.scss";
 import { RichText } from "prismic-reactjs";
 
 import Placeholder from "components/Placeholder/Placeholder";
-import Prize from "components/Prizes/Prize";
 import Columns from "components/Columns/Columns";
 import FilmThumb from "components/FilmThumb/FilmThumb";
 
@@ -21,7 +20,6 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				<ScrollNav
 					items={[
 						{ label: t("common:sobre"), id: "sobre" },
-						{ label: t("common:premiacoes"), id: "premiacoes" },
 						{ label: t("common:obras"), id: "obras" },
 						{ label: t("common:criticas"), id: "criticas" },
 						{ label: t("common:montagens"), id: "montagens" },
@@ -60,24 +58,6 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				<div className={`${styles.sobre} body`}>
 					<RichText render={member.sobre} />
 				</div>
-
-				{!!member.premiacoes.length && member.premiacoes[0].premio_ano && (
-					<div id="premiacoes" className={`${styles.section} ${styles.prizes}`}>
-						<h2 className={`h-2 ${styles.heading}`}>
-							{t("common:premiacoes")}
-						</h2>
-						<Columns sm={2} md={3}>
-							{member.premiacoes.map((prize, key) => (
-								<Prize
-									key={key}
-									title={prize.premio_titulo}
-									year={prize.premio_ano}
-									info={prize.premio_info}
-								/>
-							))}
-						</Columns>
-					</div>
-				)}
 
 				{!!obras.length && (
 					<div id="obras" className={`${styles.section} ${styles.obras}`}>

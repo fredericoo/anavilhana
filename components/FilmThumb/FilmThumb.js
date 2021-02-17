@@ -5,6 +5,7 @@ import moment from "moment";
 import Image from "next/image";
 import Placeholder from "components/Placeholder/Placeholder";
 import { RichText } from "prismic-reactjs";
+import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 
 const FilmThumb = ({ obra }) => (
 	<Link href={hrefResolver(obra)}>
@@ -26,14 +27,16 @@ const FilmThumb = ({ obra }) => (
 					</div>
 				)}
 			</div>
+
 			<h3 className={styles.titulo}>
-				{RichText.asText(obra.data.titulo)}
+				{RichText.asText(obra.data.titulo)}{" "}
 				{obra.data.lancamento && (
 					<span className={styles.ano}>
 						{moment(obra.data.lancamento).format("Y")}
 					</span>
 				)}
 			</h3>
+			<FilmDirectors technical={obra.data.ficha_tecnica} />
 		</a>
 	</Link>
 );

@@ -16,20 +16,19 @@
 	.more {
 		width: 2rem;
 		height: 2rem;
-		background: var(--colour__main);
-		color: var(--colour__bg);
-		border: none;
-		border-radius: 1rem;
-		-webkit-appearance: none;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	}
+
+	.position {
+		opacity: 0.5;
 	}
 
 	&:hover {
 		text-decoration: none;
 		.image {
 			filter: grayscale(30%);
+		}
+		.more {
+			color: var(--colour__accent);
 		}
 	}
 }

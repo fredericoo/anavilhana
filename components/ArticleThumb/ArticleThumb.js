@@ -17,7 +17,6 @@ const ArticleThumb = ({ article }) => {
 				<div className={`${styles.lead} s-sm`}>
 					<Text content={article.data.bigode} />
 				</div>
-				<div className={`${styles.cta} smcp`}>{t("common:ler")}</div>
 			</a>
 		</Link>
 	);

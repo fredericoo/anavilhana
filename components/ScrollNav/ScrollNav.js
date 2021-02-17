@@ -24,7 +24,7 @@ const ScrollNav = ({ items }) => {
 			const rect = ref.getBoundingClientRect();
 			if (rect.top <= window.innerHeight / 2) active = ref;
 		});
-		setActiveNav(active);
+		if (active !== activeNav) setActiveNav(active);
 	};
 
 	const handleOverlay = (entries, observer) => {

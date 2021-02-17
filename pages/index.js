@@ -7,12 +7,14 @@ import { Client } from "utils/prismicHelpers";
 import Banner from "components/Banner/Banner";
 import { hrefResolver } from "prismic-configuration";
 
-export default function Home({ home, docs, config }) {
+export default function Home({ home, config }) {
 	return (
 		<Layout config={config}>
 			<Meta />
-			<FilmHero filmes={docs} />
-			<CalendarSection filmes={docs} />
+			<FilmHero
+				filmes={home.data.highlights.map((highlight) => highlight.filme)}
+			/>
+			<CalendarSection />
 			{home && home.data.banner_texto && (
 				<Banner
 					text={home.data.banner_texto}
@@ -31,23 +33,27 @@ export default function Home({ home, docs, config }) {
 }
 
 export async function getStaticProps({ locale }) {
-	const documents = await queryRepeatableDocuments(
-		(doc) => doc.type === "filme" && doc.lang === locale
-	);
-
 	const client = Client();
-	const home = await client.getSingle("home", { lang: locale });
-	const config = await client.getSingle("config", { lang: locale });
-
-	if (documents) {
+	const home = await client.getSingle("home", {
+		lang: locale,
+		fetchLinks: [
+			"filme.titulo",
+			"filme.ficha_tecnica",
+			"filme.imagem",
+			"membro.nome",
+		],
+	});
+	const config = await client.getSingle("config", {
+		lang: locale,
+	});
+	if (home && config) {
 		return {
 			revalidate: 60,
 			props: {
 				config: config || {},
 				home: home || {},
-				docs: documents || {},
 			},
 		};
 	}
-	return { revalidate: 600, props: { home: {}, config: {}, docs: {} } };
+	return { revalidate: 600, props: { home: {}, config: {} } };
 }
