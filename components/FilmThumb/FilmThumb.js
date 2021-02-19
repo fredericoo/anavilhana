@@ -6,16 +6,12 @@ import Image from "next/image";
 import { RichText } from "prismic-reactjs";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 
 const FilmThumb = ({ obra }) => {
-	const vidRef = useRef();
 	const [videoLoaded, setVideoLoaded] = useState(false);
 	const handleMouseEnter = () => setVideoLoaded(true);
 	const handleMouseLeave = () => setVideoLoaded(false);
-	useEffect(() => {
-		vidRef.current && vidRef.current.play();
-	}, [videoLoaded]);
 
 	return (
 		<Link href={hrefResolver(obra)}>
@@ -47,8 +43,12 @@ const FilmThumb = ({ obra }) => {
 									src={obra.data.video360.url}
 									width="640"
 									height="360"
-									videoProps={{ muted: true, loop: true, controls: false }}
-									ref={vidRef}
+									videoProps={{
+										autoPlay: true,
+										muted: true,
+										loop: true,
+										controls: false,
+									}}
 								/>
 							)}
 						</div>

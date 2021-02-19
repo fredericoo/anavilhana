@@ -36,8 +36,10 @@
 		text-align: left;
 		padding: 0.618em 1.618em;
 		flex: 1 1 0;
+		white-space: nowrap;
 
 		@include responsive($tablet-l) {
+			white-space: initial;
 			transform: translateX(-1.2rem);
 			&:before {
 				content: "";
@@ -58,8 +60,11 @@
 		&.active {
 			transform: none;
 			opacity: 1;
-
+			background: var(--colour__main);
+			color: var(--colour__bg);
 			@include responsive($tablet-l) {
+				color: inherit;
+				background: initial;
 				&:before {
 					left: 0;
 					width: 0.8rem;

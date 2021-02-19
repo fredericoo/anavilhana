@@ -13,18 +13,12 @@ const FilmHero = ({ filmes }) => {
 	const { t } = useTranslation();
 	const [active, setActive] = useState(filmes[0]);
 
-	const vidRef = useRef();
 	const [playing, setPlaying] = useState(false);
 	const playVid = useRef();
 
 	const handleMouseEnter = (filme) => {
 		setActive(filme);
 	};
-
-	useEffect(() => vidRef.current && vidRef.current.play(), [
-		vidRef.current,
-		playing,
-	]);
 
 	useEffect(() => {
 		setPlaying(false);
@@ -61,8 +55,12 @@ const FilmHero = ({ filmes }) => {
 										width="640"
 										height="360"
 										layout="fill"
-										videoProps={{ muted: true, loop: true, controls: false }}
-										ref={vidRef}
+										videoProps={{
+											muted: true,
+											loop: true,
+											controls: false,
+											autoPlay: true,
+										}}
 									/>
 								)}
 							</div>

@@ -23,8 +23,8 @@ const TechnicalDetails = ({ details }) => {
 	const { t } = useTranslation();
 	return (
 		<Columns className={styles.items} sm={2} md={3}>
-			{fichaTecnica.map((item) => (
-				<Task task={item.task} doers={item.doers} />
+			{fichaTecnica.map((item, key) => (
+				<Task key={key} task={item.task} doers={item.doers} />
 			))}
 		</Columns>
 	);

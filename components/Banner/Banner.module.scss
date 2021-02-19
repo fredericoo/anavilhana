@@ -1,6 +1,7 @@
 @import "styles/abstracts/mixins";
 
 .section {
+	background: black;
 	min-height: 80vh;
 	.textBlock {
 		padding: 2rem 0;
@@ -11,13 +12,15 @@
 		@include responsive($tablet-l) {
 			grid-column: grid-start / col-7;
 		}
-		color: var(--textColour);
+		color: var(--colour__bg);
 
 		.heading {
 			margin-bottom: 1rem;
 		}
 	}
+
 	.background {
+		opacity: 0.75;
 		z-index: 0;
 		grid-row: 1;
 		grid-column: screen-start / screen-end;

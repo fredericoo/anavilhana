@@ -2,8 +2,6 @@
 
 .container {
 	background: var(--colour__secondary);
-	padding-top: 8rem;
-	padding-bottom: 4rem;
 }
 .header {
 	order: 1;
@@ -23,7 +21,7 @@
 	grid-column: screen-start / screen-end;
 	top: 64px;
 	z-index: 10;
-	@include responsive($tablet-p) {
+	@include responsive($tablet-l) {
 		top: 100px;
 		grid-column: grid-start / span 2;
 		height: 0;
@@ -34,7 +32,7 @@
 .body {
 	order: 2;
 	grid-column: grid-start / grid-end;
-	@include responsive($tablet-p) {
+	@include responsive($tablet-l) {
 		grid-column: col-3 / span 7;
 	}
 

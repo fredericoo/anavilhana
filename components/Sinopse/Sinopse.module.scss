@@ -26,3 +26,20 @@
 	background: black;
 	align-self: center;
 }
+
+.trailer {
+	-webkit-appearance: none;
+	border: none;
+	background: transparent;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	svg {
+		margin-right: 0.5em;
+		height: 1.2em;
+		width: 1.2em;
+	}
+	&:hover {
+		color: var(--colour__accent);
+	}
+}

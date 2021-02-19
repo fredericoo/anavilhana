@@ -5,10 +5,7 @@ import Placeholder from "components/Placeholder/Placeholder";
 
 const Banner = ({ heading = 1, text, cta, url, background, textColour }) => {
 	return (
-		<section
-			className={`${styles.section} grid grid--full`}
-			style={{ "--textColour": textColour }}
-		>
+		<section className={`${styles.section} grid grid--full`}>
 			<header className={styles.textBlock}>
 				<h2 className={`${styles.heading} h-${heading}`}>
 					<Text content={text} />

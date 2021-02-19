@@ -1,14 +1,12 @@
 import styles from "./Search.module.scss";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 
 import { hrefResolver } from "prismic-configuration";
 import { RichText } from "prismic-reactjs";
-
-import { AnimatePresence, motion } from "framer-motion";
 
 import Text from "components/Text/Text";
 
@@ -26,11 +24,12 @@ const Search = () => {
 			.then((docs) => setDocuments(docs));
 	}, [active]);
 
-	useMemo(() => {
+	useEffect(() => {
 		setResults([]);
 		if (inputRef.current) inputRef.current.value = "";
 	}, [asPath]);
-	useMemo(() => {
+
+	useEffect(() => {
 		inputRef.current && inputRef.current.focus();
 	}, [inputRef.current]);
 
@@ -72,52 +71,78 @@ const Search = () => {
 		);
 	};
 	const onClick = () => {
-		setActive(true);
+		setActive(!active);
 	};
 
 	return (
 		<div className={styles.container}>
 			<button className={styles.button} type="button" onClick={onClick}>
-				<img src="/img/search.svg" />
+				{active ? (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="1"
+						strokeLinecap="butt"
+						strokeLinejoin="arcs"
+					>
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
+				) : (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="1"
+						strokeLinecap="butt"
+						strokeLinejoin="arcs"
+					>
+						<circle cx="11" cy="11" r="8"></circle>
+						<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+					</svg>
+				)}
 			</button>
 			{active && (
-				<AnimatePresence>
-					<div className={styles.box}>
-						<motion.input
-							initial={{ width: 0 }}
-							animate={{ width: 200 }}
-							transition={{ ease: "easeOut", duration: 0.3 }}
-							className={styles.input}
-							ref={inputRef}
-							type="text"
-							onChange={onChange}
-						/>
-						<ul className={styles.suggestions}>
-							{!!results.length && (
-								<li className={`smcp ${styles.resultCount}`}>
-									{results.length}{" "}
-									{results.length === 1
-										? t("common:resultados.singular")
-										: t("common:resultados.plural")}
-								</li>
-							)}
-							{results.map((result) => (
-								<li key={result.uid}>
-									<Link href={hrefResolver(result)}>
-										<a>
-											<Text
-												content={
-													(result.data && result.data.titulo) ||
-													result.data.nome
-												}
-											/>
-										</a>
-									</Link>
-								</li>
-							))}
-						</ul>
-					</div>
-				</AnimatePresence>
+				<div className={styles.box}>
+					<input
+						transition={{ ease: "easeOut", duration: 0.3 }}
+						className={styles.input}
+						ref={inputRef}
+						placeholder={t("common:busca")}
+						type="text"
+						onChange={onChange}
+					/>
+					<ul className={styles.suggestions}>
+						{!!results.length && (
+							<li className={`smcp ${styles.resultCount}`}>
+								{results.length}{" "}
+								{results.length === 1
+									? t("common:resultados.singular")
+									: t("common:resultados.plural")}
+							</li>
+						)}
+						{results.map((result) => (
+							<li key={result.uid}>
+								<Link href={hrefResolver(result)}>
+									<a>
+										<Text
+											content={
+												(result.data && result.data.titulo) || result.data.nome
+											}
+										/>
+									</a>
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
 			)}
 		</div>
 	);

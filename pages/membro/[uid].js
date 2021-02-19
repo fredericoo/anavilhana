@@ -1,5 +1,3 @@
-import { queryRepeatableDocuments } from "utils/queries";
-
 import Prismic from "prismic-javascript";
 import { Client } from "utils/prismicHelpers";
 import Layout from "components/Layout/Layout";

@@ -1,5 +1,5 @@
 import styles from "./ScrollNav.module.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import animateScrollTo from "animated-scroll-to";
 
 const ScrollNav = ({ items }) => {
@@ -30,7 +30,6 @@ const ScrollNav = ({ items }) => {
 	const handleOverlay = (entries, observer) => {
 		let overlay = false;
 		entries.forEach((entry) => {
-			console.log(entry, observer);
 			if (entry.isIntersecting) overlay = true;
 		});
 		setOverlay(overlay);
