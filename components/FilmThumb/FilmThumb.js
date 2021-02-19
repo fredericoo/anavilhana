@@ -3,42 +3,70 @@ import Link from "next/link";
 import { hrefResolver } from "prismic-configuration";
 import moment from "moment";
 import Image from "next/image";
-import Placeholder from "components/Placeholder/Placeholder";
 import { RichText } from "prismic-reactjs";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
+import VideoPlayer from "components/VideoPlayer/VideoPlayer";
+import { useRef, useState, useEffect } from "react";
 
-const FilmThumb = ({ obra }) => (
-	<Link href={hrefResolver(obra)}>
-		<a className={styles.obra}>
-			<div className={styles.imagem}>
-				{obra.data.imagem && obra.data.imagem.url && (
-					<Image
-						src={obra.data.imagem.url}
-						layout="fill"
-						objectFit="cover"
-						sizes="(max-width: 768px) 150px,
+const FilmThumb = ({ obra }) => {
+	const vidRef = useRef();
+	const [videoLoaded, setVideoLoaded] = useState(false);
+	const handleMouseEnter = () => setVideoLoaded(true);
+	const handleMouseLeave = () => setVideoLoaded(false);
+	useEffect(() => {
+		vidRef.current && vidRef.current.play();
+	}, [videoLoaded]);
+
+	return (
+		<Link href={hrefResolver(obra)}>
+			<a
+				className={styles.obra}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+			>
+				<div className={styles.imagem}>
+					{obra.data.imagem && obra.data.imagem.url && (
+						<Image
+							src={obra.data.imagem.url}
+							layout="fill"
+							objectFit="cover"
+							sizes="(max-width: 768px) 150px,
     								(max-width: 1920px) 300px,
     								600px"
-					/>
-				)}
-				{obra.data.imagem && !obra.data.imagem.url && (
-					<div className={styles.noPic}>
-						{RichText.asText(obra.data.titulo).charAt(0)}
-					</div>
-				)}
-			</div>
+						/>
+					)}
+					{obra.data.imagem && !obra.data.imagem.url && (
+						<div className={styles.noPic}>
+							{RichText.asText(obra.data.titulo).charAt(0)}
+						</div>
+					)}
+					{obra.data.video360 && obra.data.video360.url && (
+						<div className={styles.hover}>
+							{videoLoaded && (
+								<VideoPlayer
+									src={obra.data.video360.url}
+									width="640"
+									height="360"
+									videoProps={{ muted: true, loop: true, controls: false }}
+									ref={vidRef}
+								/>
+							)}
+						</div>
+					)}
+				</div>
 
-			<h3 className={styles.titulo}>
-				{RichText.asText(obra.data.titulo)}{" "}
-				{obra.data.lancamento && (
-					<span className={styles.ano}>
-						{moment(obra.data.lancamento).format("Y")}
-					</span>
-				)}
-			</h3>
-			<FilmDirectors technical={obra.data.ficha_tecnica} />
-		</a>
-	</Link>
-);
+				<h3 className={styles.titulo}>
+					{RichText.asText(obra.data.titulo)}{" "}
+					{obra.data.lancamento && (
+						<span className={styles.ano}>
+							{moment(obra.data.lancamento).format("Y")}
+						</span>
+					)}
+				</h3>
+				<FilmDirectors technical={obra.data.ficha_tecnica} />
+			</a>
+		</Link>
+	);
+};
 
 export default FilmThumb;

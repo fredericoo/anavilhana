@@ -11,9 +11,11 @@ export default function Home({ home, config }) {
 	return (
 		<Layout config={config}>
 			<Meta />
-			<FilmHero
-				filmes={home.data.highlights.map((highlight) => highlight.filme)}
-			/>
+			{home.data?.highlights && (
+				<FilmHero
+					filmes={home.data.highlights.map((highlight) => highlight.filme)}
+				/>
+			)}
 			<CalendarSection />
 			{home && home.data.banner_texto && (
 				<Banner
@@ -38,6 +40,9 @@ export async function getStaticProps({ locale }) {
 		lang: locale,
 		fetchLinks: [
 			"filme.titulo",
+			"filme.lancamento",
+			"filme.video360",
+			"filme.video720",
 			"filme.ficha_tecnica",
 			"filme.imagem",
 			"membro.nome",

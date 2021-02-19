@@ -17,6 +17,14 @@
 			color: var(--colour__bg);
 		}
 	}
+	.hover {
+		visibility: hidden;
+	}
+	&:hover {
+		.hover {
+			visibility: visible;
+		}
+	}
 	.titulo {
 		margin-top: 0.7rem;
 		text-transform: uppercase;

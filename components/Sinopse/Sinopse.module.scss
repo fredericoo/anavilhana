@@ -1,12 +1,13 @@
 @import "styles/abstracts/mixins";
 
 .sinopse {
+	margin: 2rem 0;
 	align-self: center;
-	color: var(--colour__bg);
+	// color: var(--colour__bg);
 	.text {
 		margin-top: 1rem;
 		p {
-			color: var(--colour__bg);
+			// color: var(--colour__bg);
 			opacity: 0.8;
 		}
 	}
@@ -23,7 +24,5 @@
 
 .cover {
 	background: black;
-	& > * {
-		opacity: 0.4;
-	}
+	align-self: center;
 }

@@ -10,6 +10,7 @@ import useTranslation from "next-translate/useTranslation";
 
 import ScrollNav from "components/ScrollNav/ScrollNav";
 import ArticleThumb from "components/ArticleThumb/ArticleThumb";
+import { groupHasItems } from "utils/prismicHelpers";
 
 const MemberDetails = ({ member, obras, artigos }) => {
 	const { t } = useTranslation();
@@ -59,10 +60,10 @@ const MemberDetails = ({ member, obras, artigos }) => {
 					<RichText render={member.sobre} />
 				</div>
 
-				{!!obras.length && (
+				{groupHasItems(obras) && (
 					<div id="obras" className={`${styles.section} ${styles.obras}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
-						<Columns sm={2} md={3}>
+						<Columns sm={2} md={2}>
 							{obras.map((obra) => (
 								<FilmThumb key={obra.uid} obra={obra} />
 							))}
@@ -70,7 +71,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 					</div>
 				)}
 
-				{!!artigos.length && (
+				{groupHasItems(artigos) && (
 					<div id="criticas" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:criticas")}</h2>
 						<Columns sm={1} md={2}>

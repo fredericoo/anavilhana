@@ -18,7 +18,12 @@ const Sinopse = ({ filme }) => {
 	};
 	return (
 		<Grid>
-			<Grid.Col sm="screen-start / screen-end" rowSm="1/-1" zIndex="1">
+			<Grid.Col
+				sm="screen-start / screen-end"
+				lg="col-6 / screen-end"
+				rowLg="1/-1"
+				zIndex="1"
+			>
 				<div className={styles.cover}>
 					{filme.imagem.url && (
 						<Placeholder
@@ -30,7 +35,7 @@ const Sinopse = ({ filme }) => {
 					)}
 				</div>
 			</Grid.Col>
-			<Grid.Col md="grid-start / col-7" rowSm="1 / 2" zIndex="2">
+			<Grid.Col lg="grid-start / col-6" rowLg="1 / 2" zIndex="2">
 				<div className={styles.sinopse}>
 					<motion.div
 						initial={{ opacity: 0 }}

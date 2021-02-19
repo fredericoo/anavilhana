@@ -43,48 +43,20 @@ export default function Post({ doc, articles, config }) {
 
 				<Sinopse filme={filme} />
 
-				{(groupHasItems(filme.plataforma_e_link) || filme.trailer.html) && (
+				{groupHasItems(filme.plataforma_e_link) && (
 					<Grid className={styles.section}>
-						{filme.trailer.html && (
-							<Grid.Col
-								md={
-									groupHasItems(filme.plataforma_e_link)
-										? "grid-start / col-7"
-										: "grid-start / grid-end"
-								}
-							>
-								<div>
-									<VideoPlayer
-										html={filme.trailer.html}
-										width={filme.trailer.width}
-										height={filme.trailer.height}
-										autoPlay
+						<Grid.Col>
+							<h2 className={`h-4 ${styles.heading}`}>{t("common:assista")}</h2>
+							<Columns sm={1} md={2}>
+								{filme.plataforma_e_link.map((assista, key) => (
+									<WatchLink
+										key={key}
+										platform={assista.nome_da_plataforma}
+										link={assista.link_do_filme}
 									/>
-								</div>
-							</Grid.Col>
-						)}
-						{groupHasItems(filme.plataforma_e_link) && (
-							<Grid.Col
-								md={
-									filme.trailer.html
-										? "col-7 / grid-end"
-										: "grid-start / grid-end"
-								}
-							>
-								<h2 className={`h-4 ${styles.heading}`}>
-									{t("common:assista")}
-								</h2>
-								<Columns sm={1} md={2}>
-									{filme.plataforma_e_link.map((assista, key) => (
-										<WatchLink
-											key={key}
-											platform={assista.nome_da_plataforma}
-											link={assista.link_do_filme}
-										/>
-									))}
-								</Columns>
-							</Grid.Col>
-						)}
+								))}
+							</Columns>
+						</Grid.Col>
 					</Grid>
 				)}
 
@@ -93,14 +65,14 @@ export default function Post({ doc, articles, config }) {
 						<ScrollNav
 							items={[
 								{ label: t("common:premiacoes"), id: "premiacoes" },
-								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
+								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:criticas"), id: "criticas" },
 							]}
 						/>
 					</nav>
 
-					{!!filme.premiacoes.length && filme.premiacoes[0].premio_titulo && (
+					{groupHasItems(filme.premiacoes) && (
 						<section
 							id="premiacoes"
 							className={`${styles.section}`}
@@ -110,13 +82,7 @@ export default function Post({ doc, articles, config }) {
 						</section>
 					)}
 
-					{!!filme.galeria.length && filme.galeria[0].imagem1 && (
-						<section data-hidenav id="galeria" className={`${styles.section}`}>
-							<PhotoCarousel photos={filme.galeria} />
-						</section>
-					)}
-
-					{filme.ficha_tecnica && (
+					{groupHasItems(filme.ficha_tecnica) && (
 						<section
 							id="fichaTecnica"
 							className={`${styles.section} ${styles.content}`}
@@ -125,6 +91,12 @@ export default function Post({ doc, articles, config }) {
 								{t("common:fichaTecnica")}
 							</h2>
 							<TechnicalDetails details={filme.ficha_tecnica} />
+						</section>
+					)}
+
+					{groupHasItems(filme.galeria) && (
+						<section data-hidenav id="galeria" className={`${styles.section}`}>
+							<PhotoCarousel photos={filme.galeria} />
 						</section>
 					)}
 
