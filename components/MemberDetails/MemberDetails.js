@@ -9,7 +9,7 @@ import FilmThumb from "components/FilmThumb/FilmThumb";
 import useTranslation from "next-translate/useTranslation";
 
 import ScrollNav from "components/ScrollNav/ScrollNav";
-import ArticleThumb from "components/ArticleThumb/ArticleThumb";
+import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 import { groupHasItems } from "utils/prismicHelpers";
 
 const MemberDetails = ({ member, obras, artigos }) => {
@@ -61,7 +61,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				</div>
 
 				{groupHasItems(obras) && (
-					<div id="obras" className={`${styles.section} ${styles.obras}`}>
+					<div id="obras" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
 						<Columns sm={2} md={2}>
 							{obras.map((obra) => (
@@ -74,19 +74,17 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				{groupHasItems(artigos) && (
 					<div id="criticas" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:criticas")}</h2>
-						<Columns sm={1} md={2}>
+						<ArticlesTable articles={artigos} />
+						{/* <Columns sm={1} md={2}>
 							{artigos.map((artigo, key) => (
 								<ArticleThumb key={key} article={artigo} />
 							))}
-						</Columns>
+						</Columns> */}
 					</div>
 				)}
 
 				{!!member.montagens.length && member.montagens[0].ano && (
-					<div
-						id="montagens"
-						className={`${styles.section} ${styles.montagens}`}
-					>
+					<div id="montagens" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:montagens")}</h2>
 						<ul>
 							{member.montagens.map((montagem, key) => (

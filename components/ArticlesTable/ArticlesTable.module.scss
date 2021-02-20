@@ -37,28 +37,7 @@
 		border: none;
 		border-radius: 4px;
 	}
-	.search {
-		border-radius: 4px;
-		overflow: hidden;
-		position: relative;
-		.clear {
-			position: absolute;
-			-webkit-appearance: none;
-			border: none;
-			background: transparent;
-
-			padding: 0.4em 0.8em;
-			top: 0;
-			right: 0;
-			&:hover {
-				background: var(--colour__main);
-				color: var(--colour__bg);
-			}
-		}
-	}
 	.combo {
-		position: relative;
-
 		&:after {
 			content: "";
 			position: absolute;
@@ -70,6 +49,27 @@
 			transform: rotate(-45deg);
 			right: 0.75em;
 			top: calc(50% - 0.33em);
+		}
+	}
+	.combo,
+	.search {
+		border-radius: 4px;
+		overflow: hidden;
+		position: relative;
+		.clear {
+			position: absolute;
+			-webkit-appearance: none;
+			border: none;
+			z-index: 2;
+			background: var(--colour__secondary);
+
+			padding: 0.4em 0.8em;
+			top: 0;
+			right: 0;
+			&:hover {
+				background: var(--colour__main);
+				color: var(--colour__bg);
+			}
 		}
 	}
 }
@@ -84,7 +84,7 @@
 	padding-top: 1rem !important;
 	padding-bottom: 1rem !important;
 
-	border-bottom: 1px solid var(--colour__secondary);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
 	&:hover {
 		background: var(--colour__secondary);
@@ -118,6 +118,6 @@
 		padding: 0px 0.4em 0.1em;
 		border-radius: 8px;
 		font-weight: bold;
-		color: var(--colour__secondary);
+		color: rgba(0, 0, 0, 0.1);
 	}
 }

@@ -34,7 +34,7 @@ const Sobre = ({ sobre, config }) => {
 							</div>
 						)}
 						<div className={`${styles.body} body`}>
-							<h1 className={`h-2`}>{RichText.asText(sobre.data.titulo)}</h1>
+							<h1 className={`h-1`}>{RichText.asText(sobre.data.titulo)}</h1>
 							<RichText render={sobre.data.corpo} />
 						</div>
 					</section>

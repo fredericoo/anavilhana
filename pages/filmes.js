@@ -23,7 +23,7 @@ const Filmes = ({ filmes, doc, config }) => {
 						<h1 className={`h-1`}>{RichText.asText(filmesPage.titulo)}</h1>
 					</header>
 				)}
-				<Columns className={styles.films}>
+				<Columns sm={1} md={2} className={styles.films}>
 					{filmes.results &&
 						filmes.results.map((filme, key) => (
 							<FilmThumb key={filme.uid + key} obra={filme} />

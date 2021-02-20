@@ -11,7 +11,15 @@
 		[screen-end];
 
 	&.container {
-		padding: 0 max(var(--gutter), calc(var(--sidebearing) + var(--gutter)));
+		max-width: calc(var(--container__width) - 2 * var(--gutter));
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: var(--gutter);
+		padding-right: var(--gutter);
+		@include responsive($tablet-p) {
+			padding-left: inherit;
+			padding-right: inherit;
+		}
 		grid-template-columns: [screen-start grid-start col-1] 1fr [col-2] 1fr [col-3] 1fr [col-4] 1fr [col-5] 1fr [col-6] 1fr [col-7] 1fr [col-8] 1fr [col-9] 1fr [col-10] 1fr [col-11] 1fr [col-12] 1fr [grid-end screen-end];
 	}
 }

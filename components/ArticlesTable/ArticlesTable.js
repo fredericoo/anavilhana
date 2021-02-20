@@ -8,19 +8,11 @@ import Columns from "components/Columns/Columns";
 import Link from "next/link";
 import { hrefResolver } from "prismic-configuration";
 
-const ArticlesTable = ({ articles }) => {
+const ArticlesTable = ({ articles, withFilters }) => {
 	const [filteredArticles, setFilteredArticles] = useState(articles);
 	const { t } = useTranslation();
 
 	const columns = [
-		{
-			label: t("common:data"),
-			size: 2,
-			content: (article) =>
-				!!article.data.data
-					? moment(article.data.data)?.format("MM/YYYY")
-					: null,
-		},
 		{
 			label: t("common:titulo"),
 			size: 5,
@@ -50,6 +42,14 @@ const ArticlesTable = ({ articles }) => {
 			label: t("common:fonte"),
 			size: 3,
 			content: (article) => article.data.fonte,
+		},
+		{
+			label: t("common:data"),
+			size: 2,
+			content: (article) =>
+				!!article.data.data
+					? moment(article.data.data)?.format("MM/YYYY")
+					: null,
 		},
 	];
 
@@ -126,7 +126,7 @@ const ArticlesTable = ({ articles }) => {
 
 	return (
 		<section className={styles.section}>
-			{filters && (
+			{withFilters && filters && (
 				<Columns sm={2} md={4} className={`container ${styles.filters}`}>
 					<div className={`${styles.filter}`}>
 						<label htmlFor={`search`} className={`smcp`}>
@@ -161,7 +161,7 @@ const ArticlesTable = ({ articles }) => {
 								<select
 									onChange={(e) => handleFilter(filter, e.target.value)}
 									name={`filter-${key}`}
-									defaultValue=""
+									value={articleFilters[filter.label]}
 								>
 									<option value=""></option>
 									{uniqueOptions(filter.content).map((option, key) => (
@@ -170,6 +170,15 @@ const ArticlesTable = ({ articles }) => {
 										</option>
 									))}
 								</select>
+								{articleFilters[filter.label] && (
+									<button
+										type="button"
+										onClick={() => handleFilter(filter, "")}
+										className={styles.clear}
+									>
+										×
+									</button>
+								)}
 							</div>
 						</div>
 					))}

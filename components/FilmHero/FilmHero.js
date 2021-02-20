@@ -60,6 +60,7 @@ const FilmHero = ({ filmes }) => {
 											loop: true,
 											controls: false,
 											autoPlay: true,
+											playsInline: true,
 										}}
 									/>
 								)}

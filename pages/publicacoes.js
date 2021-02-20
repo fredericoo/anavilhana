@@ -23,7 +23,7 @@ const Imprensa = ({ articles, doc, config }) => {
 					</header>
 				)}
 			</div>
-			<ArticlesTable articles={articles} />
+			<ArticlesTable withFilters articles={articles} />
 		</Layout>
 	);
 };
