@@ -1,6 +1,7 @@
 import styles from "./PhotoCarousel.module.scss";
 import Placeholder from "components/Placeholder/Placeholder";
 import { useState } from "react";
+import Image from "next/image";
 
 const PhotoCarousel = ({ photos }) => {
 	if (typeof photos != "object" || !photos.length || !photos[0].imagem1.url)
@@ -43,6 +44,7 @@ const CarouselSlide = ({ photo, onClick }) => {
 		? { layout: "fill", objectFit: "cover" }
 		: {
 				objectFit: "contain",
+				objectPosition: "center",
 				layout: "fill",
 		  };
 	return (
@@ -50,7 +52,7 @@ const CarouselSlide = ({ photo, onClick }) => {
 			className={`${styles.slide} ${onClick ? styles.interactive : ""}`}
 			onClick={onClick}
 		>
-			<Placeholder src={photo.url} {...photoProps} alt={photo.alt} />
+			<Image src={photo.url} {...photoProps} alt={photo.alt} />
 		</figure>
 	);
 };

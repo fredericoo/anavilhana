@@ -47,7 +47,7 @@ export default function Post({ doc, articles, config }) {
 					<Grid className={styles.section}>
 						<Grid.Col>
 							<h2 className={`h-4 ${styles.heading}`}>{t("common:assista")}</h2>
-							<Columns sm={1} md={2}>
+							<Columns sm={1} md={3} lg={3} xl={4}>
 								{filme.plataforma_e_link.map((assista, key) => (
 									<WatchLink
 										key={key}

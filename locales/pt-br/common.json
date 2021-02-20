@@ -19,13 +19,22 @@
 	"toggleMenu": "Abre ou fecha o menu.",
 	"criticas": "Críticas & Artigos",
 	"rodape": "Rodapé",
-	"busca": "Digite para buscar",
+	"busca": "Busca",
+	"buscaDigite": "Digite para buscar",
 	"obras": "Obras",
 	"montagens": "Montagens",
 	"assista": "Assista",
 	"mais": "Ver todas",
 	"ler": "Ler na íntegra",
 	"direcao": "Direção",
+	"data": "Data",
+	"portugues": "Português",
+	"tipo": "Tipo",
+	"fonte": "Fonte",
+	"titulo": "Título",
+	"idioma": "Idioma",
+	"formato": "Formato",
+	"obra": "Obra",
 	"assistirTrailer": "Assistir Trailer",
 	"disponivelEm": "Disponível em",
 	"resultados": {
@@ -33,5 +42,9 @@
 		"plural": "resultados"
 	},
 	"carregando": "Carregando…",
-	"erro": "Um erro ocorreu."
+	"erro": "Um erro ocorreu.",
+	"type": {
+		"Media": "pdf",
+		"Web": "link"
+	}
 }

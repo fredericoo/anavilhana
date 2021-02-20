@@ -1,12 +1,12 @@
 import styles from "./Grid.module.scss";
 
-const Grid = ({ gutter = "2rem", container, children, className }) => {
+const Grid = ({ gap = "2rem", container, children, className }) => {
 	return (
 		<div
-			className={`${className ? className : ""} ${styles.grid} ${
-				container ? styles.container : ""
-			}`}
-			style={{ "--gutter": gutter }}
+			className={`${styles.grid} ${container ? styles.container : ""} ${
+				className ? className : ""
+			} `}
+			style={{ "--gap": gap }}
 		>
 			{children}
 		</div>

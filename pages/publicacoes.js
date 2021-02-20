@@ -6,8 +6,7 @@ import styles from "styles/pages/filmes.module.scss";
 
 import Layout from "components/Layout/Layout";
 import Meta from "components/Meta/Meta";
-import Columns from "components/Columns/Columns";
-import ArticleThumb from "components/ArticleThumb/ArticleThumb";
+import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 
 const Imprensa = ({ articles, doc, config }) => {
 	const imprensa = doc ? doc.data : null;
@@ -23,13 +22,8 @@ const Imprensa = ({ articles, doc, config }) => {
 						<h1 className={`h-1`}>{RichText.asText(imprensa.titulo)}</h1>
 					</header>
 				)}
-				<Columns sm={1} md={2} lg={3} className={styles.films}>
-					{articles.results &&
-						articles.results.map((article, key) => (
-							<ArticleThumb key={article.uid + key} article={article} />
-						))}
-				</Columns>
 			</div>
+			<ArticlesTable articles={articles} />
 		</Layout>
 	);
 };
@@ -43,7 +37,10 @@ export async function getStaticProps({ locale }) {
 	});
 
 	const documents = await client.query(
-		Prismic.Predicates.at("document.type", "artigo")
+		Prismic.Predicates.at("document.type", "artigo"),
+		{
+			fetchLinks: ["filme.titulo"],
+		}
 	);
 
 	const config = await client.getSingle("config", { lang: locale });
@@ -52,7 +49,7 @@ export async function getStaticProps({ locale }) {
 		return {
 			revalidate: 60,
 			props: {
-				articles: documents || {},
+				articles: documents.results || {},
 				config: config || {},
 				doc: doc || {},
 			},

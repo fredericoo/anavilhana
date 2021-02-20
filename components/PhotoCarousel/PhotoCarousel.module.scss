@@ -5,6 +5,7 @@
 }
 
 .slide {
+	position: relative;
 	height: 80vh;
 	&:nth-child(1) {
 		grid-column: screen-start / col-7;
@@ -50,5 +51,5 @@
 .slideNo {
 	margin-top: 0.5rem;
 	grid-column: grid-start / grid-end;
-	text-align: right;
+	text-align: center;
 }
