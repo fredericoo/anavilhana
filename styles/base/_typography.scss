@@ -20,26 +20,28 @@ body {
 		@extend .s-xxl;
 		@extend .f-sans;
 		line-height: 1;
+		font-weight: normal;
 	}
 	&-2 {
 		@extend .s-xl;
 		@extend .f-sans;
-		font-weight: 600; //bold
+		font-weight: bold;
 		line-height: 1;
 	}
 	&-3 {
 		@extend .s-lg;
 		@extend .f-sans;
-		font-weight: 600; //bold
+		font-weight: bold;
 		letter-spacing: -0.03em;
 		line-height: 1.2;
 	}
 	&-4 {
 		@extend .s-md;
 		@extend .f-sans;
-		font-weight: 600; //bold
+		font-weight: bold;
 	}
 	&-5 {
+		font-weight: bold;
 		@extend .s-md;
 		@extend .f-sans;
 	}
@@ -90,6 +92,14 @@ body {
 	-webkit-font-feature-settings: "smcp";
 	font-feature-settings: "smcp";
 	font-variant-numeric: oldstyle-nums;
+}
+
+// layers
+.l-2 {
+	opacity: 0.5;
+}
+.l-3 {
+	opacity: 0.2;
 }
 
 figcaption {

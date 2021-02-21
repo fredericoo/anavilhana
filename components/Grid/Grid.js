@@ -38,26 +38,34 @@ const Col = ({
 		"--zIndex": zIndex,
 	};
 
-	if (Array.isArray(children) || typeof children === "string") {
-		return (
-			<div
-				className={`${className ? className : ""} ${styles.col}`}
-				style={style}
-			>
-				{children}
-			</div>
-		);
-	} else {
-		return (
-			<children.type
-				{...children.props}
-				className={`${className ? className : ""} ${styles.col} ${
-					children.props.className ? children.props.className : ""
-				}`}
-				style={style}
-			/>
-		);
-	}
+	return (
+		<div
+			className={`${className ? className : ""} ${styles.col}`}
+			style={style}
+		>
+			{children}
+		</div>
+	);
+	// if (Array.isArray(children) || typeof children === "string") {
+	// 	return (
+	// 		<div
+	// 			className={`${className ? className : ""} ${styles.col}`}
+	// 			style={style}
+	// 		>
+	// 			{children}
+	// 		</div>
+	// 	);
+	// } else {
+	// 	return (
+	// 		<children.type
+	// 			{...children.props}
+	// 			className={`${className ? className : ""} ${styles.col} ${
+	// 				children.props.className ? children.props.className : ""
+	// 			}`}
+	// 			style={style}
+	// 		/>
+	// 	);
+	// }
 };
 
 Grid.Col = Col;

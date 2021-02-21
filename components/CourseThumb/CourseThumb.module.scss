@@ -1,17 +1,15 @@
 @import "styles/abstracts/mixins";
 
-.article {
+.module {
+	border: 1px solid var(--colour__secondary);
+	padding: 8px;
 	margin-bottom: 2rem;
-	.source {
+	.type {
 		opacity: 0.5;
 	}
 	.title {
 		margin-bottom: 0.5rem;
 		hanging-punctuation: first;
-		&:after {
-			content: " ↗";
-			display: inline;
-		}
 	}
 	.lead {
 		opacity: 0.5;
@@ -23,6 +21,9 @@
 		display: -webkit-box;
 		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
+	}
+	.footer {
+		margin-top: 1rem;
 	}
 
 	@include on-event {

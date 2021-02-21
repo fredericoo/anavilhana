@@ -25,6 +25,7 @@
 	"montagens": "Montagens",
 	"assista": "Assista",
 	"mais": "Ver todas",
+	"proximaPagina": "Carregar mais",
 	"ler": "Ler na íntegra",
 	"direcao": "Direção",
 	"data": "Data",
@@ -46,5 +47,9 @@
 	"type": {
 		"Media": "pdf",
 		"Web": "link"
-	}
+	},
+	"quando": "Quando",
+	"investimento": "Investimento",
+	"conteudo": "Conteúdo",
+	"ministrado": "Ministrado por"
 }

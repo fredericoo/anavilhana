@@ -1,0 +1,23 @@
+@import "styles/abstracts/mixins";
+
+.page {
+	margin-top: 4rem;
+	margin-bottom: 4rem;
+}
+
+.teachers {
+	li {
+		margin-bottom: 1rem;
+		h3 {
+			margin-bottom: 0.5rem;
+		}
+	}
+	a {
+		white-space: nowrap;
+		border-bottom: 1px solid;
+		&:hover {
+			color: var(--colour__accent);
+			text-decoration: none;
+		}
+	}
+}

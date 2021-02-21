@@ -74,12 +74,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				{groupHasItems(artigos) && (
 					<div id="criticas" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:criticas")}</h2>
-						<ArticlesTable articles={artigos} />
-						{/* <Columns sm={1} md={2}>
-							{artigos.map((artigo, key) => (
-								<ArticleThumb key={key} article={artigo} />
-							))}
-						</Columns> */}
+						<ArticlesTable articles={artigos} perPage={3} />
 					</div>
 				)}
 

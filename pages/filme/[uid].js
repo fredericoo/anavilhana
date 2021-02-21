@@ -8,7 +8,6 @@ import useTranslation from "next-translate/useTranslation";
 
 import Layout from "components/Layout/Layout";
 import Meta from "components/Meta/Meta";
-import FilmHero from "components/FilmHero/FilmHero";
 import Prizes from "components/Prizes/Prizes";
 import TechnicalDetails from "components/TechnicalDetails/TechnicalDetails";
 import Sinopse from "components/Sinopse/Sinopse";
@@ -16,9 +15,9 @@ import PhotoCarousel from "components/PhotoCarousel/PhotoCarousel";
 import ScrollNav from "components/ScrollNav/ScrollNav";
 import Columns from "components/Columns/Columns";
 import WatchLink from "components/WatchLink/WatchLink";
-import CriticsSection from "components/CriticsSection/CriticsSection";
+
 import Grid from "components/Grid/Grid";
-import VideoPlayer from "components/VideoPlayer/VideoPlayer";
+import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 
 export default function Post({ doc, articles, config }) {
 	const { t } = useTranslation();
@@ -43,22 +42,25 @@ export default function Post({ doc, articles, config }) {
 
 				<Sinopse filme={filme} />
 
-				{groupHasItems(filme.plataforma_e_link) && (
-					<Grid className={styles.section}>
-						<Grid.Col>
-							<h2 className={`h-4 ${styles.heading}`}>{t("common:assista")}</h2>
-							<Columns sm={1} md={3} lg={3} xl={4}>
-								{filme.plataforma_e_link.map((assista, key) => (
-									<WatchLink
-										key={key}
-										platform={assista.nome_da_plataforma}
-										link={assista.link_do_filme}
-									/>
-								))}
-							</Columns>
-						</Grid.Col>
-					</Grid>
-				)}
+				{groupHasItems(filme.plataforma_e_link) &&
+					!!filme.plataforma_e_link[0].nome_da_plataforma && (
+						<Grid className={styles.section}>
+							<Grid.Col>
+								<h2 className={`h-4 ${styles.heading}`}>
+									{t("common:assista")}
+								</h2>
+								<Columns sm={1} md={3} lg={3} xl={4}>
+									{filme.plataforma_e_link.map((assista, key) => (
+										<WatchLink
+											key={key}
+											platform={assista.nome_da_plataforma}
+											link={assista.link_do_filme}
+										/>
+									))}
+								</Columns>
+							</Grid.Col>
+						</Grid>
+					)}
 
 				<div className={`grid grid--full`}>
 					<nav className={styles.nav}>
@@ -108,7 +110,7 @@ export default function Post({ doc, articles, config }) {
 							<h2 className={`h-2 ${styles.heading}`}>
 								{t("common:criticas")}
 							</h2>
-							<CriticsSection articles={articles} />
+							<ArticlesTable articles={articles} perPage={3} />
 						</section>
 					)}
 				</div>

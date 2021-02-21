@@ -1,16 +1,23 @@
 import styles from "./ArticlesTable.module.scss";
+
 import { useState, useEffect } from "react";
 import useTranslation from "next-translate/useTranslation";
 import { RichText } from "prismic-reactjs";
 import moment from "moment";
+
 import Grid from "components/Grid/Grid";
 import Columns from "components/Columns/Columns";
+import Button from "components/Button/Button";
+
 import Link from "next/link";
 import { hrefResolver } from "prismic-configuration";
 
-const ArticlesTable = ({ articles, withFilters }) => {
+const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
+	const [showArticles, setShowArticles] = useState(perPage);
 	const [filteredArticles, setFilteredArticles] = useState(articles);
 	const { t } = useTranslation();
+
+	const showMore = () => setShowArticles(showArticles + perPage);
 
 	const columns = [
 		{
@@ -198,13 +205,23 @@ const ArticlesTable = ({ articles, withFilters }) => {
 				</Grid>
 
 				{articles &&
-					filteredArticles.map((article, key) => (
-						<TableRow
-							key={article.uid + key}
-							article={article}
-							columns={columns}
-						/>
-					))}
+					filteredArticles
+						.slice(0, showArticles)
+						.map((article, key) => (
+							<TableRow
+								key={article.uid + key}
+								article={article}
+								columns={columns}
+							/>
+						))}
+				{showArticles < filteredArticles.length && (
+					<div className={styles.showMore}>
+						<Button type="link" onClick={showMore}>
+							{t("common:proximaPagina")}{" "}
+							{Math.min(perPage, filteredArticles.length - showArticles)}
+						</Button>
+					</div>
+				)}
 			</div>
 		</section>
 	);

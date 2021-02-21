@@ -1,0 +1,8 @@
+.flow {
+	--flow__spacing: 1rem;
+	display: grid;
+	gap: var(--flow__spacing);
+	&.horizontal {
+		grid-auto-flow: column;
+	}
+}
