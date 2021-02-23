@@ -60,7 +60,7 @@ const ScrollNav = ({ items }) => {
 
 	return (
 		<ul className={`${styles.list} ${overlay ? styles.hidden : ""}`}>
-			{navItems.map(({ id, label }, key) => (
+			{navItems.map(({ ref, id, label }, key) => (
 				<li key={key}>
 					<button
 						onClick={() => scrollTo(ref)}
