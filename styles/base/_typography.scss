@@ -45,6 +45,9 @@ body {
 		@extend .s-md;
 		@extend .f-sans;
 	}
+	&-6 {
+		font-weight: bold;
+	}
 	&-div {
 		user-select: none;
 		pointer-events: none;

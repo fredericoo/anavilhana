@@ -9,6 +9,9 @@
 	"contato": "Contato",
 	"loja": "Loja",
 	"sala": "Sala de exibição",
+	"ano": "Ano",
+	"exibicoes": "Exibições",
+	"tarefa": "Tarefa",
 	"premiacoes": "Premiações",
 	"sinopse": "Sinopse",
 	"fichaTecnica": "Ficha Técnica",
@@ -17,12 +20,12 @@
 	"nenhumaExibicao": "Nenhuma exibição encontrada para este dia! Selecione uma data marcada no calendário.",
 	"fechar": "Fechar",
 	"toggleMenu": "Abre ou fecha o menu.",
-	"criticas": "Críticas & Artigos",
+	"criticas": "Publicações",
 	"rodape": "Rodapé",
 	"busca": "Busca",
 	"buscaDigite": "Digite para buscar",
 	"obras": "Obras",
-	"montagens": "Montagens",
+	"montagens": "Participações",
 	"assista": "Assista",
 	"mais": "Ver todas",
 	"proximaPagina": "Carregar mais",
@@ -54,5 +57,6 @@
 	"ministrado": "Ministrado por",
 	"nenhumResultado": "Nenhum resultado encontrado.",
 	"tente": "Você pode tentar",
-	"limparFiltros": "Limpar todos os filtros"
+	"limparFiltros": "Limpar todos os filtros",
+	"email": "Email"
 }

@@ -1,7 +1,14 @@
 import Link from "next/link";
 import styles from "./Button.module.scss";
 
-const Button = ({ children, href, onClick, type = "primary", size = "md" }) => {
+const Button = ({
+	children,
+	href,
+	target,
+	onClick,
+	type = "primary",
+	size = "md",
+}) => {
 	const buttonClass = `${styles.button} ${
 		type ? styles[`type--${type}`] : ""
 	} ${size ? styles[`size--${size}`] : ""}`;
@@ -15,7 +22,9 @@ const Button = ({ children, href, onClick, type = "primary", size = "md" }) => {
 
 	return (
 		<Link href={href}>
-			<a className={buttonClass}>{children}</a>
+			<a target={target} className={buttonClass}>
+				{children}
+			</a>
 		</Link>
 	);
 };

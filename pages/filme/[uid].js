@@ -15,6 +15,7 @@ import PhotoCarousel from "components/PhotoCarousel/PhotoCarousel";
 import ScrollNav from "components/ScrollNav/ScrollNav";
 import Columns from "components/Columns/Columns";
 import WatchLink from "components/WatchLink/WatchLink";
+import Table from "components/Table/Table";
 
 import Grid from "components/Grid/Grid";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
@@ -67,6 +68,7 @@ export default function Post({ doc, articles, config }) {
 						<ScrollNav
 							items={[
 								{ label: t("common:premiacoes"), id: "premiacoes" },
+								{ label: t("common:exibicoes"), id: "exibicoes" },
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
 								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:criticas"), id: "criticas" },
@@ -81,6 +83,46 @@ export default function Post({ doc, articles, config }) {
 							style={{ "--section__bg": "var(--colour__secondary)" }}
 						>
 							<Prizes prizes={filme.premiacoes} perPage={3} />
+						</section>
+					)}
+
+					{groupHasItems(filme.aired) && (
+						<section
+							id="exibicoes"
+							className={`${styles.section}`}
+							style={{ "--section__bg": "var(--colour__secondary)" }}
+						>
+							<Grid>
+								<Grid.Col lg="col-4 / grid-end">
+									<Table
+										rows={filme.aired}
+										columns={[
+											{
+												label: t("common:ano"),
+												content: (row) => row.aired_ano,
+												size: 3,
+											},
+											{
+												label: "",
+												content: (row) => (
+													<>
+														{row.aired_titulo && (
+															<RichText render={row.aired_titulo} />
+														)}
+														{row.aired_sobre && (
+															<div className="l-2">
+																<RichText render={row.aired_sobre} />
+															</div>
+														)}
+													</>
+												),
+												size: 9,
+											},
+										]}
+										perPage={3}
+									/>
+								</Grid.Col>
+							</Grid>
 						</section>
 					)}
 
