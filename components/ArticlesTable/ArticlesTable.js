@@ -11,11 +11,14 @@ import Button from "components/Button/Button";
 
 import Link from "next/link";
 import { hrefResolver } from "prismic-configuration";
+import { uniqueOptions } from "./utils/objectUtils";
 
 const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
+	const { t } = useTranslation();
+
 	const [showArticles, setShowArticles] = useState(perPage);
 	const [filteredArticles, setFilteredArticles] = useState(articles);
-	const { t } = useTranslation();
+	const [articleFilters, setFilter] = useState({});
 
 	const showMore = () => setShowArticles(showArticles + perPage);
 
@@ -60,10 +63,6 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 		},
 	];
 
-	// utility to populate selects with unique options from the article list
-	const uniqueOptions = (callback) =>
-		Array.from(new Set(articles.map(callback))).filter((item) => !!item.length);
-
 	const filters = [
 		{
 			label: t("common:data"),
@@ -79,7 +78,7 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 			content: (article) => article.data.idioma || false,
 		},
 	];
-	const [articleFilters, setFilter] = useState({});
+
 	const handleFilter = (selFilter, current) => {
 		let newFilter = articleFilters;
 		newFilter[selFilter.label] = current;
@@ -104,6 +103,12 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 
 	const [articleSearch, setSearch] = useState("");
 	const handleSearch = (e) => setSearch(e.target.value.toLowerCase().trim());
+	const clearFilters = () => {
+		setSearch("");
+		let newFilter = articleFilters;
+		filters.forEach((filter) => (newFilter[filter.label] = ""));
+		setFilter({ ...newFilter });
+	};
 
 	useEffect(() => {
 		const search = (article) =>
@@ -171,11 +176,13 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 									value={articleFilters[filter.label]}
 								>
 									<option value=""></option>
-									{uniqueOptions(filter.content).map((option, key) => (
-										<option key={key} value={option}>
-											{option}
-										</option>
-									))}
+									{uniqueOptions(articles, filter.content).map(
+										(option, key) => (
+											<option key={key} value={option}>
+												{option}
+											</option>
+										)
+									)}
 								</select>
 								{articleFilters[filter.label] && (
 									<button
@@ -192,40 +199,53 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 				</Columns>
 			)}
 			<div className={styles.table}>
-				<Grid gap={0} container className={`${styles.header} s-sm`}>
-					{columns.map((col, key) => (
-						<Grid.Col
-							sm={`span ${col.size || 1}`}
-							key={key}
-							className={`${styles.col} smcp`}
-						>
-							{col.label}
-						</Grid.Col>
-					))}
-				</Grid>
+				<TableHeader columns={columns} />
 
-				{articles &&
-					filteredArticles
-						.slice(0, showArticles)
-						.map((article, key) => (
-							<TableRow
-								key={article.uid + key}
-								article={article}
-								columns={columns}
-							/>
-						))}
-				{showArticles < filteredArticles.length && (
-					<div className={styles.showMore}>
-						<Button type="link" onClick={showMore}>
-							{t("common:proximaPagina")}{" "}
-							{Math.min(perPage, filteredArticles.length - showArticles)}
-						</Button>
-					</div>
+				{!!filteredArticles.length ? (
+					<TableBody
+						columns={columns}
+						rows={filteredArticles}
+						limit={showArticles}
+						showMore={showMore}
+					/>
+				) : (
+					<NoRows clearFilters={clearFilters} />
 				)}
 			</div>
 		</section>
 	);
 };
+
+export default ArticlesTable;
+
+const TableHeader = ({ columns }) => (
+	<Grid gap={0} container className={`${styles.header} s-sm`}>
+		{columns.map((col, key) => (
+			<Grid.Col
+				sm={`span ${col.size || 1}`}
+				key={key}
+				className={`${styles.col} smcp`}
+			>
+				{col.label}
+			</Grid.Col>
+		))}
+	</Grid>
+);
+
+const TableBody = ({ columns, rows, limit, showMore }) => (
+	<>
+		{rows.slice(0, limit).map((article, key) => (
+			<TableRow key={article.uid + key} article={article} columns={columns} />
+		))}
+		{showMore && limit < rows.length && (
+			<div className={styles.showMore}>
+				<Button type="link" onClick={showMore}>
+					{t("common:proximaPagina")} {Math.min(perPage, rows.length - limit)}
+				</Button>
+			</div>
+		)}
+	</>
+);
 
 const TableRow = ({ article, columns }) => (
 	<Link href={hrefResolver(article.data.link)}>
@@ -245,4 +265,23 @@ const TableRow = ({ article, columns }) => (
 	</Link>
 );
 
-export default ArticlesTable;
+const NoRows = ({ clearFilters }) => {
+	const { t } = useTranslation();
+	return (
+		<Grid>
+			<Grid.Col>
+				<p className={styles.nada}>
+					{t("common:nenhumResultado")}{" "}
+					{clearFilters && (
+						<>
+							{t("common:tente")}{" "}
+							<Button type="link" onClick={clearFilters}>
+								{t("common:limparFiltros")}
+							</Button>
+						</>
+					)}
+				</p>
+			</Grid.Col>
+		</Grid>
+	);
+};

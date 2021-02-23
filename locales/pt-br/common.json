@@ -1,6 +1,6 @@
 {
 	"title": "Anavilhana",
-	"desc": "Anavilhana",
+	"desc": "Produtora que desde 2005 alcança reconhecimento ao serem exibidos em importantes festivais nacionais e internacionais de cinema, conquistando diversos prêmios; e por terem seus filmes distribuídos comercialmente no Brasil e em países da América Latina e da Europa.",
 	"filmes": "Filmes",
 	"institucional": "Institucional",
 	"imprensa": "Imprensa",
@@ -51,5 +51,8 @@
 	"quando": "Quando",
 	"investimento": "Investimento",
 	"conteudo": "Conteúdo",
-	"ministrado": "Ministrado por"
+	"ministrado": "Ministrado por",
+	"nenhumResultado": "Nenhum resultado encontrado.",
+	"tente": "Você pode tentar",
+	"limparFiltros": "Limpar todos os filtros"
 }
