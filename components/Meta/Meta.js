@@ -34,8 +34,8 @@ const Meta = ({ pageTitle, pageDesc, pageType, pageImage }) => {
 
 			<meta name="robots" content="index,follow" />
 
-			<link rel="canonical" href={`https://anavilhana.com.br${asPath}`} />
-			<meta property="og:url" href={`https://anavilhana.com.br${asPath}`} />
+			<link rel="canonical" href={`https://anavilhana.art.br${asPath}`} />
+			<meta property="og:url" href={`https://anavilhana.art.br${asPath}`} />
 
 			{pageImage && <meta property="og:image" content={pageImage} />}
 
