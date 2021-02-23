@@ -34,13 +34,13 @@
 		opacity: 0.5;
 		display: inline-block;
 		text-align: left;
-		padding: 0.618em 1.618em;
+		padding: 0.618em 1.2em;
 		flex: 1 1 0;
 		white-space: nowrap;
 
 		@include responsive($tablet-l) {
 			white-space: initial;
-			transform: translateX(-1.2rem);
+			transform: translateX(-1.2em);
 			&:before {
 				content: "";
 				height: 1px;

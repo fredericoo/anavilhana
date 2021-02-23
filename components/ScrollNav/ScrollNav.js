@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import animateScrollTo from "animated-scroll-to";
 
 const ScrollNav = ({ items }) => {
-	const [activeNav, setActiveNav] = useState();
+	const [activeNav, setActiveNav] = useState({ id: "" });
 	const [navItems, setNavItems] = useState([]);
 	const [overlay, setOverlay] = useState(false);
 
@@ -13,6 +13,7 @@ const ScrollNav = ({ items }) => {
 				.filter((item) => document.querySelector(`#${item.id}`)) // elements that don't exist are purged off.
 				.map(({ label, id }) => ({
 					label,
+					id,
 					ref: document.querySelector(`#${id}`), // creates the 'ref' inside the navItems state with the query.
 				}))
 		);
@@ -20,11 +21,11 @@ const ScrollNav = ({ items }) => {
 
 	const handleScroll = () => {
 		let active = null;
-		navItems.forEach(({ ref }) => {
+		navItems.forEach(({ ref, id }) => {
 			const rect = ref.getBoundingClientRect();
-			if (rect.top <= window.innerHeight / 2) active = ref;
+			if (rect.top <= window.innerHeight / 2) active = id;
 		});
-		if (active !== activeNav) setActiveNav(active);
+		if (+active !== +activeNav) setActiveNav(active);
 	};
 
 	const handleOverlay = (entries, observer) => {
@@ -59,13 +60,13 @@ const ScrollNav = ({ items }) => {
 
 	return (
 		<ul className={`${styles.list} ${overlay ? styles.hidden : ""}`}>
-			{navItems.map(({ ref, label }, key) => (
+			{navItems.map(({ id, label }, key) => (
 				<li key={key}>
 					<button
 						onClick={() => scrollTo(ref)}
 						type="button"
 						className={`smcp ${styles.item} ${
-							ref === activeNav ? styles.active : ""
+							id === activeNav ? styles.active : ""
 						}`}
 					>
 						{label || "missing label"}
