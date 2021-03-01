@@ -28,6 +28,8 @@
 	.suggestions {
 		width: 100%;
 		position: absolute;
+		max-height: 70vh;
+		overflow-y: scroll;
 		top: 100%;
 		left: 0;
 		background: var(--colour__bg);

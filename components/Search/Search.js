@@ -19,9 +19,14 @@ const Search = () => {
 	const { t } = useTranslation();
 
 	useEffect(() => {
-		fetch("/api/documents")
-			.then((res) => res.json())
-			.then((docs) => setDocuments(docs));
+		if (active && !documents) {
+			fetch("/api/documents")
+				.then((res) => res.json())
+				.then((docs) => setDocuments(docs));
+		}
+		if (!active) {
+			setResults([]);
+		}
 	}, [active]);
 
 	useEffect(() => {
