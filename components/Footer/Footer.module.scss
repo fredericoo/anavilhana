@@ -1,15 +1,14 @@
 @import "styles/abstracts/mixins";
 
 .section {
-	padding-top: var(--gutter);
+	padding: 4rem 0;
+	@include responsive($tablet-l) {
+		padding: 2rem 0;
+	}
 	background: var(--colour__main);
 	color: var(--colour__bg);
-}
-
-.summary {
-	grid-column: grid-start / grid-end;
-	@include responsive($tablet-l) {
-		grid-column: span 6;
+	address {
+		font-style: normal;
 	}
 }
 
@@ -22,16 +21,12 @@
 	}
 }
 
-.footerMenu {
-	grid-column: grid-start / grid-end;
-	@include responsive($tablet-l) {
-		grid-column: span 3;
-	}
-}
-
-.address {
-	grid-column: grid-start / grid-end;
-	@include responsive($tablet-l) {
-		grid-column: span 3;
+.menu {
+	a {
+		border-bottom: 1px solid;
+		@include on-event {
+			text-decoration: none;
+			color: var(--colour__accent);
+		}
 	}
 }
