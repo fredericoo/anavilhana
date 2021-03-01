@@ -24,6 +24,7 @@
 	&.hidden {
 		@include responsive($tablet-l) {
 			opacity: 0;
+			pointer-events: none;
 		}
 	}
 	.item {
