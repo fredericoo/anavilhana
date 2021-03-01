@@ -45,7 +45,7 @@ export default function Post({ doc, articles, config }) {
 
 				{((groupHasItems(filme.plataforma_e_link) &&
 					!!filme.plataforma_e_link[0].nome_da_plataforma) ||
-					filme.trailer) && (
+					filme.trailer?.embed_url) && (
 					<Grid className={styles.section}>
 						<Grid.Col>
 							<Columns sm={1} md={3} lg={3} xl={4}>
