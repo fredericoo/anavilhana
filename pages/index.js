@@ -11,13 +11,13 @@ export default function Home({ home, config }) {
 	return (
 		<Layout config={config}>
 			<Meta />
-			{home.data?.highlights && (
+			{home?.data?.highlights && (
 				<FilmHero
 					filmes={home.data.highlights.map((highlight) => highlight.filme)}
 				/>
 			)}
 			<CalendarSection />
-			{home && home.data.banner_texto && (
+			{home?.data?.banner_texto && (
 				<Banner
 					text={home.data.banner_texto}
 					cta={home.data.banner_cta}
