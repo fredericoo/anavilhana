@@ -34,6 +34,7 @@ const ScrollNav = ({ items }) => {
 				`li[data-scroll=${activeNav}]`
 			);
 			animateScrollTo(selectedOption, {
+				horizontalOffset: window.innerWidth / -2,
 				elementToScroll: navRef.current,
 			});
 		}
