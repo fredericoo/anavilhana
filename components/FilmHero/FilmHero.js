@@ -3,6 +3,7 @@ import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 import { RichText } from "prismic-reactjs";
 import { useState, useRef, useEffect } from "react";
+import { hrefResolver } from "prismic-configuration";
 import moment from "moment";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,31 +48,27 @@ const FilmHero = ({ filmes }) => {
 							objectFit="cover"
 							layout="fill"
 						/>
-						{(active.data.video720 || active.data.video360) && (
-							<div className={styles.video}>
-								{playing && (
-									<VideoPlayer
-										src={active.data.video720.url || active.data.video360.url}
-										width="640"
-										height="360"
-										layout="fill"
-										videoProps={{
-											muted: true,
-											loop: true,
-											controls: false,
-											autoPlay: true,
-											playsInline: true,
-										}}
-									/>
-								)}
-							</div>
+						{(active.data.video720 || active.data.video360) && playing && (
+							<VideoPlayer
+								src={active.data.video720.url || active.data.video360.url}
+								width="640"
+								height="360"
+								layout="fill"
+								videoProps={{
+									muted: true,
+									loop: true,
+									controls: false,
+									autoPlay: true,
+									playsInline: true,
+								}}
+							/>
 						)}
 					</motion.div>
 				)}
 			</AnimatePresence>
 			<div className={styles.films}>
 				{filmes.map((filme) => (
-					<Link href={`/filme/${filme.uid}`} key={filme.uid}>
+					<Link href={hrefResolver(filme)} key={filme.uid}>
 						<a
 							onMouseEnter={() => handleMouseEnter(filme)}
 							className={`${styles.film} ${
