@@ -12,9 +12,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const Sinopse = ({ filme }) => {
 	if (!filme.sinopse) return null;
 	const { t } = useTranslation();
-	const imgRef = useRef();
-
+	const [playing, setPlaying] = useState(false);
+	const videoRef = useRef();
 	const playVid = useRef();
+
 	useEffect(() => {
 		setPlaying(false);
 		clearTimeout(playVid.current);
@@ -24,7 +25,9 @@ const Sinopse = ({ filme }) => {
 		return () => clearTimeout(playVid.current);
 	}, []);
 
-	const [playing, setPlaying] = useState(false);
+	useEffect(() => {
+		playing && videoRef.current && videoRef.current.play();
+	}, [playing]);
 
 	return (
 		<Grid className={styles.grid}>
@@ -46,6 +49,7 @@ const Sinopse = ({ filme }) => {
 										src={filme.video720.url || filme.video360.url}
 										width="640"
 										height="360"
+										ref={videoRef}
 										layout="fill"
 										videoProps={{
 											muted: true,
