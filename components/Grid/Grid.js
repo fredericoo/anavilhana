@@ -16,6 +16,7 @@ const Grid = ({ gap = "2rem", container, children, className }) => {
 const Col = ({
 	children,
 	className,
+	id,
 	sm = "grid-start / grid-end",
 	md,
 	lg,
@@ -40,32 +41,13 @@ const Col = ({
 
 	return (
 		<div
+			id={id}
 			className={`${className ? className : ""} ${styles.col}`}
 			style={style}
 		>
 			{children}
 		</div>
 	);
-	// if (Array.isArray(children) || typeof children === "string") {
-	// 	return (
-	// 		<div
-	// 			className={`${className ? className : ""} ${styles.col}`}
-	// 			style={style}
-	// 		>
-	// 			{children}
-	// 		</div>
-	// 	);
-	// } else {
-	// 	return (
-	// 		<children.type
-	// 			{...children.props}
-	// 			className={`${className ? className : ""} ${styles.col} ${
-	// 				children.props.className ? children.props.className : ""
-	// 			}`}
-	// 			style={style}
-	// 		/>
-	// 	);
-	// }
 };
 
 Grid.Col = Col;
