@@ -14,13 +14,20 @@ import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 import { groupHasItems } from "utils/prismicHelpers";
 import Button from "components/Button/Button";
 import Table from "components/Table/Table";
+import Grid from "components/Grid/Grid";
 
 const MemberDetails = ({ member, obras, artigos }) => {
 	const { t } = useTranslation();
 
 	return (
-		<div className={`${styles.container} grid grid--full`}>
-			<header className={styles.header}>
+		<Grid className={`${styles.container}`}>
+			<Grid.Col
+				sm="grid-start / grid-end"
+				lg="grid-start / span 3"
+				rowSm="3"
+				rowLg="1"
+				className={styles.header}
+			>
 				{member.imagem && (
 					<div className={styles.image}>
 						<Placeholder
@@ -54,8 +61,14 @@ const MemberDetails = ({ member, obras, artigos }) => {
 						</dd>
 					))}
 				</dl>
-			</header>
-			<nav className={styles.nav}>
+			</Grid.Col>
+			<Grid.Col
+				sm="screen-start / screen-end"
+				lg="grid-start / span 3"
+				rowSm="1"
+				rowLg="2"
+				className={styles.nav}
+			>
 				<ScrollNav
 					items={[
 						{ label: t("common:sobre"), id: "sobre" },
@@ -64,21 +77,29 @@ const MemberDetails = ({ member, obras, artigos }) => {
 						{ label: t("common:montagens"), id: "montagens" },
 					]}
 				/>
-			</nav>
-			<div id="sobre" className={styles.body}>
-				<h1 className={`h-1 ${styles.heading}`}>
-					{RichText.asText(member.nome)}
-					{member.posicao && (
-						<>
-							, <div className={`h-2`}>{member.posicao}</div>
-						</>
-					)}
-				</h1>
-				<h2 className="visually-hidden">{t("common:sobre")}</h2>
-				<div className={`${styles.sobre} body`}>
-					<RichText render={member.sobre} />
-				</div>
-
+			</Grid.Col>
+			<Grid.Col
+				sm="grid-start / grid-end"
+				lg="col-4 / span 7"
+				rowLg="1/3"
+				className={styles.body}
+			>
+				<header id="sobre">
+					<h1 className={`h-1 ${styles.heading}`}>
+						{RichText.asText(member.nome)}
+						{member.posicao && (
+							<>
+								, <div className={`h-2`}>{member.posicao}</div>
+							</>
+						)}
+					</h1>
+					<h2 className="visually-hidden">{t("common:sobre")}</h2>
+					<div className={`${styles.sobre} body`}>
+						<RichText render={member.sobre} />
+					</div>
+				</header>
+			</Grid.Col>
+			<Grid.Col sm="grid-start / grid-end" lg="col-4 / span 7" rowSm="4">
 				{groupHasItems(obras) && (
 					<div id="obras" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
@@ -132,8 +153,8 @@ const MemberDetails = ({ member, obras, artigos }) => {
 						</ul>
 					</div>
 				)}
-			</div>
-		</div>
+			</Grid.Col>
+		</Grid>
 	);
 };
 
