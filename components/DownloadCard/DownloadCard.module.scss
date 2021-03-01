@@ -1,0 +1,20 @@
+.title {
+	display: flex;
+	align-items: center;
+	.icon {
+		margin-right: 0.5em;
+		height: 2em;
+		width: 2em;
+	}
+	h3:after {
+		content: " ↗";
+		font-weight: normal;
+		display: inline-block;
+		margin-left: 0.2em;
+		font-size: 0.8em;
+	}
+	&:hover {
+		text-decoration: none;
+		color: var(--colour__accent);
+	}
+}

@@ -16,9 +16,12 @@ import ScrollNav from "components/ScrollNav/ScrollNav";
 import Columns from "components/Columns/Columns";
 import WatchLink from "components/WatchLink/WatchLink";
 import Table from "components/Table/Table";
-
+import DownloadCard from "components/DownloadCard/DownloadCard";
 import Grid from "components/Grid/Grid";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
+import Link from "next/link";
+
+import { hrefResolver } from "prismic-configuration";
 
 export default function Post({ doc, articles, config }) {
 	const { t } = useTranslation();
@@ -81,6 +84,7 @@ export default function Post({ doc, articles, config }) {
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
 								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:criticas"), id: "criticas" },
+								{ label: t("common:presskit"), id: "presskit" },
 							]}
 						/>
 					</nav>
@@ -164,6 +168,32 @@ export default function Post({ doc, articles, config }) {
 							<ArticlesTable articles={articles} perPage={3} />
 						</section>
 					)}
+
+					{groupHasItems(filme.downloads) &&
+						filme.downloads[0].download_link.url && (
+							<section id="presskit" className={styles.section}>
+								<Grid>
+									<Grid.Col lg="col-4 / grid-end">
+										<h2 className={`h-2 ${styles.heading}`}>
+											{t("common:presskit")}
+										</h2>
+
+										<Columns sm="1" md="2">
+											{filme.downloads.map((download, key) => (
+												<DownloadCard
+													key={key}
+													title={download.download_titulo}
+													subtitle={
+														download.download_privado ? t("common:privado") : ""
+													}
+													link={download.download_link}
+												/>
+											))}
+										</Columns>
+									</Grid.Col>
+								</Grid>
+							</section>
+						)}
 				</div>
 			</Layout>
 		);

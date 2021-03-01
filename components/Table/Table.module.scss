@@ -5,7 +5,6 @@
 }
 
 .col {
-	padding: 0 16px;
 	@include responsive($tablet-p) {
 		padding: 8px;
 	}

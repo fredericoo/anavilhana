@@ -62,7 +62,7 @@ const Table = ({ rows, columns, filters, searchInside, perPage = 10 }) => {
 	}, [rowFilters, rowSearch]);
 
 	return (
-		<section className={styles.section}>
+		<section>
 			{filters && (
 				<TableFilters
 					rows={filteredRows}
@@ -106,62 +106,66 @@ const TableFilters = ({
 }) => {
 	const { t } = useTranslation();
 	return (
-		<Columns sm={2} md={4} className={`container ${styles.filters}`}>
-			<div className={`${styles.filter}`}>
-				<label htmlFor={`search`} className={`smcp`}>
-					{t("common:busca")}
-				</label>
-				<div className={styles.search}>
-					<input
-						type="text"
-						onChange={handleSearch}
-						name="search"
-						value={rowSearch}
-						className={styles.search}
-						placeholder={t("common:buscaDigite")}
-					/>
-					{rowSearch && (
-						<button
-							type="button"
-							onClick={clearSearch}
-							className={styles.clear}
-						>
-							×
-						</button>
-					)}
-				</div>
-			</div>
-			{filters.map((filter, key) => (
-				<div key={key} className={styles.filter}>
-					<label htmlFor={`filter-${key}`} className={`smcp`}>
-						{filter.label}
-					</label>
-					<div className={styles.combo}>
-						<select
-							onChange={(e) => handleFilter(filter, e.target.value)}
-							name={`filter-${key}`}
-							value={rowFilters[filter.label]}
-						>
-							<option value=""></option>
-							{uniqueOptions(rows, filter.content).map((option, key) => (
-								<option key={key} value={option}>
-									{option}
-								</option>
-							))}
-						</select>
-						{rowFilters[filter.label] && (
-							<button
-								type="button"
-								onClick={() => handleFilter(filter, "")}
-								className={styles.clear}
-							>
-								×
-							</button>
-						)}
+		<Grid container>
+			<Grid.Col>
+				<Columns sm={2} md={4} className={`${styles.filters}`}>
+					<div className={`${styles.filter}`}>
+						<label htmlFor={`search`} className={`smcp`}>
+							{t("common:busca")}
+						</label>
+						<div className={styles.search}>
+							<input
+								type="text"
+								onChange={handleSearch}
+								name="search"
+								value={rowSearch}
+								className={styles.search}
+								placeholder={t("common:buscaDigite")}
+							/>
+							{rowSearch && (
+								<button
+									type="button"
+									onClick={clearSearch}
+									className={styles.clear}
+								>
+									×
+								</button>
+							)}
+						</div>
 					</div>
-				</div>
-			))}
-		</Columns>
+					{filters.map((filter, key) => (
+						<div key={key} className={styles.filter}>
+							<label htmlFor={`filter-${key}`} className={`smcp`}>
+								{filter.label}
+							</label>
+							<div className={styles.combo}>
+								<select
+									onChange={(e) => handleFilter(filter, e.target.value)}
+									name={`filter-${key}`}
+									value={rowFilters[filter.label]}
+								>
+									<option value=""></option>
+									{uniqueOptions(rows, filter.content).map((option, key) => (
+										<option key={key} value={option}>
+											{option}
+										</option>
+									))}
+								</select>
+								{rowFilters[filter.label] && (
+									<button
+										type="button"
+										onClick={() => handleFilter(filter, "")}
+										className={styles.clear}
+									>
+										×
+									</button>
+								)}
+							</div>
+						</div>
+					))}
+				</Columns>
+			</Grid.Col>
+		</Grid>
 	);
 };
 

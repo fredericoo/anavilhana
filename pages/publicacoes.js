@@ -2,27 +2,29 @@ import { Client } from "utils/prismicHelpers";
 import Prismic from "prismic-javascript";
 import { RichText } from "prismic-reactjs";
 
-import styles from "styles/pages/filmes.module.scss";
-
 import Layout from "components/Layout/Layout";
 import Meta from "components/Meta/Meta";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
+import Grid from "components/Grid/Grid";
+import PageHeader from "components/PageHeader/PageHeader";
 
 const Imprensa = ({ articles, doc, config }) => {
 	const imprensa = doc ? doc.data : null;
 	return (
 		<Layout config={config}>
-			<div className={`grid grid--inner`}>
+			<Grid>
 				{imprensa && (
-					<header className={styles.header}>
-						<Meta
-							pageTitle={RichText.asText(imprensa.titulo)}
-							pageDesc={RichText.asText(imprensa.corpo)}
-						/>
-						<h1 className={`h-1`}>{RichText.asText(imprensa.titulo)}</h1>
-					</header>
+					<Grid.Col>
+						<PageHeader>
+							<Meta
+								pageTitle={RichText.asText(imprensa.titulo)}
+								pageDesc={RichText.asText(imprensa.corpo)}
+							/>
+							<h1 className={`h-1`}>{RichText.asText(imprensa.titulo)}</h1>
+						</PageHeader>
+					</Grid.Col>
 				)}
-			</div>
+			</Grid>
 			<ArticlesTable withFilters articles={articles} />
 		</Layout>
 	);

@@ -10,21 +10,24 @@ import Grid from "components/Grid/Grid";
 import CourseThumb from "components/CourseThumb/CourseThumb";
 import { RichText } from "prismic-reactjs";
 import Text from "components/Text/Text";
+import PageHeader from "components/PageHeader/PageHeader";
 
 const Educacao = ({ doc, docs, config }) => {
 	return (
 		<Layout config={config}>
-			{doc && doc.data && (
-				<Meta
-					pageTitle={RichText.asText(doc.data.titulo)}
-					pageDesc={RichText.asText(doc.data.texto)}
-				/>
-			)}
 			<Grid container>
 				<Grid.Col sm="grid-start / grid-end">
-					<h1 className={`h-1`}>
-						{doc && doc.data && <Text asText content={doc.data.titulo} />}
-					</h1>
+					{doc?.data && (
+						<PageHeader>
+							<Meta
+								pageTitle={RichText.asText(doc.data.titulo)}
+								pageDesc={RichText.asText(doc.data.texto)}
+							/>
+							<h1 className={`h-1`}>
+								<Text asText content={doc.data.titulo} />
+							</h1>
+						</PageHeader>
+					)}
 				</Grid.Col>
 				<Grid.Col sm="grid-start / grid-end">
 					<div>
