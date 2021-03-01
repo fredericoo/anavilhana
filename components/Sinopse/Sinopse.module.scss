@@ -1,13 +1,18 @@
 @import "styles/abstracts/mixins";
 
+.grid {
+	min-height: 80vh;
+	background: black;
+}
+
 .sinopse {
 	margin: 2rem 0;
 	align-self: center;
-	// color: var(--colour__bg);
+	color: var(--colour__bg);
 	.text {
 		margin-top: 1rem;
 		p {
-			// color: var(--colour__bg);
+			color: var(--colour__bg);
 			opacity: 0.8;
 		}
 	}
@@ -23,8 +28,19 @@
 }
 
 .cover {
-	background: black;
+	opacity: 0.6;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	position: relative;
 	align-self: center;
+	.video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
 }
 
 .trailer {
