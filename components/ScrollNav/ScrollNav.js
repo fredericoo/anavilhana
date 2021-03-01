@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import animateScrollTo from "animated-scroll-to";
 
 const ScrollNav = ({ items }) => {
-	const [activeNav, setActiveNav] = useState({ id: "" });
+	const [activeNav, setActiveNav] = useState("");
 	const [navItems, setNavItems] = useState([]);
 	const [overlay, setOverlay] = useState(false);
 
@@ -25,10 +25,10 @@ const ScrollNav = ({ items }) => {
 			const rect = ref.getBoundingClientRect();
 			if (rect.top <= window.innerHeight / 2) active = id;
 		});
-		if (+active !== +activeNav) setActiveNav(active);
+		if (active && active !== activeNav) setActiveNav(active);
 	};
 
-	const handleOverlay = (entries, observer) => {
+	const handleOverlay = (entries, _) => {
 		let overlay = false;
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) overlay = true;
