@@ -65,7 +65,7 @@ const Table = ({ rows, columns, filters, searchInside, perPage = 10 }) => {
 		<section className={styles.section}>
 			{filters && (
 				<TableFilters
-					rows={rows}
+					rows={filteredRows}
 					filters={filters}
 					rowFilters={rowFilters}
 					handleFilter={handleFilter}
