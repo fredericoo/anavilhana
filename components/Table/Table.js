@@ -184,7 +184,7 @@ const TableBody = ({ columns, rows, limit, perPage, showMore }) => {
 	return (
 		<>
 			{rows.slice(0, limit).map((row, key) => (
-				<TableRow key={row.uid + key} row={row} columns={columns} />
+				<TableRow key={key} row={row} columns={columns} />
 			))}
 			{showMore && limit < rows.length && (
 				<div className={styles.showMore}>

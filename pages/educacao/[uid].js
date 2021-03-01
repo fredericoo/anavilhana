@@ -38,9 +38,9 @@ const Membro = ({ membro }) => {
 				)}
 			</h3>
 			{membro.biografia && (
-				<divcl className="l-2 s-sm">
+				<div className="l-2 s-sm">
 					<Text content={membro.biografia} />
-				</divcl>
+				</div>
 			)}
 		</>
 	);
@@ -84,7 +84,7 @@ export default function Educacao({ doc, config }) {
 									<Text content={curso.tipo} />
 								</div>
 								<h1 className={"h-2"}>
-									<Text content={curso.titulo} />
+									<Text asText content={curso.titulo} />
 								</h1>
 							</header>
 

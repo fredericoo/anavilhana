@@ -23,7 +23,7 @@ const Educacao = ({ doc, docs, config }) => {
 			<Grid container>
 				<Grid.Col sm="grid-start / grid-end">
 					<h1 className={`h-1`}>
-						{doc && doc.data && <Text content={doc.data.titulo} />}
+						{doc && doc.data && <Text asText content={doc.data.titulo} />}
 					</h1>
 				</Grid.Col>
 				<Grid.Col sm="grid-start / grid-end">

@@ -34,8 +34,8 @@ const CourseThumb = ({ course }) => {
 					)}
 					{groupHasItems(course.data.datas) && (
 						<ul className={styles.dates}>
-							{course.data.datas.map((range) => (
-								<li className={styles.date}>
+							{course.data.datas.map((range, key) => (
+								<li key={key} className={styles.date}>
 									{formatDateRange(range.inicio, range.final, [
 										(date) => date.format("YYYY"),
 										(date) => date.format("MMM"),

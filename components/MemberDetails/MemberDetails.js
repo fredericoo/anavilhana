@@ -42,8 +42,8 @@ const MemberDetails = ({ member, obras, artigos }) => {
 							<dd>{member.email}</dd>
 						</>
 					)}
-					{member.social.map((social) => (
-						<dd>
+					{member.social.map((social, key) => (
+						<dd key={key}>
 							<Button
 								target="_blank"
 								type="link"
