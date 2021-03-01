@@ -12,10 +12,10 @@ module.exports = {
 	// Modify as your project grows to handle any new routes you've made
 	linkResolver: function (doc) {
 		if (doc.type === "filme") {
-			return `/filme/${doc.uid}`;
+			return `/filmes/${doc.uid}`;
 		}
 		if (doc.type === "membro") {
-			return `/membro/${doc.uid}`;
+			return `/membros/${doc.uid}`;
 		}
 		if (doc.type === "educacao") {
 			return `/educacao/${doc.uid}`;
@@ -35,10 +35,10 @@ module.exports = {
 	// Additional helper function for Next/Link component
 	hrefResolver: function (doc) {
 		if (doc.type === "filme") {
-			return `/filme/${doc.uid}`;
+			return `/filmes/${doc.uid}`;
 		}
 		if (doc.type === "membro") {
-			return `/membro/${doc.uid}`;
+			return `/membros/${doc.uid}`;
 		}
 		if (doc.type === "educacao") {
 			return `/educacao/${doc.uid}`;
