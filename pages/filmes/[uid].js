@@ -43,25 +43,34 @@ export default function Post({ doc, articles, config }) {
 
 				<Sinopse filme={filme} />
 
-				{groupHasItems(filme.plataforma_e_link) &&
-					!!filme.plataforma_e_link[0].nome_da_plataforma && (
-						<Grid className={styles.section}>
-							<Grid.Col>
-								<h2 className={`h-4 ${styles.heading}`}>
-									{t("common:assista")}
-								</h2>
-								<Columns sm={1} md={3} lg={3} xl={4}>
-									{filme.plataforma_e_link.map((assista, key) => (
+				{((groupHasItems(filme.plataforma_e_link) &&
+					!!filme.plataforma_e_link[0].nome_da_plataforma) ||
+					filme.trailer) && (
+					<Grid className={styles.section}>
+						<Grid.Col>
+							<Columns sm={1} md={3} lg={3} xl={4}>
+								{filme.trailer?.embed_url && (
+									<WatchLink
+										size="sm"
+										platform={t("common:assistirTrailer")}
+										link={filme.trailer.embed_url}
+										key="trailer"
+									/>
+								)}
+								{groupHasItems(filme.plataforma_e_link) &&
+									!!filme.plataforma_e_link[0].nome_da_plataforma &&
+									filme.plataforma_e_link.map((assista, key) => (
 										<WatchLink
 											key={key}
 											platform={assista.nome_da_plataforma}
+											subtitle={t("common:assista")}
 											link={assista.link_do_filme}
 										/>
 									))}
-								</Columns>
-							</Grid.Col>
-						</Grid>
-					)}
+							</Columns>
+						</Grid.Col>
+					</Grid>
+				)}
 
 				<div className={`grid grid--full`}>
 					<nav className={styles.nav}>
