@@ -19,7 +19,7 @@ const Search = () => {
 	const { t } = useTranslation();
 
 	useEffect(() => {
-		if (active && !documents) {
+		if (active && !documents.length) {
 			fetch("/api/documents")
 				.then((res) => res.json())
 				.then((docs) => setDocuments(docs));
