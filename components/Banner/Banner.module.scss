@@ -3,9 +3,9 @@
 .section {
 	background: black;
 	min-height: 80vh;
+	position: relative;
 	.textBlock {
 		padding: 2rem 0;
-		position: relative;
 		z-index: 1;
 		grid-row: 1;
 		grid-column: grid-start / grid-end;
@@ -20,6 +20,11 @@
 	}
 
 	.background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
 		opacity: 0.75;
 		z-index: 0;
 		grid-row: 1;

@@ -1,7 +1,6 @@
 import Layout from "components/Layout/Layout";
 import Meta from "components/Meta/Meta";
 import FilmHero from "components/FilmHero/FilmHero";
-import { queryRepeatableDocuments } from "utils/queries";
 import CalendarSection from "components/CalendarSection/CalendarSection";
 import { Client } from "utils/prismicHelpers";
 import Banner from "components/Banner/Banner";
@@ -41,10 +40,8 @@ export async function getStaticProps({ locale }) {
 		fetchLinks: [
 			"filme.titulo",
 			"filme.lancamento",
-			"filme.video360",
-			"filme.video720",
+			"filme.imagens",
 			"filme.ficha_tecnica",
-			"filme.imagem",
 			"membro.nome",
 		],
 	});

@@ -8,17 +8,24 @@ import moment from "moment";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
+import { groupHasItems } from "utils/prismicHelpers";
 
 const FilmHero = ({ filmes }) => {
 	if (!filmes || !filmes.length) return null;
 	const { t } = useTranslation();
-	const [active, setActive] = useState(filmes[0]);
+	const [active, setActive] = useState();
+	// filmes[0].data.imagens[Math.random() * filmes[0].data.imagens.length];
 
 	const [playing, setPlaying] = useState(false);
 	const playVid = useRef();
 
 	const handleMouseEnter = (filme) => {
-		setActive(filme);
+		groupHasItems(filme.data.imagens) &&
+			setActive(
+				filme.data.imagens[
+					Math.floor(Math.random() * filme.data.imagens.length)
+				]
+			);
 	};
 
 	useEffect(() => {
@@ -34,23 +41,19 @@ const FilmHero = ({ filmes }) => {
 		<section className={`grid grid--full ${styles.grid}`}>
 			<h1 className="visually-hidden">{t("common:filmes")}</h1>
 			<AnimatePresence>
-				{active.data.imagem.url && (
+				{!!active?.imagem.url && (
 					<motion.div
-						key={active.data.imagem.url}
+						key={active.imagem.url}
 						initial={{ opacity: 0, scale: 1.5 }}
 						animate={{ opacity: 0.7, scale: 1.2 }}
 						exit={{ opacity: 0, scale: 1 }}
 						transition={{ ease: "easeOut", duration: 0.3 }}
 						className={styles.image}
 					>
-						<Image
-							src={active.data.imagem.url}
-							objectFit="cover"
-							layout="fill"
-						/>
-						{(active.data.video720 || active.data.video360) && playing && (
+						<Image src={active.imagem.url} objectFit="cover" layout="fill" />
+						{(active.video720 || active.video360) && playing && (
 							<VideoPlayer
-								src={active.data.video720.url || active.data.video360.url}
+								src={active.video720.url || active.video360.url}
 								width="640"
 								height="360"
 								layout="fill"

@@ -7,8 +7,13 @@ import { RichText } from "prismic-reactjs";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import { useState } from "react";
+import { groupHasItems } from "utils/prismicHelpers";
 
 const FilmThumb = ({ obra }) => {
+	const [random, _] = useState(
+		groupHasItems(obra.data.imagens) &&
+			obra.data.imagens[Math.floor(Math.random() * obra.data.imagens.length)]
+	);
 	const [videoLoaded, setVideoLoaded] = useState(false);
 	const handleMouseEnter = () => setVideoLoaded(true);
 	const handleMouseLeave = () => setVideoLoaded(false);
@@ -21,9 +26,9 @@ const FilmThumb = ({ obra }) => {
 				onMouseLeave={handleMouseLeave}
 			>
 				<div className={styles.imagem}>
-					{obra.data.imagem && obra.data.imagem.url && (
+					{random.imagem && random.imagem.url && (
 						<Image
-							src={obra.data.imagem.url}
+							src={random.imagem.url}
 							layout="fill"
 							objectFit="cover"
 							sizes="(max-width: 768px) 150px,
@@ -31,16 +36,16 @@ const FilmThumb = ({ obra }) => {
     								600px"
 						/>
 					)}
-					{obra.data.imagem && !obra.data.imagem.url && (
+					{random.imagem && !random.imagem.url && (
 						<div className={styles.noPic}>
 							{RichText.asText(obra.data.titulo).charAt(0)}
 						</div>
 					)}
-					{obra.data.video360 && obra.data.video360.url && (
+					{random.video360 && random.video360.url && (
 						<div className={styles.hover}>
 							{videoLoaded && (
 								<VideoPlayer
-									src={obra.data.video360.url}
+									src={random.video360.url}
 									width="640"
 									height="360"
 									videoProps={{
