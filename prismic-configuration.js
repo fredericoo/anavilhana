@@ -18,7 +18,7 @@ module.exports = {
 			return `/membros/${doc.uid}`;
 		}
 		if (doc.type === "educacao") {
-			return `/educacao/${doc.uid}`;
+			return `/formacao/${doc.uid}`;
 		}
 		if (doc.type === "homepage") {
 			return `/`;
@@ -41,7 +41,7 @@ module.exports = {
 			return `/membros/${doc.uid}`;
 		}
 		if (doc.type === "educacao") {
-			return `/educacao/${doc.uid}`;
+			return `/formacao/${doc.uid}`;
 		}
 		if (doc.type === "homepage") {
 			return `/`;
