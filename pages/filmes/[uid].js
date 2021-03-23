@@ -84,6 +84,7 @@ export default function Post({ doc, articles, config }) {
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
 								{ label: t("common:galeria"), id: "galeria" },
 								{ label: t("common:criticas"), id: "criticas" },
+								{ label: t("common:processo"), id: "processo" },
 								{ label: t("common:presskit"), id: "presskit" },
 							]}
 						/>
@@ -166,6 +167,12 @@ export default function Post({ doc, articles, config }) {
 								{t("common:criticas")}
 							</h2>
 							<ArticlesTable articles={articles} perPage={3} />
+						</section>
+					)}
+
+					{groupHasItems(filme.processo) && (
+						<section data-hidenav id="processo" className={`${styles.section}`}>
+							<PhotoCarousel photos={filme.processo} />
 						</section>
 					)}
 
