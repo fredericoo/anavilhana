@@ -14,7 +14,6 @@ const FilmHero = ({ filmes }) => {
 	if (!filmes || !filmes.length) return null;
 	const { t } = useTranslation();
 	const [active, setActive] = useState();
-	// filmes[0].data.imagens[Math.random() * filmes[0].data.imagens.length];
 
 	const [playing, setPlaying] = useState(false);
 	const playVid = useRef();
@@ -27,6 +26,16 @@ const FilmHero = ({ filmes }) => {
 				]
 			);
 	};
+
+	useEffect(() => {
+		if (!active && groupHasItems(filmes[0].data.imagens)) {
+			setActive(
+				filmes[0].data.imagens[
+					Math.floor(Math.random() * filmes[0].data.imagens.length)
+				]
+			);
+		}
+	}, []);
 
 	useEffect(() => {
 		setPlaying(false);
