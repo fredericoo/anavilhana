@@ -1,6 +1,7 @@
 import { RichText } from "prismic-reactjs";
 import useTranslation from "next-translate/useTranslation";
 import styles from "./FilmDirectors.module.scss";
+import { groupHasItems } from "utils/prismicHelpers";
 
 const FilmDirectors = ({ technical }) => {
 	const { t } = useTranslation();
@@ -8,7 +9,9 @@ const FilmDirectors = ({ technical }) => {
 	if (!technical) return null;
 	const directors = technical
 		.filter(
-			(item) => item.tarefa.toLowerCase() === t("common:direcao").toLowerCase()
+			(item) =>
+				item.tarefa &&
+				item.tarefa.toLowerCase() === t("common:direcao").toLowerCase()
 		)
 		.map((item) => ({ nome: item.nome, membro: item.membro }));
 	if (!directors.length) return null;

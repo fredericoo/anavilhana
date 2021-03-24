@@ -20,7 +20,7 @@
 	border: none;
 	padding: 1rem;
 	align-self: center;
-	@include responsive($tablet-l) {
+	@include responsive($desktop) {
 		display: none;
 	}
 }
@@ -83,7 +83,7 @@
 	overflow: hidden;
 	top: 0;
 	left: 0;
-	@include responsive($tablet-l) {
+	@include responsive($desktop) {
 		overflow: visible;
 		position: static;
 		height: auto;
@@ -99,7 +99,7 @@
 	font-size: 1.5rem;
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
-	@include responsive($tablet-l) {
+	@include responsive($desktop) {
 		flex-grow: 1;
 		text-align: left;
 		flex-direction: row;
@@ -139,7 +139,7 @@
 		transform: translateX(0%);
 	}
 
-	@include responsive($tablet-l) {
+	@include responsive($desktop) {
 		transform: none;
 		height: initial;
 		width: initial;
@@ -155,7 +155,7 @@
 .login {
 	align-self: flex-end;
 	margin-right: 1rem;
-	@include responsive($tablet-l) {
+	@include responsive($desktop) {
 		margin-right: 0;
 		align-self: center;
 	}
@@ -168,7 +168,7 @@
 	justify-content: center;
 	flex-grow: 1;
 	padding-left: 3.25rem;
-	@include responsive($tablet-l) {
+	@include responsive($desktop) {
 		justify-content: flex-start;
 		flex-grow: 0;
 		margin-right: var(--gutter);

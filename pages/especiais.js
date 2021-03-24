@@ -42,14 +42,14 @@ export default Filmes;
 
 export async function getStaticProps({ locale }) {
 	const client = Client();
-	const doc = await client.getSingle("filmes", {
+	const doc = await client.getSingle("especiais", {
 		lang: locale,
 	});
 
 	const documents = await client.query(
 		[
 			Prismic.Predicates.at("document.type", "filme"),
-			Prismic.Predicates.at("my.filme.tipo", "Filme"),
+			Prismic.Predicates.at("my.filme.tipo", "Especial"),
 		],
 		{ fetchLinks: "membro.nome", orderings: "[my.filme.lancamento desc]" }
 	);
