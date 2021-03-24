@@ -8,6 +8,7 @@ import Placeholder from "components/Placeholder/Placeholder";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import { motion, AnimatePresence } from "framer-motion";
+import { groupHasItems } from "utils/prismicHelpers";
 
 const Sinopse = ({ filme }) => {
 	if (!filme.sinopse) return null;
