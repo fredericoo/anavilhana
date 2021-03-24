@@ -11,6 +11,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Sinopse = ({ filme }) => {
 	if (!filme.sinopse) return null;
+	const [random, _] = useState(
+		groupHasItems(filme.imagens) &&
+			filme.imagens[Math.floor(Math.random() * filme.imagens.length)]
+	);
 	const { t } = useTranslation();
 	const [playing, setPlaying] = useState(false);
 	const videoRef = useRef();
@@ -33,10 +37,10 @@ const Sinopse = ({ filme }) => {
 		<Grid className={styles.grid}>
 			<Grid.Col sm="screen-start / screen-end" rowSm="1/-1" zIndex="1">
 				<div className={styles.cover}>
-					{filme.imagem.url && (
-						<Placeholder src={filme.imagem.url} layout="fill" />
+					{random.imagem?.url && (
+						<Placeholder src={random.imagem.url} layout="fill" />
 					)}
-					{(filme.video720?.url || filme.video360?.url) && (
+					{(random.video720?.url || random.video360?.url) && (
 						<AnimatePresence>
 							{playing && (
 								<motion.div
@@ -46,7 +50,7 @@ const Sinopse = ({ filme }) => {
 									exit={{ opacity: 0, scale: 1 }}
 								>
 									<VideoPlayer
-										src={filme.video720.url || filme.video360.url}
+										src={random.video720.url || random.video360.url}
 										width="640"
 										height="360"
 										ref={videoRef}
