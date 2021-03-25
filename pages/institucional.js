@@ -22,7 +22,9 @@ const Filmes = ({ filmes, doc, config }) => {
 								pageTitle={RichText.asText(filmesPage.titulo)}
 								pageDesc={RichText.asText(filmesPage.corpo)}
 							/>
-							<h1 className={`h-1`}>{RichText.asText(filmesPage.titulo)}</h1>
+							<h1 className={`h-1 visually-hidden`}>
+								{RichText.asText(filmesPage.titulo)}
+							</h1>
 						</PageHeader>
 					)}
 					<div className={styles.films}>

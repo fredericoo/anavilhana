@@ -23,7 +23,7 @@ const Educacao = ({ doc, docs, config }) => {
 								pageTitle={RichText.asText(doc.data.titulo)}
 								pageDesc={RichText.asText(doc.data.texto)}
 							/>
-							<h1 className={`h-1`}>
+							<h1 className={`h-1 visually-hidden`}>
 								<Text asText content={doc.data.titulo} />
 							</h1>
 						</PageHeader>

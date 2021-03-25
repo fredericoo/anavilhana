@@ -112,6 +112,17 @@
 
 		&.active {
 			opacity: 1;
+			position: relative;
+			&:before {
+				position: absolute;
+				content: "";
+				display: block;
+				height: 1px;
+				background: currentColor;
+				bottom: 0px;
+				left: 1rem;
+				width: calc(100% - 2rem);
+			}
 		}
 		@include on-event {
 			opacity: 1;

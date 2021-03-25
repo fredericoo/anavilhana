@@ -20,7 +20,9 @@ const Imprensa = ({ articles, doc, config }) => {
 								pageTitle={RichText.asText(imprensa.titulo)}
 								pageDesc={RichText.asText(imprensa.corpo)}
 							/>
-							<h1 className={`h-1`}>{RichText.asText(imprensa.titulo)}</h1>
+							<h1 className={`h-1 visually-hidden`}>
+								{RichText.asText(imprensa.titulo)}
+							</h1>
 						</PageHeader>
 					</Grid.Col>
 				)}
