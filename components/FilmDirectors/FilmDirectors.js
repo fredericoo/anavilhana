@@ -3,21 +3,21 @@ import useTranslation from "next-translate/useTranslation";
 import styles from "./FilmDirectors.module.scss";
 import { groupHasItems } from "utils/prismicHelpers";
 
-const FilmDirectors = ({ technical }) => {
+const FilmDirectors = ({ technical, special = false }) => {
 	const { t } = useTranslation();
 
 	if (!technical) return null;
+	const position = special ? t("common:instituicao") : t("common:direcao");
 	const directors = technical
 		.filter(
 			(item) =>
-				item.tarefa &&
-				item.tarefa.toLowerCase() === t("common:direcao").toLowerCase()
+				item.tarefa && item.tarefa.toLowerCase() === position.toLowerCase()
 		)
 		.map((item) => ({ nome: item.nome, membro: item.membro }));
 	if (!directors.length) return null;
 	return (
 		<div className={styles.directedBy}>
-			<span className={styles.label}>{t("common:direcao")}</span>{" "}
+			<span className={styles.label}>{position}</span>{" "}
 			<ul className={styles.directors}>
 				{directors.map((doer, key) => {
 					return (

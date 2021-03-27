@@ -36,7 +36,7 @@ const FilmThumb = ({ obra }) => {
     								600px"
 						/>
 					)}
-					{random.imagem && !random.imagem.url && (
+					{(!random.imagem || !random.imagem.url) && (
 						<div className={styles.noPic}>
 							{RichText.asText(obra.data.titulo).charAt(0)}
 						</div>
@@ -68,7 +68,10 @@ const FilmThumb = ({ obra }) => {
 						</span>
 					)}
 				</h3>
-				<FilmDirectors technical={obra.data.ficha_tecnica} />
+				<FilmDirectors
+					technical={obra.data.ficha_tecnica}
+					special={obra.data.tipo === "Especial"}
+				/>
 			</a>
 		</Link>
 	);

@@ -15,7 +15,9 @@
 			justify-content: center;
 			font-size: 6rem;
 			opacity: 0.3;
-			color: var(--colour__bg);
+			color: var(--colour__secondary);
+			user-select: none;
+			pointer-events: none;
 		}
 	}
 	.hover {
