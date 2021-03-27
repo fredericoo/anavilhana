@@ -23,7 +23,9 @@ export const groupHasItems = (group) => {
 	return (
 		group.length > 1 ||
 		!!group.filter(
-			(item) => !!Object.values(item).filter((value) => value).length
+			(item) =>
+				!!Object.values(item).filter((value) => value != null && value.length)
+					.length
 		).length
 	);
 };
