@@ -43,11 +43,6 @@ const Navbar = ({ menu }) => {
 							))}
 					</ul>
 					<Search />
-					<div className={styles.login}>
-						{/* <Button type="secondary" href="/sala">
-							{t("common:sala")}
-						</Button> */}
-					</div>
 				</div>
 			</div>
 			<button

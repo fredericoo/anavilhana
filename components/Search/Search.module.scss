@@ -1,3 +1,5 @@
+@import "styles/abstracts/mixins";
+
 .container {
 	display: flex;
 	align-items: center;
@@ -19,10 +21,14 @@
 	margin-right: 1rem;
 
 	.input {
+		max-width: 100%;
 		border: none;
 		border-radius: 4px;
 		padding: 4px 8px;
-		background: var(--colour__secondary);
+		background: var(--colour__bg);
+		@include responsive($desktop) {
+			background: var(--colour__secondary);
+		}
 	}
 
 	.suggestions {
@@ -30,7 +36,12 @@
 		position: absolute;
 		max-height: 70vh;
 		overflow-y: scroll;
-		top: 100%;
+		border: 1px solid var(--colour__secondary);
+		bottom: 100%;
+		@include responsive($desktop) {
+			bottom: auto;
+			top: 100%;
+		}
 		left: 0;
 		background: var(--colour__bg);
 		z-index: 100;
