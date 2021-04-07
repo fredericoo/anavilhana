@@ -101,13 +101,12 @@ export default function Post({ doc, articles, config }) {
 					)}
 
 					{groupHasItems(filme.aired) && (
-						<section
-							id="exibicoes"
-							className={`${styles.section}`}
-							style={{ "--section__bg": "var(--colour__secondary)" }}
-						>
+						<section id="exibicoes" className={`${styles.section}`}>
 							<Grid>
 								<Grid.Col lg="col-4 / grid-end">
+									<h2 className={`h-2 ${styles.heading}`}>
+										{t("common:exibicoes")}
+									</h2>
 									<Table
 										rows={filme.aired}
 										columns={[
@@ -154,6 +153,13 @@ export default function Post({ doc, articles, config }) {
 
 					{groupHasItems(filme.galeria) && (
 						<section data-hidenav id="galeria" className={`${styles.section}`}>
+							<Grid>
+								<Grid.Col lg="col-4 / grid-end">
+									<h2 className={`h-2 ${styles.heading}`}>
+										{t("common:galeria")}
+									</h2>
+								</Grid.Col>
+							</Grid>
 							<PhotoCarousel photos={filme.galeria} />
 						</section>
 					)}
@@ -172,6 +178,14 @@ export default function Post({ doc, articles, config }) {
 
 					{groupHasItems(filme.processo) && (
 						<section data-hidenav id="processo" className={`${styles.section}`}>
+							<Grid>
+								<Grid.Col lg="col-4 / grid-end">
+									<h2 className={`h-2 ${styles.heading}`}>
+										{t("common:processo")}
+									</h2>
+								</Grid.Col>
+							</Grid>
+
 							<PhotoCarousel photos={filme.processo} />
 						</section>
 					)}

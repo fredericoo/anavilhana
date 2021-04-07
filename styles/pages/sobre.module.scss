@@ -18,7 +18,7 @@
 		grid-column: grid-start / grid-end;
 		@include responsive($tablet-p) {
 			grid-column: grid-start / span 5;
-			padding-top: 30vh;
+			padding-top: 1rem;
 			order: 1;
 		}
 	}

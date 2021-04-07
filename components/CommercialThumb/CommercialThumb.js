@@ -16,9 +16,9 @@ const CommercialThumb = ({ obra }) => {
 	return (
 		<Columns sm="1" md="2" className={styles.obra}>
 			<div className={styles.imagem}>
-				{obra.data.imagem && obra.data.imagem.url && (
+				{obra.data.img && obra.data.img.url && (
 					<Image
-						src={obra.data.imagem.url}
+						src={obra.data.img.url}
 						layout="fill"
 						objectFit="cover"
 						sizes="(max-width: 768px) 150px,
@@ -26,7 +26,7 @@ const CommercialThumb = ({ obra }) => {
     								600px"
 					/>
 				)}
-				{!obra.data.imagem?.url && (
+				{!obra.data.img?.url && (
 					<div className={styles.noPic}>
 						{RichText.asText(obra.data.titulo).charAt(0)}
 					</div>
@@ -45,7 +45,7 @@ const CommercialThumb = ({ obra }) => {
 				<div className={`body s-sm ${styles.sinopse}`}>
 					<Text content={obra.data.sinopse} />
 				</div>
-				<FilmDirectors technical={obra.data.ficha_tecnica} />
+				<Text content={obra.data.cliente} />
 				{groupHasItems(obra.data.downloads) &&
 					obra.data.downloads[0].download_link.url && (
 						<Columns sm="1" md="2">

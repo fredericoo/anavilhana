@@ -39,7 +39,7 @@ const Sinopse = ({ filme }) => {
 			<Grid.Col sm="screen-start / screen-end" rowSm="1/-1" zIndex="1">
 				<div className={styles.cover}>
 					{random.imagem?.url && (
-						<Placeholder src={random.imagem.url} layout="fill" />
+						<Placeholder src={random.imagem.url} layout="fill" quality={100} />
 					)}
 					{(random.video720?.url || random.video360?.url) && (
 						<AnimatePresence>
