@@ -84,6 +84,10 @@ const Sinopse = ({ filme }) => {
 						</span>
 					</h1>
 					<FilmDirectors technical={filme.ficha_tecnica} />
+					<div className={styles.adicional}>
+						<Text content={filme.formato} />{" "}
+						{filme.duracao && <Text content={filme.duracao + "′"} />}
+					</div>
 					<h2 className={`visually-hidden`}>{t("common:sinopse")}</h2>
 					<div className={`${styles.text} body`}>
 						<Text content={filme.sinopse} />

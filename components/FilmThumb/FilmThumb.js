@@ -8,6 +8,7 @@ import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import { useState } from "react";
 import { groupHasItems } from "utils/prismicHelpers";
+import Placeholder from "components/Placeholder/Placeholder";
 
 const FilmThumb = ({ obra }) => {
 	const [random, _] = useState(
@@ -27,13 +28,10 @@ const FilmThumb = ({ obra }) => {
 			>
 				<div className={styles.imagem}>
 					{random.imagem && random.imagem.url && (
-						<Image
+						<Placeholder
 							src={random.imagem.url}
 							layout="fill"
 							objectFit="cover"
-							sizes="(max-width: 768px) 150px,
-    								(max-width: 1920px) 300px,
-    								600px"
 						/>
 					)}
 					{(!random.imagem || !random.imagem.url) && (
@@ -45,10 +43,12 @@ const FilmThumb = ({ obra }) => {
 						<div className={styles.hover}>
 							{videoLoaded && (
 								<VideoPlayer
+									layout="fill"
 									src={random.video360.url}
-									width="640"
-									height="360"
+									width="1920"
+									height="1080"
 									videoProps={{
+										playsInline: true,
 										autoPlay: true,
 										muted: true,
 										loop: true,

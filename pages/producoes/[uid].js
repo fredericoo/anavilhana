@@ -19,9 +19,7 @@ import Table from "components/Table/Table";
 import DownloadCard from "components/DownloadCard/DownloadCard";
 import Grid from "components/Grid/Grid";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
-import Link from "next/link";
-
-import { hrefResolver } from "prismic-configuration";
+import Text from "components/Text/Text";
 
 export default function Post({ doc, articles, config }) {
 	const { t } = useTranslation();
@@ -79,6 +77,7 @@ export default function Post({ doc, articles, config }) {
 					<nav className={styles.nav}>
 						<ScrollNav
 							items={[
+								{ label: RichText.asText(filme.extra_titulo), id: "extra" },
 								{ label: t("common:premiacoes"), id: "premiacoes" },
 								{ label: t("common:exibicoes"), id: "exibicoes" },
 								{ label: t("common:fichaTecnica"), id: "fichaTecnica" },
@@ -90,13 +89,28 @@ export default function Post({ doc, articles, config }) {
 						/>
 					</nav>
 
+					{!!filme.extra_texto.length && (
+						<section id="extra" className={styles.section}>
+							<Grid>
+								<Grid.Col lg="col-4 / grid-end">
+									{filme.extra_titulo && (
+										<h2 className={`h-2 ${styles.heading}`}>
+											{RichText.asText(filme.extra_titulo)}
+										</h2>
+									)}
+									<Text content={filme.extra_texto} />
+								</Grid.Col>
+							</Grid>
+						</section>
+					)}
+
 					{groupHasItems(filme.premiacoes) && (
 						<section
 							id="premiacoes"
 							className={`${styles.section}`}
 							style={{ "--section__bg": "var(--colour__secondary)" }}
 						>
-							<Prizes prizes={filme.premiacoes} perPage={3} />
+							<Prizes prizes={filme.premiacoes} display={3} />
 						</section>
 					)}
 
@@ -132,7 +146,7 @@ export default function Post({ doc, articles, config }) {
 												size: 9,
 											},
 										]}
-										perPage={3}
+										display={3}
 									/>
 								</Grid.Col>
 							</Grid>
@@ -172,7 +186,7 @@ export default function Post({ doc, articles, config }) {
 							<h2 className={`h-2 ${styles.heading}`}>
 								{t("common:criticas")}
 							</h2>
-							<ArticlesTable articles={articles} perPage={3} />
+							<ArticlesTable articles={articles} display={3} />
 						</section>
 					)}
 

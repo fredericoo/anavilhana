@@ -33,3 +33,18 @@
 		margin-bottom: 1rem;
 	}
 }
+
+.link {
+	border-bottom: 1px solid;
+	&:after {
+		content: " ↗";
+	}
+	@include on-event {
+		text-decoration: none;
+		color: var(--colour__accent);
+	}
+}
+
+.downloads {
+	margin-top: 2rem;
+}

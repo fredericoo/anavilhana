@@ -13,6 +13,8 @@ import { hrefResolver } from "prismic-configuration";
 import Layout from "components/Layout/Layout";
 import Meta from "components/Meta/Meta";
 import Grid from "components/Grid/Grid";
+import Columns from "components/Columns/Columns";
+import DownloadCard from "components/DownloadCard/DownloadCard";
 import Text from "components/Text/Text";
 import Placeholder from "components/Placeholder/Placeholder";
 import Flow from "components/Flow/Flow";
@@ -137,13 +139,34 @@ export default function Educacao({ doc, config }) {
 								</div>
 							)}
 							{curso.texto && (
-								<div>
+								<section>
 									<h2 className="smcp">{t("common:conteudo")}</h2>
 									<div className="body">
 										<Text content={curso.texto} />
 									</div>
-								</div>
+								</section>
 							)}
+							{groupHasItems(curso.downloads) &&
+								curso.downloads[0].download_link.url && (
+									<section>
+										<h2 className="smcp visually-hidden">
+											{t("common:links")}
+										</h2>
+
+										<Columns sm="1" md="2">
+											{curso.downloads.map((download, key) => (
+												<DownloadCard
+													key={key}
+													title={download.download_titulo}
+													subtitle={
+														download.download_privado ? t("common:privado") : ""
+													}
+													link={download.download_link}
+												/>
+											))}
+										</Columns>
+									</section>
+								)}
 						</Flow>
 					</Grid.Col>
 				</Grid>

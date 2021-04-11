@@ -1,9 +1,9 @@
 .obra {
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 	.imagem {
 		transition: filter 0.6s ease-out;
 		height: 0;
-		padding-bottom: 56.25%;
+		padding-bottom: 54.04%;
 		position: relative;
 		background: var(--colour__main);
 		.noPic {
@@ -31,4 +31,13 @@
 		font-size: 0.7em;
 		vertical-align: top;
 	}
+}
+
+.innerContent {
+	display: flex;
+	flex-direction: column;
+}
+
+.footer {
+	margin-top: auto;
 }

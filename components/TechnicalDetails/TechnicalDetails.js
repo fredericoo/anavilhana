@@ -15,7 +15,11 @@ const TechnicalDetails = ({ details }) => {
 			doers: details
 				.filter((item) => item.tarefa === task)
 				.map((item) => {
-					return { nome: item.nome, membro: item.membro };
+					return {
+						nome: item.nome,
+						membro: item.membro,
+						externo: item.externo,
+					};
 				}),
 		};
 	});
@@ -38,25 +42,37 @@ const Task = ({ task, doers }) => {
 				{doers.map((doer, key) => {
 					return (
 						<li key={key}>
-							{doer.membro && doer.membro.uid ? (
-								<Link href={hrefResolver(doer.membro)}>
-									<a>
-										{doer.nome
-											? doer.nome
-											: doer.membro.data
-											? RichText.asText(doer.membro.data.nome)
-											: doer.membro.uid}
-									</a>
-								</Link>
-							) : (
-								doer.nome
-							)}
+							<MemberName doer={doer} />
 						</li>
 					);
 				})}
 			</ul>
 		</div>
 	);
+};
+
+const MemberName = ({ doer }) => {
+	if (doer.membro.uid) {
+		return (
+			<Link href={hrefResolver(doer.membro)}>
+				<a>
+					{doer.nome
+						? doer.nome
+						: doer.membro.data
+						? RichText.asText(doer.membro.data.nome)
+						: doer.membro.uid}
+				</a>
+			</Link>
+		);
+	} else if (doer.externo.url) {
+		return (
+			<Link href={hrefResolver(doer.externo)}>
+				<a target="_blank">{doer.nome}</a>
+			</Link>
+		);
+	} else {
+		return doer.nome;
+	}
 };
 
 export default TechnicalDetails;

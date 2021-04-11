@@ -3,7 +3,7 @@
 	.imagem {
 		transition: filter 0.6s ease-out;
 		height: 0;
-		padding-bottom: 56.25%;
+		padding-bottom: 54.04%;
 		position: relative;
 		background: var(--colour__main);
 		.noPic {
@@ -26,6 +26,11 @@
 	&:hover {
 		.hover {
 			visibility: visible;
+			& > * {
+				height: 100%;
+				width: 100%;
+				position: absolute;
+			}
 		}
 	}
 	.titulo {

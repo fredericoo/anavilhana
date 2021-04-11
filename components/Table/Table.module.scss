@@ -97,6 +97,13 @@
 	justify-content: center;
 }
 
+.showing {
+	user-select: none;
+	opacity: 0.5;
+	margin-top: 1rem;
+	text-align: center;
+}
+
 .nada {
 	text-align: center;
 	padding: 1rem;

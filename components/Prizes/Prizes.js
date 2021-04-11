@@ -5,12 +5,12 @@ import Button from "components/Button/Button";
 import Columns from "components/Columns/Columns";
 import { useState } from "react";
 
-const Prizes = ({ prizes, perPage = 6 }) => {
-	const [show, setShow] = useState(perPage);
+const Prizes = ({ prizes, display = 6, perPage = 6 }) => {
+	const [show, setShow] = useState(display);
 	if (!prizes || !prizes[0].premio_titulo) return null;
 	const { t } = useTranslation();
 	const showMore = () => {
-		setShow(prizes.length);
+		setShow(Math.min(show + perPage, prizes.length));
 	};
 
 	return (
@@ -26,10 +26,13 @@ const Prizes = ({ prizes, perPage = 6 }) => {
 					/>
 				))}
 			</Columns>
+			<div className={`s-sm ${styles.showing}`}>
+				{t("common:showing")} {show} {t("common:of")} {prizes.length}
+			</div>
 			{show < prizes.length && (
 				<div className={styles.showMore}>
 					<Button type="link" onClick={showMore}>
-						{t("common:mais")} ({prizes.length})
+						{t("common:proximaPagina")}
 					</Button>
 				</div>
 			)}

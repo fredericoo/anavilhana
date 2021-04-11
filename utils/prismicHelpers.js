@@ -21,7 +21,7 @@ export const customLink = (type, element, content) => (
 export const groupHasItems = (group) => {
 	if (!group || !Array.isArray(group) || !group.length) return false;
 	return (
-		group.length > 0 ||
+		group.length > 1 ||
 		!!group.filter(
 			(item) =>
 				!!Object.values(item).filter((value) => value != null && value.length)

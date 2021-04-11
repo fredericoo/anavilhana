@@ -80,7 +80,7 @@ export async function getStaticProps({ params, locale }) {
 			Prismic.Predicates.at("document.type", "filme"),
 			Prismic.Predicates.at("my.filme.ficha_tecnica.membro", doc.id),
 		],
-		{ fetchLinks: "membro.nome" }
+		{ fetchLinks: "membro.nome", orderings: "[my.filme.lancamento desc]" }
 	);
 
 	const config = await client.getSingle("config", { lang: locale });

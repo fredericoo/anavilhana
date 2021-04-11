@@ -1,20 +1,21 @@
 @import "styles/abstracts/mixins";
 
 .section {
-	min-height: 90vh;
-	margin: 4rem 0;
+	min-height: calc(100vh - 50px);
+	grid-template-rows: min-content 1fr;
 	header {
-		margin-bottom: 2rem;
+		padding: 4rem 0;
 		grid-column: grid-start / grid-end;
 		@include responsive($tablet-p) {
-			grid-column: span 6;
+			grid-column: col-4 / col-11;
 		}
 	}
 
 	.ways {
+		padding: 2rem 0;
 		grid-column: grid-start / grid-end;
 		@include responsive($tablet-p) {
-			grid-column: span 6;
+			grid-column: col-4 / col-11;
 		}
 		li {
 			margin-bottom: 1rem;

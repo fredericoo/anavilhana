@@ -5,6 +5,7 @@ import { hrefResolver } from "prismic-configuration";
 
 import Placeholder from "components/Placeholder/Placeholder";
 import Columns from "components/Columns/Columns";
+import DownloadCard from "components/DownloadCard/DownloadCard";
 import FilmThumb from "components/FilmThumb/FilmThumb";
 
 import useTranslation from "next-translate/useTranslation";
@@ -15,6 +16,7 @@ import { groupHasItems } from "utils/prismicHelpers";
 import Button from "components/Button/Button";
 import Table from "components/Table/Table";
 import Grid from "components/Grid/Grid";
+import Link from "next/link";
 
 const MemberDetails = ({ member, obras, artigos }) => {
 	const { t } = useTranslation();
@@ -97,8 +99,28 @@ const MemberDetails = ({ member, obras, artigos }) => {
 					<div className={`${styles.sobre} body`}>
 						<RichText render={member.sobre} />
 					</div>
+					{groupHasItems(member.downloads) && (
+						<div className={styles.downloads}>
+							<h2 className={`h-2 visually-hidden ${styles.heading}`}>
+								{t("common:downloads")}
+							</h2>
+							<Columns sm="1" md="2">
+								{member.downloads.map((download, key) => (
+									<DownloadCard
+										key={key}
+										title={download.download_titulo}
+										subtitle={
+											download.download_privado ? t("common:privado") : ""
+										}
+										link={download.download_link}
+									/>
+								))}
+							</Columns>
+						</div>
+					)}
 				</header>
 			</Grid.Col>
+
 			<Grid.Col sm="grid-start / grid-end" lg="col-4 / span 7" rowSm="4">
 				{groupHasItems(obras) && (
 					<div id="obras" className={`${styles.section}`}>
@@ -114,7 +136,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				{groupHasItems(artigos) && (
 					<div id="criticas" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:criticas")}</h2>
-						<ArticlesTable articles={artigos} perPage={2} />
+						<ArticlesTable articles={artigos} display={2} />
 					</div>
 				)}
 
@@ -134,7 +156,20 @@ const MemberDetails = ({ member, obras, artigos }) => {
 										label: t("common:obra"),
 										content: (row) => (
 											<>
-												<h3 className="h-6">{RichText.asText(row.titulo)}</h3>
+												<h3 className="h-6">
+													{row.externo?.url ? (
+														<Link
+															href={hrefResolver(row.externo)}
+															target="_blank"
+														>
+															<a className={styles.link} target="_blank">
+																{RichText.asText(row.titulo)}
+															</a>
+														</Link>
+													) : (
+														RichText.asText(row.titulo)
+													)}
+												</h3>
 												<div className="l-2">
 													<RichText render={row.texto} />
 												</div>
@@ -148,7 +183,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 										size: 4,
 									},
 								]}
-								perPage={3}
+								display={3}
 							/>
 						</ul>
 					</div>

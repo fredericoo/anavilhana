@@ -18,5 +18,17 @@
 		}
 		display: flex;
 		justify-content: center;
+		margin-top: 1rem;
 	}
+}
+
+.showing {
+	grid-column: grid-start / grid-end;
+	@include responsive($tablet-l) {
+		grid-column: col-4 / grid-end;
+	}
+	user-select: none;
+	opacity: 0.5;
+	margin-top: 1rem;
+	text-align: center;
 }

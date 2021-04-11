@@ -21,11 +21,8 @@ const ScrollNav = ({ items }) => {
 	}, []);
 
 	const handleOverlay = (entries, _) => {
-		let overlay = false;
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) overlay = true;
-		});
-		setOverlay(overlay);
+		const anyOverlay = !!entries.filter((entry) => entry.isIntersecting).length;
+		setOverlay(anyOverlay);
 	};
 
 	useEffect(() => {
@@ -58,7 +55,7 @@ const ScrollNav = ({ items }) => {
 			window.addEventListener("scroll", () => handleScroll());
 			observer = new window.IntersectionObserver(handleOverlay, {
 				root: null,
-				threshold: [0.5],
+				threshold: [0.25, 0.5, 0.75],
 			});
 			navItems
 				.filter(({ ref }) => ref.dataset.hidenav)

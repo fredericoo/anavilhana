@@ -1,12 +1,13 @@
 @import "styles/abstracts/mixins";
 
 .section {
+	user-select: none;
 	background: var(--colour__bg);
 }
 
 .slide {
 	position: relative;
-	height: 80vh;
+	height: 80vmin;
 	&:nth-child(1) {
 		grid-column: screen-start / col-7;
 		@include responsive($tablet-p) {
@@ -30,15 +31,20 @@
 	&.interactive {
 		grid-row: 1;
 		z-index: 2;
-		opacity: 0;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		opacity: 0.5;
+		transform: translateY(2rem);
 		@include responsive($tablet-p) {
-			opacity: 0.5;
+			align-items: center;
 		}
 		height: 100%;
-		& > * {
+		& > div {
+			visibility: hidden;
 			height: 100%;
 			width: 100%;
-			position: relative;
+			position: absolute;
 		}
 		@include on-event {
 			@include responsive($tablet-p) {

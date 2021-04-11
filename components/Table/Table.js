@@ -9,13 +9,20 @@ import Button from "components/Button/Button";
 
 import { uniqueOptions } from "./utils/objectUtils";
 
-const Table = ({ rows, columns, filters, searchInside, perPage = 10 }) => {
-	const [showRows, setShowRows] = useState(perPage);
+const Table = ({
+	rows,
+	columns,
+	filters,
+	searchInside,
+	display = 10,
+	perPage = 10,
+}) => {
+	const [showRows, setShowRows] = useState(display);
 	const [filteredRows, setFilteredRows] = useState(rows);
 	const [rowFilters, setFilter] = useState({});
 	const [rowSearch, setSearch] = useState("");
 
-	const showMore = () => setShowRows(showRows + perPage);
+	const showMore = () => setShowRows(Math.min(showRows + perPage, rows.length));
 
 	const handleFilter = (selFilter, current) => {
 		let newFilter = rowFilters;
@@ -190,10 +197,13 @@ const TableBody = ({ columns, rows, limit, perPage, showMore }) => {
 			{rows.slice(0, limit).map((row, key) => (
 				<TableRow key={key} row={row} columns={columns} />
 			))}
+			<div className={`s-sm ${styles.showing}`}>
+				{t("common:showing")} {limit} {t("common:of")} {rows.length}
+			</div>
 			{showMore && limit < rows.length && (
 				<div className={styles.showMore}>
 					<Button type="link" onClick={showMore}>
-						{t("common:proximaPagina")} {Math.min(perPage, rows.length - limit)}
+						{t("common:proximaPagina")}
 					</Button>
 				</div>
 			)}

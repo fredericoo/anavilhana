@@ -25,7 +25,21 @@ const PhotoCarousel = ({ photos }) => {
 				key={photos[displaySlides.previous].imagem1.url}
 				photo={photos[displaySlides.previous].imagem1}
 				onClick={() => changeSlide(displaySlides.previous)}
-			/>
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="32"
+					height="32"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="butt"
+					strokeLinejoin="arcs"
+				>
+					<path d="M19 12H6M12 5l-7 7 7 7" />
+				</svg>
+			</CarouselSlide>
 			<CarouselSlide
 				key={photos[displaySlides.current].imagem1.url}
 				photo={photos[displaySlides.current].imagem1}
@@ -34,7 +48,21 @@ const PhotoCarousel = ({ photos }) => {
 				key={photos[displaySlides.next].imagem1.url}
 				onClick={() => changeSlide(displaySlides.next)}
 				photo={photos[displaySlides.next].imagem1}
-			/>
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="32"
+					height="32"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="butt"
+					strokeLinejoin="arcs"
+				>
+					<path d="M5 12h13M12 5l7 7-7 7" />
+				</svg>
+			</CarouselSlide>
 			<div className={`${styles.slideNo}`}>
 				{" "}
 				{slideIndex + 1} / {photos.length}
@@ -43,7 +71,7 @@ const PhotoCarousel = ({ photos }) => {
 	);
 };
 
-const CarouselSlide = ({ photo, onClick }) => {
+const CarouselSlide = ({ photo, onClick, children }) => {
 	if (!photo.url) return null;
 	const photoProps = onClick
 		? { layout: "fill", objectFit: "cover" }
@@ -57,7 +85,8 @@ const CarouselSlide = ({ photo, onClick }) => {
 			className={`${styles.slide} ${onClick ? styles.interactive : ""}`}
 			onClick={onClick}
 		>
-			<Image src={photo.url} {...photoProps} alt={photo.alt} />
+			{children}
+			<Placeholder src={photo.url} {...photoProps} alt={photo.alt} />
 		</figure>
 	);
 };

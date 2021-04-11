@@ -14,12 +14,12 @@
 	.lead {
 		opacity: 0.5;
 		line-height: 1.4;
-		max-height: calc(1.4 * 1em * 3);
+		max-height: calc(1.4 * 1em * 5);
 		overflow-y: hidden;
 		text-overflow: ellipsis;
 		line-clamp: 3;
 		display: -webkit-box;
-		-webkit-line-clamp: 3;
+		-webkit-line-clamp: 5;
 		-webkit-box-orient: vertical;
 	}
 	.footer {
