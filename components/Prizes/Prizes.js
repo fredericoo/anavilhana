@@ -26,9 +26,12 @@ const Prizes = ({ prizes, display = 6, perPage = 6 }) => {
 					/>
 				))}
 			</Columns>
-			<div className={`s-sm ${styles.showing}`}>
-				{t("common:showing")} {show} {t("common:of")} {prizes.length}
-			</div>
+			{prizes.length > 1 && (
+				<div className={`s-sm ${styles.showing}`}>
+					{t("common:showing")} {Math.min(show, prizes.length)} {t("common:of")}{" "}
+					{prizes.length}
+				</div>
+			)}
 			{show < prizes.length && (
 				<div className={styles.showMore}>
 					<Button type="link" onClick={showMore}>

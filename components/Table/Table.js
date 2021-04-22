@@ -86,7 +86,6 @@ const Table = ({
 
 				{!!filteredRows.length ? (
 					<TableBody
-						perPage={perPage}
 						columns={columns}
 						rows={filteredRows}
 						limit={showRows}
@@ -190,7 +189,7 @@ const TableHeader = ({ columns }) => (
 	</Grid>
 );
 
-const TableBody = ({ columns, rows, limit, perPage, showMore }) => {
+const TableBody = ({ columns, rows, limit, showMore }) => {
 	const { t } = useTranslation();
 	return (
 		<>
@@ -198,7 +197,8 @@ const TableBody = ({ columns, rows, limit, perPage, showMore }) => {
 				<TableRow key={key} row={row} columns={columns} />
 			))}
 			<div className={`s-sm ${styles.showing}`}>
-				{t("common:showing")} {limit} {t("common:of")} {rows.length}
+				{t("common:showing")} {Math.min(limit, rows.length)} {t("common:of")}{" "}
+				{rows.length}
 			</div>
 			{showMore && limit < rows.length && (
 				<div className={styles.showMore}>
