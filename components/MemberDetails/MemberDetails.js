@@ -21,6 +21,9 @@ import Link from "next/link";
 const MemberDetails = ({ member, obras, artigos }) => {
 	const { t } = useTranslation();
 
+	const filmes = obras.filter((obra) => obra.data.tipo === "Filme");
+	const especiais = obras.filter((obra) => obra.data.tipo === "Especial");
+
 	return (
 		<Grid className={`${styles.container}`}>
 			<Grid.Col
@@ -75,6 +78,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 					items={[
 						{ label: t("common:sobre"), id: "sobre" },
 						{ label: t("common:obras"), id: "obras" },
+						{ label: t("common:especiais"), id: "especiais" },
 						{ label: t("common:criticas"), id: "criticas" },
 						{ label: t("common:montagens"), id: "montagens" },
 					]}
@@ -118,11 +122,22 @@ const MemberDetails = ({ member, obras, artigos }) => {
 			</Grid.Col>
 
 			<Grid.Col sm="grid-start / grid-end" lg="col-4 / span 7" rowSm="4">
-				{groupHasItems(obras) && (
+				{filmes && (
 					<div id="obras" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
 						<Columns sm={2} md={2}>
-							{obras.map((obra) => (
+							{filmes.map((obra) => (
+								<FilmThumb key={obra.uid} obra={obra} />
+							))}
+						</Columns>
+					</div>
+				)}
+
+				{especiais && (
+					<div id="especiais" className={`${styles.section}`}>
+						<h2 className={`h-2 ${styles.heading}`}>{t("common:especiais")}</h2>
+						<Columns sm={2} md={2}>
+							{especiais.map((obra) => (
 								<FilmThumb key={obra.uid} obra={obra} />
 							))}
 						</Columns>
