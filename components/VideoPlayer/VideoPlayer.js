@@ -31,7 +31,7 @@ const VideoPlayer = forwardRef(
 				</div>
 			);
 		}
-		return <div>ERRO</div>;
+		return null;
 	}
 );
 

@@ -9,11 +9,15 @@
 		object-fit: cover;
 	}
 
+	&.fill {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+	}
+
 	&.responsive {
 		height: 0px;
 		padding-bottom: calc(100% / var(--aspectRatio));
 		position: relative;
-	}
-	&.fill {
 	}
 }

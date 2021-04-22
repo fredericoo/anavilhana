@@ -13,7 +13,9 @@ const Placeholder = ({ style, ...props }) => {
 	return (
 		<div
 			style={style}
-			className={`${styles.placeholder} ${loaded ? styles.loaded : ""}`}
+			className={`${styles.placeholder} ${loaded ? styles.loaded : ""} ${
+				props.layout === "fill" ? styles.fill : ""
+			}`}
 		>
 			<Image
 				objectFit="cover"

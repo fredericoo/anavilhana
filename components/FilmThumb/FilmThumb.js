@@ -39,24 +39,22 @@ const FilmThumb = ({ obra }) => {
 							{RichText.asText(obra.data.titulo).charAt(0)}
 						</div>
 					)}
-					{random.video360 && random.video360.url && (
-						<div className={styles.hover}>
-							{videoLoaded && (
-								<VideoPlayer
-									layout="fill"
-									src={random.video360.url}
-									width="1920"
-									height="1080"
-									videoProps={{
-										playsInline: true,
-										autoPlay: true,
-										muted: true,
-										loop: true,
-										controls: false,
-									}}
-								/>
-							)}
-						</div>
+					{random.video360?.url && videoLoaded && (
+						<VideoPlayer
+							className={styles.hover}
+							layout="fill"
+							src={random.video360.url}
+							width="1920"
+							height="1080"
+							videoProps={{
+								playsInline: true,
+								autoPlay: true,
+								muted: true,
+								loop: true,
+								controls: false,
+							}}
+						/>
+					)}
 					)}
 				</div>
 
