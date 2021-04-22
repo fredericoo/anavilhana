@@ -15,6 +15,7 @@ import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 import useSWR from "swr";
 import { fetchAllOfType } from "utils/fetcher";
+import { hrefResolver } from "prismic-configuration";
 
 const Calendar = () => {
 	const { data, error } = useSWR("filme", fetchAllOfType);
@@ -94,7 +95,7 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 				{!!eventsToday.length ? (
 					eventsToday.map((event) => (
 						<div className={styles.event}>
-							<Link href={`/filme/${event.film.uid}`}>
+							<Link href={hrefResolver(event.film)}>
 								<a>
 									<h3 className={`${styles.filmName} h-4`}>
 										{RichText.asText(event.film.data.titulo)}
