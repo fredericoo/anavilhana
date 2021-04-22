@@ -89,11 +89,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 				<header id="sobre">
 					<h1 className={`h-1 ${styles.heading}`}>
 						{RichText.asText(member.nome)}
-						{member.posicao && (
-							<>
-								, <div className={`h-2`}>{member.posicao}</div>
-							</>
-						)}
+						{member.posicao && <div className={`h-2`}>{member.posicao}</div>}
 					</h1>
 					<h2 className="visually-hidden">{t("common:sobre")}</h2>
 					<div className={`${styles.sobre} body`}>
