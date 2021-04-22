@@ -11,9 +11,11 @@ import { groupHasItems } from "utils/prismicHelpers";
 import Placeholder from "components/Placeholder/Placeholder";
 
 const FilmThumb = ({ obra }) => {
+	const validImages = obra.data.imagens.filter((img) => img.imagem.url);
 	const [random, _] = useState(
-		groupHasItems(obra.data.imagens) &&
-			obra.data.imagens[Math.floor(Math.random() * obra.data.imagens.length)]
+		validImages.length
+			? obra.data.imagens[Math.floor(Math.random() * validImages.length)]
+			: validImages
 	);
 	const [videoLoaded, setVideoLoaded] = useState(false);
 	const handleMouseEnter = () => setVideoLoaded(true);
