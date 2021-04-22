@@ -8,6 +8,7 @@ import Columns from "components/Columns/Columns";
 import Placeholder from "components/Placeholder/Placeholder";
 
 const CourseThumb = ({ course }) => {
+	if (!course.data) return null;
 	return (
 		<Link href={hrefResolver(course)}>
 			<a className={styles.module}>
@@ -22,6 +23,13 @@ const CourseThumb = ({ course }) => {
 				<div className={`${styles.type} smcp`}>{course.data.tipo}</div>
 				<h3 className={`h-3 ${styles.title}`}>
 					<Text asText content={course.data.titulo} />
+					{!!course.data.ministrado.length && (
+						<div>
+							<small>
+								com {course.data.ministrado.map((item) => item.nome).join(", ")}
+							</small>
+						</div>
+					)}
 				</h3>
 				{course.data.resumo && (
 					<div className={`${styles.lead} s-sm`}>
