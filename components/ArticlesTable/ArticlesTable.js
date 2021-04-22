@@ -53,15 +53,13 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 			label: t("common:data"),
 			size: 2,
 			content: (article) =>
-				!!article.data.data
-					? moment(article.data.data)?.format("MM/YYYY")
-					: null,
+				!!article.data.data ? moment(article.data.data)?.format("YYYY") : null,
 		},
 	];
 
 	const searchInside = [
 		(article) =>
-			article.data.data ? moment(article.data.data).format("MM/YYYY") : "",
+			article.data.data ? moment(article.data.data).format("YYYY") : "",
 		(article) => article.data.fonte || "",
 		(article) => RichText.asText(article.data.titulo) || "",
 	];
@@ -70,7 +68,7 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 		{
 			label: t("common:data"),
 			content: (article) =>
-				article.data.data ? moment(article.data.data).format("MM/YYYY") : false,
+				article.data.data ? moment(article.data.data).format("YYYY") : false,
 		},
 		{
 			label: t("common:tipo"),
