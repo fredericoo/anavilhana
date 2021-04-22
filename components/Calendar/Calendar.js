@@ -105,8 +105,8 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 							<div className={`${styles.dateTime} smcp`}>
 								{event.film.data.allday
 									? event.fullDate.format("D/MM")
-									: event.fullDate.format("D/MM, HH:mm")}{" "}
-								— {RichText.asText(event.local)}
+									: event.fullDate.format("D/MM, HH:mm")}
+								{<RichText render={event.local} />}
 							</div>
 							<div className={`s-sm ${styles.synopsis}`}>
 								<RichText render={event.film.data.sinopse} />
