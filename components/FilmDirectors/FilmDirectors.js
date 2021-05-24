@@ -1,7 +1,6 @@
 import { RichText } from "prismic-reactjs";
 import useTranslation from "next-translate/useTranslation";
 import styles from "./FilmDirectors.module.scss";
-import { groupHasItems } from "utils/prismicHelpers";
 
 const FilmDirectors = ({ technical, special = false }) => {
 	const { t } = useTranslation();

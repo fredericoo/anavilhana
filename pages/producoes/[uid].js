@@ -20,6 +20,7 @@ import DownloadCard from "components/DownloadCard/DownloadCard";
 import Grid from "components/Grid/Grid";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 import Text from "components/Text/Text";
+import Link from "next/link";
 
 export default function Post({ doc, articles, config }) {
 	const { t } = useTranslation();
@@ -137,7 +138,7 @@ export default function Post({ doc, articles, config }) {
 															<>
 																{!!row.aired_link?.url ? (
 																	<Link href={row.aired_link.url}>
-																		<a>
+																		<a className={styles.link} target="_blank">
 																			<RichText
 																				render={row.aired_titulo}
 																				asText

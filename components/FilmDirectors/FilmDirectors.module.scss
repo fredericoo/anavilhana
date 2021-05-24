@@ -17,6 +17,11 @@
 .person {
 	letter-spacing: 0.02em;
 	display: inline;
+	&:not(:first-child):not(:nth-last-child(2)):not(:last-child) {
+		&:after {
+			content: ", ";
+		}
+	}
 	&:not(:first-child):last-child {
 		&:before {
 			content: " & ";

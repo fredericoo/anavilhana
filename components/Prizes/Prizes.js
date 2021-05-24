@@ -23,6 +23,7 @@ const Prizes = ({ prizes, display = 6, perPage = 6 }) => {
 						title={premio.premio_titulo}
 						year={premio.premio_ano}
 						info={premio.premio_info}
+						link={premio.premio_link}
 					/>
 				))}
 			</Columns>
