@@ -4,7 +4,7 @@ import Text from "components/Text/Text";
 import Grid from "components/Grid/Grid";
 import { useState, useRef, useEffect } from "react";
 import moment from "moment";
-import Placeholder from "components/Placeholder/Placeholder";
+import Image from "next/image";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import { motion, AnimatePresence } from "framer-motion";
@@ -39,7 +39,12 @@ const Sinopse = ({ filme }) => {
 			<Grid.Col sm="screen-start / screen-end" rowSm="1/-1" zIndex="1">
 				<div className={styles.cover}>
 					{random.imagem?.url && (
-						<Placeholder src={random.imagem.url} layout="fill" quality={100} />
+						<Image
+							src={random.imagem.url}
+							layout="fill"
+							quality={100}
+							objectFit="cover"
+						/>
 					)}
 					{(random.video720?.url || random.video360?.url) && (
 						<AnimatePresence>
