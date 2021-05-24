@@ -89,7 +89,7 @@ export default function Post({ doc, articles, config }) {
 						/>
 					</nav>
 
-					{!!filme.extra_texto.length && (
+					{!!filme.extra_texto?.length && !!filme.extra_texto[0]?.text && (
 						<section id="extra" className={styles.section}>
 							<Grid>
 								<Grid.Col lg="col-4 / grid-end">
@@ -134,7 +134,20 @@ export default function Post({ doc, articles, config }) {
 												content: (row) => (
 													<>
 														{row.aired_titulo && (
-															<RichText render={row.aired_titulo} />
+															<>
+																{!!row.aired_link?.url ? (
+																	<Link href={row.aired_link.url}>
+																		<a>
+																			<RichText
+																				render={row.aired_titulo}
+																				asText
+																			/>
+																		</a>
+																	</Link>
+																) : (
+																	<RichText render={row.aired_titulo} />
+																)}
+															</>
 														)}
 														{row.aired_sobre && (
 															<div className="l-2">

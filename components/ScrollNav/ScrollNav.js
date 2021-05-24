@@ -80,19 +80,21 @@ const ScrollNav = ({ items }) => {
 			ref={navRef}
 			className={`${styles.list} ${overlay ? styles.hidden : ""}`}
 		>
-			{navItems.map(({ ref, id, label }, key) => (
-				<li data-scroll={id} key={key}>
-					<button
-						onClick={() => scrollTo(ref)}
-						type="button"
-						className={`smcp ${styles.item} ${
-							id === activeNav ? styles.active : ""
-						}`}
-					>
-						{label || "missing label"}
-					</button>
-				</li>
-			))}
+			{navItems
+				.filter(({ label }) => label)
+				.map(({ ref, id, label }, key) => (
+					<li data-scroll={id} key={key}>
+						<button
+							onClick={() => scrollTo(ref)}
+							type="button"
+							className={`smcp ${styles.item} ${
+								id === activeNav ? styles.active : ""
+							}`}
+						>
+							{label}
+						</button>
+					</li>
+				))}
 		</ul>
 	);
 };
