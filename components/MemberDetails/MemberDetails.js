@@ -122,7 +122,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 			</Grid.Col>
 
 			<Grid.Col sm="grid-start / grid-end" lg="col-4 / span 7" rowSm="4">
-				{filmes && (
+				{!!filmes.length && (
 					<div id="obras" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:obras")}</h2>
 						<Columns sm={2} md={2}>
@@ -133,7 +133,7 @@ const MemberDetails = ({ member, obras, artigos }) => {
 					</div>
 				)}
 
-				{especiais && (
+				{!!especiais.length && (
 					<div id="especiais" className={`${styles.section}`}>
 						<h2 className={`h-2 ${styles.heading}`}>{t("common:especiais")}</h2>
 						<Columns sm={2} md={2}>
