@@ -7,6 +7,7 @@ import Meta from "components/Meta/Meta";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 import Grid from "components/Grid/Grid";
 import PageHeader from "components/PageHeader/PageHeader";
+import { queryRepeatableDocuments } from "utils/queries";
 
 const Imprensa = ({ articles, doc, config }) => {
 	const imprensa = doc ? doc.data : null;
@@ -40,12 +41,16 @@ export async function getStaticProps({ locale }) {
 		lang: locale,
 	});
 
-	const documents = await client.query(
-		Prismic.Predicates.at("document.type", "artigo"),
-		{
-			fetchLinks: ["filme.titulo"],
-		}
+	const documents = await queryRepeatableDocuments(
+		(doc) => doc.type === "artigo"
 	);
+	// 	client.query(
+	// 	Prismic.Predicates.at("document.type", "artigo"),
+	// 	{
+	// 		pageSize: 100,
+	// 		fetchLinks: ["filme.titulo"],
+	// 	}
+	// );
 
 	const config = await client.getSingle("config", { lang: locale });
 
@@ -53,7 +58,7 @@ export async function getStaticProps({ locale }) {
 		return {
 			revalidate: 60,
 			props: {
-				articles: documents.results || {},
+				articles: documents || {},
 				config: config || {},
 				doc: doc || {},
 			},

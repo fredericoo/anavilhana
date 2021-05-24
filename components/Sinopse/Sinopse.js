@@ -8,15 +8,15 @@ import Image from "next/image";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import { motion, AnimatePresence } from "framer-motion";
-import { groupHasItems } from "utils/prismicHelpers";
 
 const Sinopse = ({ filme }) => {
 	if (!filme.sinopse) return null;
 	const [random, _] = useState(
-		groupHasItems(filme.imagens) &&
-			filme.imagens[Math.floor(Math.random() * filme.imagens.length)]
+		filme.imagens[Math.floor(Math.random() * filme.imagens.length)]
 	);
+	const [loadingVideo, setLoadingVideo] = useState(false);
 	const { t } = useTranslation();
+	const hasVideo = random.video720.url || random.video360.url;
 	const [playing, setPlaying] = useState(false);
 	const videoRef = useRef();
 	const playVid = useRef();
@@ -24,6 +24,7 @@ const Sinopse = ({ filme }) => {
 	useEffect(() => {
 		setPlaying(false);
 		clearTimeout(playVid.current);
+		hasVideo && setLoadingVideo(true);
 		playVid.current = setTimeout(() => {
 			setPlaying(true);
 		}, 1200);
@@ -40,6 +41,7 @@ const Sinopse = ({ filme }) => {
 				<div className={styles.cover}>
 					{random.imagem?.url && (
 						<Image
+							className={`${loadingVideo ? styles.loadingVideo : ""}`}
 							src={random.imagem.url}
 							layout="fill"
 							quality={100}
@@ -51,9 +53,10 @@ const Sinopse = ({ filme }) => {
 							{playing && (
 								<motion.div
 									className={styles.video}
-									initial={{ opacity: 0, scale: 1.5 }}
-									animate={{ opacity: 1, scale: 1.2 }}
-									exit={{ opacity: 0, scale: 1 }}
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.5 }}
 								>
 									<VideoPlayer
 										src={random.video720.url || random.video360.url}

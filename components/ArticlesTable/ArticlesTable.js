@@ -22,7 +22,7 @@ const ArticlesTable = ({ articles, withFilters, perPage = 10 }) => {
 			size: 5,
 			content: (article) => (
 				<Link href={hrefResolver(article.data.link)}>
-					<a className={styles.link}>
+					<a className={styles.link} target="_blank">
 						<h2 className={styles.title}>
 							{article.data.titulo && RichText.asText(article.data.titulo)}{" "}
 							<div className={`${styles.format} smcp`}>

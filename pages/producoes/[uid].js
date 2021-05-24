@@ -265,9 +265,10 @@ export default function Post({ doc, articles, config }) {
 
 export async function getStaticPaths() {
 	const client = Client();
-	const documents = await client.query([
-		Prismic.Predicates.at("document.type", "filme"),
-	]);
+	const documents = await client.query(
+		[Prismic.Predicates.at("document.type", "filme")],
+		{ pageSize: 100 }
+	);
 
 	return {
 		paths: documents.results.map((doc) => {
@@ -286,10 +287,13 @@ export async function getStaticProps({ params, locale }) {
 		lang: locale,
 		fetchLinks: ["membro.nome"],
 	});
-	const articles = await client.query([
-		Prismic.Predicates.at("document.type", "artigo"),
-		Prismic.Predicates.at("my.artigo.linked", doc.id),
-	]);
+	const articles = await client.query(
+		[
+			Prismic.Predicates.at("document.type", "artigo"),
+			Prismic.Predicates.at("my.artigo.linked", doc.id),
+		],
+		{ pageSize: 100 }
+	);
 	const config = await client.getSingle("config", { lang: locale });
 
 	if (doc) {
