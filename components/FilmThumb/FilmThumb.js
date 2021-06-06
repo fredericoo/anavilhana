@@ -59,6 +59,7 @@ const FilmThumb = ({ obra }) => {
 				</div>
 
 				<h3 className={`${styles.titulo} h-4`}>
+					<div className="smcp s-xs l-3">{obra.data.tipo}</div>
 					{RichText.asText(obra.data.titulo)}{" "}
 					{obra.data.lancamento && (
 						<span className={styles.ano}>
