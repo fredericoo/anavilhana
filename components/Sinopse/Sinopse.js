@@ -91,11 +91,12 @@ const Sinopse = ({ filme }) => {
 							{moment(filme.lancamento).format("Y")}
 						</span>
 					</h1>
-					<FilmDirectors technical={filme.ficha_tecnica} />
-					<div className={styles.adicional}>
-						<Text content={filme.formato} />{" "}
-						{filme.duracao && <Text content={filme.duracao + "′"} />}
+					<div className={"s-sm"}>
+						<Text content={filme.formato} />
+						{filme.duracao && filme.formato && ","}{" "}
+						{filme.duracao && <Text content={filme.duracao + " min"} />}
 					</div>
+					<FilmDirectors technical={filme.ficha_tecnica} />
 					<h2 className={`visually-hidden`}>{t("common:sinopse")}</h2>
 					<div className={`${styles.text} body`}>
 						<Text content={filme.sinopse} />

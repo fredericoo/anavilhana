@@ -68,10 +68,7 @@ const FilmThumb = ({ obra }) => {
 						</span>
 					)}
 				</h3>
-				<FilmDirectors
-					technical={obra.data.ficha_tecnica}
-					special={obra.data.tipo === "Especial"}
-				/>
+				<FilmDirectors technical={obra.data.ficha_tecnica} />
 			</a>
 		</Link>
 	);

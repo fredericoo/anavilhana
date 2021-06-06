@@ -70,17 +70,24 @@ export async function getStaticProps({ params, locale }) {
 		fetchLinks: ["filme.titulo"],
 	});
 
-	const articles = await client.query([
-		Prismic.Predicates.at("document.type", "artigo"),
-		Prismic.Predicates.at("my.artigo.mencoes.membro", doc.id),
-	]);
+	const articles = await client.query(
+		[
+			Prismic.Predicates.at("document.type", "artigo"),
+			Prismic.Predicates.at("my.artigo.mencoes.membro", doc.id),
+		],
+		{ pageSize: 100 }
+	);
 
 	const obras = await client.query(
 		[
 			Prismic.Predicates.at("document.type", "filme"),
 			Prismic.Predicates.at("my.filme.ficha_tecnica.membro", doc.id),
 		],
-		{ fetchLinks: "membro.nome", orderings: "[my.filme.lancamento desc]" }
+		{
+			pageSize: 100,
+			fetchLinks: "membro.nome",
+			orderings: "[my.filme.lancamento desc]",
+		}
 	);
 
 	const config = await client.getSingle("config", { lang: locale });

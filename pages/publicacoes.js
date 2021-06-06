@@ -7,9 +7,21 @@ import Meta from "components/Meta/Meta";
 import ArticlesTable from "components/ArticlesTable/ArticlesTable";
 import Grid from "components/Grid/Grid";
 import PageHeader from "components/PageHeader/PageHeader";
-import { queryRepeatableDocuments } from "utils/queries";
+import { useDocuments } from "utils/hooks/useDocuments";
+import { useMemo } from "react";
+import moment from "moment";
 
 const Imprensa = ({ articles, doc, config }) => {
+	const documents = useDocuments();
+	const allArticles = useMemo(
+		() =>
+			documents
+				.filter((doc) => doc.type === "artigo")
+				.sort(
+					(a, b) => moment(b.data.data).unix() - moment(a.data.data).unix()
+				),
+		[documents]
+	);
 	const imprensa = doc ? doc.data : null;
 	return (
 		<Layout config={config}>
@@ -28,7 +40,10 @@ const Imprensa = ({ articles, doc, config }) => {
 					</Grid.Col>
 				)}
 			</Grid>
-			<ArticlesTable withFilters articles={articles} />
+			<ArticlesTable
+				withFilters
+				articles={allArticles.length > 0 ? allArticles : articles}
+			/>
 		</Layout>
 	);
 };
@@ -41,16 +56,14 @@ export async function getStaticProps({ locale }) {
 		lang: locale,
 	});
 
-	const documents = await queryRepeatableDocuments(
-		(doc) => doc.type === "artigo"
+	const documents = await client.query(
+		Prismic.Predicates.at("document.type", "artigo"),
+		{
+			pageSize: 100,
+			fetchLinks: ["filme.titulo"],
+			orderings: "[my.artigo.data desc]",
+		}
 	);
-	// 	client.query(
-	// 	Prismic.Predicates.at("document.type", "artigo"),
-	// 	{
-	// 		pageSize: 100,
-	// 		fetchLinks: ["filme.titulo"],
-	// 	}
-	// );
 
 	const config = await client.getSingle("config", { lang: locale });
 
@@ -58,7 +71,7 @@ export async function getStaticProps({ locale }) {
 		return {
 			revalidate: 60,
 			props: {
-				articles: documents || {},
+				articles: documents.results || {},
 				config: config || {},
 				doc: doc || {},
 			},

@@ -52,7 +52,11 @@ export async function getStaticProps({ locale }) {
 
 	const documents = await client.query(
 		Prismic.Predicates.at("document.type", "educacao"),
-		{ fetchLinks: "membro.nome", orderings: "[my.filme.datas.inicio desc]" }
+		{
+			fetchLinks: "membro.nome",
+			orderings: "[my.filme.datas.inicio desc]",
+			pageSize: 100,
+		}
 	);
 
 	const config = await client.getSingle("config", { lang: locale });

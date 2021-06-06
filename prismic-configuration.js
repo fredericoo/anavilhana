@@ -11,6 +11,8 @@ module.exports = {
 	// Manages links to internal Prismic documents
 	// Modify as your project grows to handle any new routes you've made
 	linkResolver: function (doc) {
+		if (!doc) return "/";
+
 		if (doc.type === "filme") {
 			return `/producoes/${doc.uid}`;
 		}
@@ -34,6 +36,7 @@ module.exports = {
 
 	// Additional helper function for Next/Link component
 	hrefResolver: function (doc) {
+		if (!doc) return "/";
 		if (doc.type === "filme") {
 			return `/producoes/${doc.uid}`;
 		}

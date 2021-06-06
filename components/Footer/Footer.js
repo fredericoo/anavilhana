@@ -18,7 +18,7 @@ const Footer = ({ config }) => {
 						<div className={styles.social}>
 							{config.data.social.map((item, index) => (
 								<NextLink key={index} href={hrefResolver(item.link)} passHref>
-									<a>
+									<a target="_blank">
 										<img src={item.icone.url} />
 									</a>
 								</NextLink>

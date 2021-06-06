@@ -35,7 +35,7 @@ const Table = ({
 		setFilter({ ...newFilter });
 	};
 
-	const handleSearch = (e) => setSearch(e.target.value.toLowerCase().trim());
+	const handleSearch = (e) => setSearch(e.target.value);
 	const clearSearch = () => setSearch("");
 
 	const clearAll = () => {
@@ -47,7 +47,7 @@ const Table = ({
 		const search = (article) =>
 			!rowSearch ||
 			!!searchInside.filter((col) =>
-				col(article).toLowerCase().trim().match(rowSearch)
+				col(article).toLowerCase().trim().match(rowSearch.toLowerCase().trim())
 			).length;
 
 		const compareFilter = (article, key, value) =>
@@ -66,7 +66,7 @@ const Table = ({
 				);
 			})
 		);
-	}, [rowFilters, rowSearch]);
+	}, [rowFilters, rowSearch, rows]);
 
 	return (
 		<section>

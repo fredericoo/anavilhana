@@ -191,9 +191,10 @@ export default function Educacao({ doc, config }) {
 
 export async function getStaticPaths() {
 	const client = Client();
-	const documents = await client.query([
-		Prismic.Predicates.at("document.type", "educacao"),
-	]);
+	const documents = await client.query(
+		[Prismic.Predicates.at("document.type", "educacao")],
+		{ pageSize: 100 }
+	);
 
 	return {
 		paths: documents.results.map((doc) => {

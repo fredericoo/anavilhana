@@ -13,12 +13,11 @@ import Button from "components/Button/Button";
 import useTranslation from "next-translate/useTranslation";
 import { RichText } from "prismic-reactjs";
 import Link from "next/link";
-import useSWR from "swr";
-import { fetchAllOfType } from "utils/fetcher";
 import { hrefResolver } from "prismic-configuration";
+import { useDocuments } from "utils/hooks/useDocuments";
 
 const Calendar = () => {
-	const { data, error } = useSWR("filme", fetchAllOfType);
+	const data = useDocuments();
 
 	const [markedDates, setMarkedDates] = useState([]);
 	const [selectDate, setSelectDate] = useState(moment().toDate());
@@ -27,6 +26,7 @@ const Calendar = () => {
 		data &&
 			setMarkedDates(
 				data
+					.filter((doc) => doc.type === "filme")
 					.map((filme) =>
 						filme.data.exibicoes.map((exibicao) =>
 							getMonthDayYear(moment(exibicao.datetime))
@@ -51,7 +51,11 @@ const Calendar = () => {
 					markedDates={markedDates}
 				/>
 			</div>
-			{!error && <CalendarAirings selectDate={selectDate} filmes={data} />}
+
+			<CalendarAirings
+				selectDate={selectDate}
+				filmes={data.filter((doc) => doc.type === "filme")}
+			/>
 		</div>
 	);
 };
@@ -63,7 +67,7 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 			<div className={styles.airings}>
 				<div className={styles.scroll}>
 					<header className={`${styles.header} h-3`}>
-						{`${t("common:exibicoesEm")} ${moment(selectDate).format("D/MM")}`}
+						{`${t("common:exibicoesEm")} ${moment(selectDate).format("DD/MM")}`}
 					</header>
 					<div className={`${styles.notFound} s-sm`}>
 						{t("common:carregando")}
@@ -79,6 +83,7 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 					film: filme,
 					fullDate: moment(exibicao.datetime),
 					local: exibicao.local,
+					custom_sinopse: exibicao.custom_sinopse,
 					date: getMonthDayYear(moment(exibicao.datetime)),
 				};
 			})
@@ -86,15 +91,17 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 		.flat()
 		.filter((event) => event.date === getMonthDayYear(moment(selectDate)));
 
+	console.log(eventsToday);
+
 	return (
 		<div className={styles.airings}>
 			<div className={styles.scroll}>
 				<header className={`${styles.header} h-3`}>
-					{`${t("common:exibicoesEm")} ${moment(selectDate).format("D/MM")}`}
+					{`${t("common:exibicoesEm")} ${moment(selectDate).format("DD/MM")}`}
 				</header>
 				{!!eventsToday.length ? (
 					eventsToday.map((event) => (
-						<div className={styles.event}>
+						<div className={styles.event} key={event.film.uid + event.fullDate}>
 							<Link href={hrefResolver(event.film)}>
 								<a>
 									<h3 className={`${styles.filmName} h-4`}>
@@ -110,7 +117,11 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 							</div>
 							<div className={`s-sm ${styles.synopsis}`}>
 								<RichText
-									render={event.custom_sinopse || event.film.data.sinopse}
+									render={
+										!!event.custom_sinopse.length
+											? event.custom_sinopse
+											: event.film.data.sinopse
+									}
 								/>
 							</div>
 						</div>

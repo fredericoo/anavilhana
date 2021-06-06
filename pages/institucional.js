@@ -49,7 +49,7 @@ export async function getStaticProps({ locale }) {
 
 	const documents = await client.query(
 		Prismic.Predicates.at("document.type", "commercial"),
-		{ orderings: "[my.commercial.data desc]" }
+		{ orderings: "[my.commercial.data desc]", pageSize: 100 }
 	);
 
 	const config = await client.getSingle("config", { lang: locale });

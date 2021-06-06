@@ -9,30 +9,20 @@ import { hrefResolver } from "prismic-configuration";
 import { RichText } from "prismic-reactjs";
 
 import Text from "components/Text/Text";
+import { useDocuments } from "utils/hooks/useDocuments";
 
 const Search = () => {
 	const [active, setActive] = useState(false);
-	const [documents, setDocuments] = useState([]);
+	const documents = useDocuments((doc) => doc.uid);
 	const [results, setResults] = useState([]);
 	const inputRef = useRef();
-	const { asPath } = useRouter();
 	const { t } = useTranslation();
 
 	useEffect(() => {
-		if (active && !documents.length) {
-			fetch("/api/documents")
-				.then((res) => res.json())
-				.then((docs) => setDocuments(docs));
-		}
 		if (!active) {
 			setResults([]);
 		}
 	}, [active]);
-
-	useEffect(() => {
-		setResults([]);
-		if (inputRef.current) inputRef.current.value = "";
-	}, [asPath]);
 
 	useEffect(() => {
 		inputRef.current && inputRef.current.focus();
@@ -75,13 +65,14 @@ const Search = () => {
 			)
 		);
 	};
-	const onClick = () => {
-		setActive(!active);
-	};
 
 	return (
 		<div className={styles.container}>
-			<button className={styles.button} type="button" onClick={onClick}>
+			<button
+				className={styles.button}
+				type="button"
+				onClick={() => setActive(!active)}
+			>
 				{active ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
