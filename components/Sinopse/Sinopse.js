@@ -44,9 +44,15 @@ const Sinopse = ({ filme }) => {
 							className={`${loadingVideo ? styles.loadingVideo : ""}`}
 							src={random.imagem.url}
 							layout="fill"
-							sizes="(max-width: 768px) 60px,
+							sizes={
+								loadingVideo
+									? `(max-width: 768px) 60px,
     								(max-width: 1920px) 150px,
-    								300px"
+    								300px`
+									: `(max-width: 768px) 300px,
+    								(max-width: 1920px) 600px,
+    								1200px`
+							}
 							quality={loadingVideo ? 10 : 100}
 							objectFit="cover"
 						/>
