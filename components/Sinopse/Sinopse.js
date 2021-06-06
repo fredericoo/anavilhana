@@ -21,6 +21,8 @@ const Sinopse = ({ filme }) => {
 	const videoRef = useRef();
 	const playVid = useRef();
 
+	const hasVideo = !!random.video720?.url || !!random.video360?.url;
+
 	useEffect(() => {
 		setPlaying(false);
 		clearTimeout(playVid.current);
@@ -45,7 +47,7 @@ const Sinopse = ({ filme }) => {
 							src={random.imagem.url}
 							layout="fill"
 							sizes={
-								loadingVideo
+								hasVideo
 									? `(max-width: 768px) 60px,
     								(max-width: 1920px) 150px,
     								300px`
@@ -53,11 +55,11 @@ const Sinopse = ({ filme }) => {
     								(max-width: 1920px) 600px,
     								1200px`
 							}
-							quality={loadingVideo ? 10 : 100}
+							quality={hasVideo ? 10 : 100}
 							objectFit="cover"
 						/>
 					)}
-					{(random.video720?.url || random.video360?.url) && (
+					{hasVideo && (
 						<AnimatePresence>
 							{playing && (
 								<motion.div
