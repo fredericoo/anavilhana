@@ -16,11 +16,9 @@ const Sinopse = ({ filme }) => {
 	);
 	const [loadingVideo, setLoadingVideo] = useState(false);
 	const { t } = useTranslation();
-	const hasVideo = random.video720.url || random.video360.url;
 	const [playing, setPlaying] = useState(false);
 	const videoRef = useRef();
 	const playVid = useRef();
-
 	const hasVideo = !!random.video720?.url || !!random.video360?.url;
 
 	useEffect(() => {
