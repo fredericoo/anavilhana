@@ -2,12 +2,10 @@ import styles from "./FilmThumb.module.scss";
 import Link from "next/link";
 import { hrefResolver } from "prismic-configuration";
 import moment from "moment";
-import Image from "next/image";
 import { RichText } from "prismic-reactjs";
 import FilmDirectors from "components/FilmDirectors/FilmDirectors";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import { useState } from "react";
-import { groupHasItems } from "utils/prismicHelpers";
 import Placeholder from "components/Placeholder/Placeholder";
 
 const FilmThumb = ({ obra }) => {
