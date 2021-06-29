@@ -3,7 +3,6 @@ import styles from "./Search.module.scss";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
 
 import { hrefResolver } from "prismic-configuration";
 import { RichText } from "prismic-reactjs";
@@ -13,7 +12,7 @@ import { useDocuments } from "utils/hooks/useDocuments";
 
 const Search = () => {
 	const [active, setActive] = useState(false);
-	const documents = useDocuments((doc) => doc.uid);
+	const documents = useDocuments().filter((doc) => doc.uid);
 	const [results, setResults] = useState([]);
 	const inputRef = useRef();
 	const { t } = useTranslation();
@@ -26,9 +25,26 @@ const Search = () => {
 
 	useEffect(() => {
 		inputRef.current && inputRef.current.focus();
-	}, [inputRef.current]);
+	}, [active]);
 
 	const searchInValue = (a, b) => {
+		const compareStrings = (a, b) =>
+			a.toString().toLowerCase().includes(b.toString().toLowerCase().trim());
+
+		const compareObjectToString = (a, b) => {
+			if (!a || !b) return false;
+			if (Array.isArray(a)) {
+				if (a.length === 0) return false;
+				if (a.length === 1) return compareStrings(a[0], b);
+			}
+			if (a.type && typeof a.spans !== "undefined") {
+				return compareStrings(RichText.asText([a]), b);
+			}
+			return (
+				Object.values(a).filter((value) => searchInValue(value, b)).length > 0
+			);
+		};
+
 		if (typeof a === "string") {
 			return compareStrings(a, b);
 		} else if (typeof a === "object") {
@@ -36,22 +52,6 @@ const Search = () => {
 		} else {
 			return false;
 		}
-	};
-	const compareStrings = (a, b) =>
-		a.toString().toLowerCase().includes(b.toString().toLowerCase().trim());
-
-	const compareObjectToString = (a, b) => {
-		if (!a || !b) return false;
-		if (Array.isArray(a)) {
-			if (a.length === 0) return false;
-			if (a.length === 1) return compareStrings(a[0], b);
-		}
-		if (a.type && typeof a.spans !== "undefined") {
-			return compareStrings(RichText.asText([a]), b);
-		}
-		return (
-			Object.values(a).filter((value) => searchInValue(value, b)).length > 0
-		);
 	};
 
 	const onChange = (e) => {
@@ -71,73 +71,80 @@ const Search = () => {
 			<button
 				className={styles.button}
 				type="button"
-				onClick={() => setActive(!active)}
+				onClick={() => setActive(true)}
 			>
-				{active ? (
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1"
-						strokeLinecap="butt"
-						strokeLinejoin="arcs"
-					>
-						<line x1="18" y1="6" x2="6" y2="18"></line>
-						<line x1="6" y1="6" x2="18" y2="18"></line>
-					</svg>
-				) : (
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1"
-						strokeLinecap="butt"
-						strokeLinejoin="arcs"
-					>
-						<circle cx="11" cy="11" r="8"></circle>
-						<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-					</svg>
-				)}
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="1"
+					strokeLinecap="butt"
+					strokeLinejoin="arcs"
+				>
+					<circle cx="11" cy="11" r="8"></circle>
+					<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+				</svg>
 			</button>
 			{active && (
 				<div className={styles.box}>
-					<input
-						transition={{ ease: "easeOut", duration: 0.3 }}
-						className={styles.input}
-						ref={inputRef}
-						placeholder={t("common:busca")}
-						type="text"
-						onChange={onChange}
-					/>
-					<ul className={styles.suggestions}>
+					<div className={styles.inputContainer}>
+						<input
+							transition={{ ease: "easeOut", duration: 0.3 }}
+							className={styles.input}
+							ref={inputRef}
+							placeholder={t("common:buscaDigite")}
+							type="text"
+							onChange={onChange}
+						/>
 						{!!results.length && (
-							<li className={`smcp ${styles.resultCount}`}>
-								{results.length}{" "}
-								{results.length === 1
-									? t("common:resultados.singular")
-									: t("common:resultados.plural")}
-							</li>
+							<ul className={styles.suggestions}>
+								<li className={`smcp ${styles.resultCount}`}>
+									{results.length}{" "}
+									{results.length === 1
+										? t("common:resultados.singular")
+										: t("common:resultados.plural")}
+								</li>
+
+								{results.map((result) => (
+									<li key={result.uid}>
+										<Link href={hrefResolver(result)}>
+											<a>
+												<Text
+													content={
+														(result.data && result.data.titulo) ||
+														result.data.nome
+													}
+												/>
+											</a>
+										</Link>
+									</li>
+								))}
+							</ul>
 						)}
-						{results.map((result) => (
-							<li key={result.uid}>
-								<Link href={hrefResolver(result)}>
-									<a>
-										<Text
-											content={
-												(result.data && result.data.titulo) || result.data.nome
-											}
-										/>
-									</a>
-								</Link>
-							</li>
-						))}
-					</ul>
+					</div>
+					<button
+						className={styles.button}
+						type="button"
+						onClick={() => setActive(false)}
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="1"
+							strokeLinecap="butt"
+							strokeLinejoin="arcs"
+						>
+							<line x1="18" y1="6" x2="6" y2="18"></line>
+							<line x1="6" y1="6" x2="18" y2="18"></line>
+						</svg>
+					</button>
 				</div>
 			)}
 		</div>
