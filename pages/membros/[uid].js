@@ -75,7 +75,10 @@ export async function getStaticProps({ params, locale }) {
 			Prismic.Predicates.at("document.type", "artigo"),
 			Prismic.Predicates.at("my.artigo.mencoes.membro", doc.id),
 		],
-		{ pageSize: 100 }
+		{
+			pageSize: 100,
+			orderings: "[my.artigo.data desc]",
+		}
 	);
 
 	const obras = await client.query(
