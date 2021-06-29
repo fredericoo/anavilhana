@@ -27,14 +27,13 @@ const FilmThumb = ({ obra }) => {
 				onMouseLeave={handleMouseLeave}
 			>
 				<div className={styles.imagem}>
-					{random.imagem && random.imagem.url && (
+					{random.imagem && random.imagem.url ? (
 						<Placeholder
 							src={random.imagem.url}
 							layout="fill"
 							objectFit="cover"
 						/>
-					)}
-					{(!random.imagem || !random.imagem.url) && (
+					) : (
 						<div className={styles.noPic}>
 							{RichText.asText(obra.data.titulo).charAt(0)}
 						</div>
@@ -59,7 +58,9 @@ const FilmThumb = ({ obra }) => {
 				</div>
 
 				<h3 className={`${styles.titulo} h-4`}>
-					<div className="smcp s-xs l-3">{obra.data.tipo}</div>
+					{obra.data.formato && (
+						<div className="smcp s-xs l-3">{obra.data.formato}</div>
+					)}
 					{RichText.asText(obra.data.titulo)}{" "}
 					{obra.data.lancamento && (
 						<span className={styles.ano}>
