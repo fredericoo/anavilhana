@@ -85,13 +85,12 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 					local: exibicao.local,
 					custom_sinopse: exibicao.custom_sinopse,
 					date: getMonthDayYear(moment(exibicao.datetime)),
+					allday: exibicao.allday,
 				};
 			})
 		)
 		.flat()
 		.filter((event) => event.date === getMonthDayYear(moment(selectDate)));
-
-	console.log(eventsToday);
 
 	return (
 		<div className={styles.airings}>
@@ -101,30 +100,7 @@ const CalendarAirings = ({ selectDate, filmes }) => {
 				</header>
 				{!!eventsToday.length ? (
 					eventsToday.map((event) => (
-						<div className={styles.event} key={event.film.uid + event.fullDate}>
-							<Link href={hrefResolver(event.film)}>
-								<a>
-									<h3 className={`${styles.filmName} h-4`}>
-										{RichText.asText(event.film.data.titulo)}
-									</h3>
-								</a>
-							</Link>
-							<div className={`${styles.dateTime} smcp`}>
-								{event.film.data.allday
-									? event.fullDate.format("DD/MM")
-									: event.fullDate.format("DD/MM, HH:mm")}
-								{<RichText render={event.local} />}
-							</div>
-							<div className={`s-sm ${styles.synopsis}`}>
-								<RichText
-									render={
-										!!event.custom_sinopse.length
-											? event.custom_sinopse
-											: event.film.data.sinopse
-									}
-								/>
-							</div>
-						</div>
+						<SingleEvent key={event.film.uid + event.fullDate} event={event} />
 					))
 				) : (
 					<div className={`${styles.notFound} s-sm`}>
@@ -196,6 +172,35 @@ const CalendarFooter = ({ selectDate, setSelectDate }) => {
 			<Button type="arrow" onClick={() => changeMonth(monthSet.next)}>
 				{monthsFull[getMonth(monthSet.next)]}
 			</Button>
+		</div>
+	);
+};
+
+const SingleEvent = ({ event }) => {
+	return (
+		<div className={styles.event}>
+			<Link href={hrefResolver(event.film)}>
+				<a>
+					<h3 className={`${styles.filmName} h-4`}>
+						{RichText.asText(event.film.data.titulo)}
+					</h3>
+				</a>
+			</Link>
+			<div className={`${styles.dateTime} smcp`}>
+				{event.allday
+					? event.fullDate.format("DD/MM")
+					: event.fullDate.format("DD/MM, HH:mm")}
+				{<RichText render={event.local} />}
+			</div>
+			<div className={`s-sm ${styles.synopsis}`}>
+				<RichText
+					render={
+						!!event.custom_sinopse.length
+							? event.custom_sinopse
+							: event.film.data.sinopse
+					}
+				/>
+			</div>
 		</div>
 	);
 };
