@@ -43,3 +43,12 @@
 .link {
 	text-decoration: underline;
 }
+
+.textBlock {
+	p {
+		line-height: 1.618;
+	}
+	p + p {
+		margin-bottom: 1.618em;
+	}
+}

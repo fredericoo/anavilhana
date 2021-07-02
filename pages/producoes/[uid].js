@@ -99,7 +99,9 @@ export default function Post({ doc, articles, config }) {
 											{RichText.asText(filme.extra_titulo)}
 										</h2>
 									)}
-									<Text content={filme.extra_texto} />
+									<div className={styles.textBlock}>
+										<Text content={filme.extra_texto} />
+									</div>
 								</Grid.Col>
 							</Grid>
 						</section>
