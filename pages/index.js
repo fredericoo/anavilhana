@@ -7,28 +7,32 @@ import Banner from "components/Banner/Banner";
 import { hrefResolver } from "prismic-configuration";
 
 export default function Home({ home, config }) {
+	if (!home?.data) return null;
+
 	return (
 		<Layout config={config}>
 			<Meta />
-			{home?.data?.highlights && (
+			{home.data.highlights && (
 				<FilmHero
 					filmes={home.data.highlights.map((highlight) => highlight.filme)}
 				/>
 			)}
 			<CalendarSection />
-			{home?.data?.banner_texto && (
-				<Banner
-					text={home.data.banner_texto}
-					cta={home.data.banner_cta}
-					url={hrefResolver(home.data.banner_url)}
-					background={home.data.banner_bg}
-					textColour={
-						home.data.banner_textcolour === "branco"
-							? "var(--colour__bg)"
-							: "var(--colour__main)"
-					}
-				/>
-			)}
+			{home.data.banners
+				?.filter((entry) => entry.banner_texto)
+				.map((entry) => (
+					<Banner
+						text={entry.banner_texto}
+						cta={entry.banner_cta}
+						url={hrefResolver(entry.banner_url)}
+						background={entry.banner_bg}
+						textColour={
+							entry.banner_textcolour === "branco"
+								? "var(--colour__bg)"
+								: "var(--colour__main)"
+						}
+					/>
+				))}
 		</Layout>
 	);
 }
