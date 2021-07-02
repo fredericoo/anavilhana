@@ -43,7 +43,7 @@ export default function Post({ doc, articles, config }) {
 					}
 				/>
 
-				<Sinopse filme={filme} />
+				<Sinopse key={doc.uid} filme={filme} />
 
 				{((groupHasItems(filme.plataforma_e_link) &&
 					!!filme.plataforma_e_link[0].nome_da_plataforma) ||
