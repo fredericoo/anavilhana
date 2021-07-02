@@ -22,6 +22,9 @@ module.exports = {
 		if (doc.type === "educacao") {
 			return `/formacao/${doc.uid}`;
 		}
+		if (doc.type === "produto") {
+			return `/produto/${doc.uid}`;
+		}
 		if (doc.type === "homepage") {
 			return `/`;
 		}
@@ -45,6 +48,9 @@ module.exports = {
 		}
 		if (doc.type === "educacao") {
 			return `/formacao/${doc.uid}`;
+		}
+		if (doc.type === "produto") {
+			return `/produto/${doc.uid}`;
 		}
 		if (doc.type === "homepage") {
 			return `/`;
