@@ -9,13 +9,19 @@ import { RichText } from "prismic-reactjs";
 
 import Text from "components/Text/Text";
 import { useDocuments } from "utils/hooks/useDocuments";
+import { useRouter } from "next/router";
 
 const Search = () => {
 	const [active, setActive] = useState(false);
 	const documents = useDocuments().filter((doc) => doc.uid);
 	const [results, setResults] = useState([]);
 	const inputRef = useRef();
+	const { asPath } = useRouter();
 	const { t } = useTranslation();
+
+	useEffect(() => {
+		setActive(false);
+	}, [asPath]);
 
 	useEffect(() => {
 		if (!active) {
