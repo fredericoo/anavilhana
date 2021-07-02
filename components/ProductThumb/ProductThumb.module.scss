@@ -1,0 +1,38 @@
+@import "styles/abstracts/mixins";
+
+.module {
+	border: 1px solid var(--colour__secondary);
+	padding: 8px;
+	margin-bottom: 2rem;
+	.type {
+		opacity: 0.5;
+	}
+	.title {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+		hanging-punctuation: first;
+	}
+	.lead {
+		--lines: 3;
+		opacity: 0.5;
+		line-height: 1.4;
+		max-height: calc(1.4 * 1em * var(--lines));
+		overflow-y: hidden;
+		text-overflow: ellipsis;
+		line-clamp: var(--lines);
+		display: -webkit-box;
+		-webkit-line-clamp: var(--lines);
+		-webkit-box-orient: vertical;
+	}
+	.footer {
+		margin-top: 1rem;
+	}
+
+	@include on-event {
+		text-decoration: none;
+
+		.title {
+			color: var(--colour__accent);
+		}
+	}
+}

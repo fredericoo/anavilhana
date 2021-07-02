@@ -8,6 +8,7 @@ import Grid from "components/Grid/Grid";
 import { RichText } from "prismic-reactjs";
 import Text from "components/Text/Text";
 import PageHeader from "components/PageHeader/PageHeader";
+import ProductThumb from "components/ProductThumb/ProductThumb";
 
 const Loja = ({ doc, docs, config }) => {
 	return (
@@ -29,7 +30,8 @@ const Loja = ({ doc, docs, config }) => {
 				<Grid.Col sm="grid-start / grid-end">
 					<div>
 						<Columns sm={1} md={2} lg={3}>
-							{docs && docs.map((doc, key) => <div>{doc.uid}</div>)}
+							{docs &&
+								docs.map((doc) => <ProductThumb key={doc.uid} product={doc} />)}
 						</Columns>
 					</div>
 				</Grid.Col>
