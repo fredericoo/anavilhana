@@ -1,11 +1,12 @@
 import styles from "./PhotoCarousel.module.scss";
 import Placeholder from "components/Placeholder/Placeholder";
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useMemo } from "react";
 
 const PhotoCarousel = ({ photos }) => {
 	if (typeof photos != "object" || !photos.length || !photos[0].imagem1.url)
 		return null;
+
+	const images = useMemo(() => photos.filter((photo) => photo.url), [photos]);
 
 	const [slideIndex, setSlideIndex] = useState(0);
 
@@ -14,16 +15,16 @@ const PhotoCarousel = ({ photos }) => {
 	};
 
 	const displaySlides = {
-		previous: slideIndex <= 0 ? photos.length - 1 : slideIndex - 1,
+		previous: slideIndex <= 0 ? images.length - 1 : slideIndex - 1,
 		current: slideIndex,
-		next: slideIndex + 1 >= photos.length ? 0 : slideIndex + 1,
+		next: slideIndex + 1 >= images.length ? 0 : slideIndex + 1,
 	};
 
 	return (
 		<div className={`${styles.section} grid grid--full`}>
 			<CarouselSlide
-				key={"prev" + photos[displaySlides.previous].imagem1.url}
-				photo={photos[displaySlides.previous].imagem1}
+				key={"prev" + images[displaySlides.previous].imagem1.url}
+				photo={images[displaySlides.previous].imagem1}
 				onClick={() => changeSlide(displaySlides.previous)}
 			>
 				<svg
@@ -41,13 +42,13 @@ const PhotoCarousel = ({ photos }) => {
 				</svg>
 			</CarouselSlide>
 			<CarouselSlide
-				key={photos[displaySlides.current].imagem1.url}
-				photo={photos[displaySlides.current].imagem1}
+				key={images[displaySlides.current].imagem1.url}
+				photo={images[displaySlides.current].imagem1}
 			/>
 			<CarouselSlide
-				key={"next" + photos[displaySlides.next].imagem1.url}
+				key={"next" + images[displaySlides.next].imagem1.url}
 				onClick={() => changeSlide(displaySlides.next)}
-				photo={photos[displaySlides.next].imagem1}
+				photo={images[displaySlides.next].imagem1}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +66,7 @@ const PhotoCarousel = ({ photos }) => {
 			</CarouselSlide>
 			<div className={`${styles.slideNo}`}>
 				{" "}
-				{slideIndex + 1} / {photos.length}
+				{slideIndex + 1} / {images.length}
 			</div>
 		</div>
 	);
