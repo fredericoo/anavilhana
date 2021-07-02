@@ -188,7 +188,7 @@ const SingleEvent = ({ event }) => {
 			</Link>
 			<div className={`${styles.dateTime} smcp`}>
 				{event.allday
-					? event.fullDate.format("DD/MM")
+					? event.fullDate.format("DD/MM, [dia todo]")
 					: event.fullDate.format("DD/MM, HH:mm")}
 				{<RichText render={event.local} />}
 			</div>
