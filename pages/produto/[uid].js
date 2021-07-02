@@ -14,6 +14,7 @@ import Text from "components/Text/Text";
 import Placeholder from "components/Placeholder/Placeholder";
 import Flow from "components/Flow/Flow";
 import { useRouter } from "next/router";
+import Button from "components/Button/Button";
 
 export default function Product({ doc, config }) {
 	const { t } = useTranslation();
@@ -59,8 +60,12 @@ export default function Product({ doc, config }) {
 										currency: "BRL",
 									}).format(produto.preco)}
 								</div>
+								{produto.link?.url && (
+									<Button href={produto.link.url} target="_blank">
+										{produto.cta || "Comprar"}
+									</Button>
+								)}
 							</header>
-
 							{produto.sobre && (
 								<section>
 									<h2 className="smcp">{t("common:conteudo")}</h2>
