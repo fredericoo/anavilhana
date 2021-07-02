@@ -3,10 +3,12 @@ import Placeholder from "components/Placeholder/Placeholder";
 import { useState, useMemo } from "react";
 
 const PhotoCarousel = ({ photos }) => {
-	if (typeof photos != "object" || !photos.length || !photos[0].imagem1.url)
+	if (typeof photos != "object" || !photos.length || !photos[0].imagem1?.url)
 		return null;
 
-	const images = useMemo(() => photos.filter((photo) => photo.url), [photos]);
+	const images = useMemo(() => photos.filter((photo) => photo.imagem1.url), [
+		photos,
+	]);
 
 	const [slideIndex, setSlideIndex] = useState(0);
 
