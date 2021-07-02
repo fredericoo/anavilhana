@@ -5,6 +5,7 @@ import CalendarSection from "components/CalendarSection/CalendarSection";
 import { Client } from "utils/prismicHelpers";
 import Banner from "components/Banner/Banner";
 import { hrefResolver } from "prismic-configuration";
+import Flickity from "react-flickity-component";
 
 export default function Home({ home, config }) {
 	if (!home?.data) return null;
@@ -18,21 +19,23 @@ export default function Home({ home, config }) {
 				/>
 			)}
 			<CalendarSection />
-			{home.data.banners
-				?.filter((entry) => entry.banner_texto)
-				.map((entry) => (
-					<Banner
-						text={entry.banner_texto}
-						cta={entry.banner_cta}
-						url={hrefResolver(entry.banner_url)}
-						background={entry.banner_bg}
-						textColour={
-							entry.banner_textcolour === "branco"
-								? "var(--colour__bg)"
-								: "var(--colour__main)"
-						}
-					/>
-				))}
+			<Flickity options={{ autoPlay: true }} disableImagesLoaded={true} static>
+				{home.data.banners
+					?.filter((entry) => entry.banner_texto)
+					.map((entry) => (
+						<Banner
+							text={entry.banner_texto}
+							cta={entry.banner_cta}
+							url={hrefResolver(entry.banner_url)}
+							background={entry.banner_bg}
+							textColour={
+								entry.banner_textcolour === "branco"
+									? "var(--colour__bg)"
+									: "var(--colour__main)"
+							}
+						/>
+					))}
+			</Flickity>
 		</Layout>
 	);
 }
