@@ -10,6 +10,7 @@
   "dependencies": {
     "animated-scroll-to": "^2.0.12",
     "breakpoint-sass": "^2.7.1",
+    "flickity": "^2.2.2",
     "framer-motion": "^3.3.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
